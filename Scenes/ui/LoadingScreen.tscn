@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cwbbreokh0v58"]
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Fondo" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.909824, 0.000466676, 0.866355, 1)
+
+[node name="Label" type="Label" parent="Fondo"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 294.0
+offset_right = 2958.0
+offset_bottom = 1114.0
+scale = Vector2(0.68, 1)
+theme_override_font_sizes/font_size = 350
+text = "LOADING"
+horizontal_alignment = 1
+vertical_alignment = 3

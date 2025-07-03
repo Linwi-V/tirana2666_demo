@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://p1l2r0ujti5t"]
+
+[ext_resource type="Texture2D" uid="uid://bwbamy08t6f16" path="res://Shaders/Vignette/vignette.png" id="1_f8t5l"]
+
+[node name="Vignette" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Vignette" type="Sprite2D" parent="."]
+texture = ExtResource("1_f8t5l")
+centered = false

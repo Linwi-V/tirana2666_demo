@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl8idd32j0gil"]
+
+[ext_resource type="Script" uid="uid://2ey14f4imjla" path="res://Scripts/cinematics/cinematic_2.gd" id="1_w4nne"]
+[ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="2_skf5x"]
+
+[sub_resource type="Theme" id="Theme_to5p4"]
+default_font = ExtResource("2_skf5x")
+default_font_size = 77
+
+[node name="Cinematic2" type="Node3D"]
+script = ExtResource("1_w4nne")
+
+[node name="PH" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PH"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PH"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 545.0
+offset_right = 1157.0
+offset_bottom = 622.0
+theme = SubResource("Theme_to5p4")
+text = "CINEMATIC  LIMBO AQUÍ JUAJUA"
+fit_content = true

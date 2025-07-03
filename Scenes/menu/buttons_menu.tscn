@@ -1,0 +1,113 @@
+[gd_scene load_steps=4 format=3 uid="uid://vu3cn0dhrrvb"]
+
+[ext_resource type="Script" uid="uid://cvbie7re0n6jl" path="res://Scripts/menu/buttons_menu.gd" id="1_73ivg"]
+[ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="2_mpkr6"]
+
+[sub_resource type="Theme" id="Theme_yspfm"]
+default_font = ExtResource("2_mpkr6")
+default_font_size = 77
+
+[node name="ButtonsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_73ivg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -375.0
+offset_top = -350.0
+offset_right = 375.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(375, 175)
+alignment = 1
+
+[node name="NuevaPartida" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="txt" type="RichTextLabel" parent="VBoxContainer/NuevaPartida"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_yspfm")
+theme_override_constants/line_separation = 15
+bbcode_enabled = true
+text = "[wave amp=30.0 freq=2.0 connected=0]Nueva Partida"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Cargar" type="TextureButton" parent="VBoxContainer"]
+modulate = Color(0.605274, 0.605274, 0.605274, 1)
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="txt" type="RichTextLabel" parent="VBoxContainer/Cargar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_yspfm")
+theme_override_constants/line_separation = 15
+bbcode_enabled = true
+text = "[wave amp=30.0 freq=2.0 connected=0]Cargar"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Salir" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="txt" type="RichTextLabel" parent="VBoxContainer/Salir"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_yspfm")
+theme_override_constants/line_separation = 15
+bbcode_enabled = true
+text = "[wave amp=30.0 freq=2.0 connected=0]Salir"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 50
+
+[connection signal="mouse_entered" from="VBoxContainer/NuevaPartida" to="." method="_on_nueva_partida_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/NuevaPartida" to="." method="_on_nueva_partida_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/NuevaPartida" to="." method="_on_nueva_partida_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Salir" to="." method="_on_salir_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/Salir" to="." method="_on_salir_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/Salir" to="." method="_on_salir_pressed"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci8ecs6df2poy"]
+
+[ext_resource type="Shader" uid="uid://ckv1dc1ldsi3s" path="res://Shaders/CRT/Crt.gdshader" id="1_dqykp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k7x01"]
+shader = ExtResource("1_dqykp")
+shader_parameter/screen_size = Vector2(840, 840)
+shader_parameter/viewport_size = Vector2(1920, 1080)
+shader_parameter/hardScan = -8.0
+shader_parameter/hardPix = -3.0
+shader_parameter/warpX = 0.0
+shader_parameter/warpY = 0.0
+shader_parameter/maskDark = 2.0
+shader_parameter/maskLight = 2.0
+shader_parameter/scaleInLinearGamma = true
+shader_parameter/shadowMask = 3
+shader_parameter/brightBoost = 1.0
+shader_parameter/hardBloomPix = -1.5
+shader_parameter/hardBloomScan = -2.0
+shader_parameter/bloomAmount = 0.15
+shader_parameter/shape = 2.0
+shader_parameter/doBloom = true
+
+[node name="Crt" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_k7x01")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

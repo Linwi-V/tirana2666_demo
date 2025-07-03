@@ -1,0 +1,17 @@
+[gd_resource type="Environment" format=3 uid="uid://c3ecpysnsccbb"]
+
+[resource]
+background_mode = 1
+background_color = Color(0.702525, 0.873127, 1, 1)
+background_energy_multiplier = 0.75
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.0
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 0.59
+ssr_enabled = true
+ssao_enabled = true
+ssao_intensity = 3.58
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.24

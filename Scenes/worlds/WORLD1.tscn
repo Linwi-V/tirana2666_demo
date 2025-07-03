@@ -1,0 +1,142 @@
+[gd_scene load_steps=14 format=3 uid="uid://bw6o0a3b4qcry"]
+
+[ext_resource type="Script" uid="uid://do52llmfik6m8" path="res://Scenes/worlds/WorldState.gd" id="1_1o8cl"]
+[ext_resource type="Script" uid="uid://cej45bh5gtu1r" path="res://Scripts/worlds/WORLD1/ow.gd" id="2_1wvpl"]
+[ext_resource type="PackedScene" uid="uid://c6u4tjn3huw6u" path="res://Meshs/WORLD1/0/ext.tscn" id="2_21rgl"]
+[ext_resource type="Environment" uid="uid://dusvo0sb2luqt" path="res://Scenes/worlds/WORLD1_env.tres" id="3_qx6a0"]
+[ext_resource type="PackedScene" uid="uid://b3edj1jmkebei" path="res://Scenes/pp/Pp.tscn" id="5_1wvpl"]
+
+[sub_resource type="Gradient" id="Gradient_1wvpl"]
+offsets = PackedFloat32Array(0, 0.551471, 1)
+colors = PackedColorArray(0.612728, 0.727132, 0.955971, 1, 0.831648, 0.768525, 0.749835, 1, 0.972052, 0.682117, 0.837556, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bwn35"]
+gradient = SubResource("Gradient_1wvpl")
+
+[sub_resource type="Curve" id="Curve_prdkv"]
+_data = [Vector2(0, 0), 0.0, 0.00925796, 0, 0, Vector2(0.577922, 0.988082), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.51856, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1m13u"]
+curve = SubResource("Curve_prdkv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_31mmb"]
+emission_shape = 3
+emission_box_extents = Vector3(19.365, 5.36, 16.91)
+initial_velocity_min = -0.5
+initial_velocity_max = 0.5
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 0.199984
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_1m13u")
+color_ramp = SubResource("GradientTexture1D_bwn35")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wvpl"]
+shading_mode = 0
+diffuse_mode = 3
+albedo_color = Color(0.996043, 0.914748, 0.616037, 1)
+texture_filter = 0
+proximity_fade_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_s46tr"]
+material = SubResource("StandardMaterial3D_1wvpl")
+radius = 0.2
+height = 0.4
+radial_segments = 32
+rings = 3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1wvpl"]
+size = Vector3(4.805, 2.144, 1.65)
+
+[node name="World1" type="Node3D"]
+script = ExtResource("1_1o8cl")
+
+[node name="OW" type="Node3D" parent="."]
+script = ExtResource("2_1wvpl")
+
+[node name="Limbo" parent="OW" instance=ExtResource("2_21rgl")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="OW"]
+environment = ExtResource("3_qx6a0")
+
+[node name="SOL" type="DirectionalLight3D" parent="OW"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 9.41509)
+light_color = Color(0.076852, 0.130357, 0.302049, 1)
+light_energy = 4.016
+shadow_enabled = true
+
+[node name="LucesOmni" type="Node" parent="OW"]
+
+[node name="Luz5" type="OmniLight3D" parent="OW/LucesOmni"]
+transform = Transform3D(0.674856, 0.243964, 0.696456, -3.37685e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 0.112177, 11.1169, 9.09055)
+light_color = Color(0.0313726, 0.0392157, 0.184314, 1)
+light_energy = 16.0
+omni_range = 43.744
+omni_attenuation = 0.131
+
+[node name="Luz1" type="OmniLight3D" parent="OW/LucesOmni"]
+transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 0.112177, 2.34731, 15.0999)
+light_color = Color(0.208777, 0.422356, 0.662226, 1)
+light_energy = 10.68
+shadow_enabled = true
+omni_range = 7.102
+omni_attenuation = 1.411
+
+[node name="Luz2" type="OmniLight3D" parent="OW/LucesOmni"]
+transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 0.112177, 2.34731, 9.09055)
+light_color = Color(0.208777, 0.422356, 0.662226, 1)
+light_energy = 10.68
+shadow_enabled = true
+omni_range = 7.102
+omni_attenuation = 1.411
+
+[node name="Luz4" type="OmniLight3D" parent="OW/LucesOmni"]
+transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, -9.19852, 2.34731, 7.1044)
+light_color = Color(0.208777, 0.422356, 0.662226, 1)
+light_energy = 10.68
+shadow_enabled = true
+omni_range = 7.102
+omni_attenuation = 1.411
+
+[node name="Luz3" type="OmniLight3D" parent="OW/LucesOmni"]
+transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 1.11669, 5.83652, 2.87916)
+light_color = Color(0.928303, 0.833383, 0.361079, 1)
+light_energy = 4.507
+light_size = 0.695
+shadow_enabled = true
+omni_range = 16.223
+omni_attenuation = 1.89
+
+[node name="Particulas" type="Node" parent="OW"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="OW/Particulas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.91969, 6.56465)
+amount = 100
+lifetime = 4.0
+preprocess = 2.0
+speed_scale = 0.5
+process_material = SubResource("ParticleProcessMaterial_31mmb")
+draw_pass_1 = SubResource("SphereMesh_s46tr")
+
+[node name="Pp" parent="OW" instance=ExtResource("5_1wvpl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.157951, -1.0627, 7.26285)
+
+[node name="Warp" type="Node" parent="OW"]
+
+[node name="WarpCasa" type="Area3D" parent="OW/Warp"]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Warp/WarpCasa"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.440857, -0.105605, 0.297674)
+shape = SubResource("BoxShape3D_1wvpl")
+
+[node name="BTL" type="Node3D" parent="."]
+
+[node name="DNC" type="Node3D" parent="."]
+
+[connection signal="body_shape_entered" from="OW/Warp/WarpCasa" to="OW" method="_on_warp_casa_body_shape_entered"]

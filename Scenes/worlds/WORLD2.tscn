@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdu5h1xv7exl3"]
+
+[ext_resource type="Script" uid="uid://do52llmfik6m8" path="res://Scenes/worlds/WorldState.gd" id="1_et3lb"]
+[ext_resource type="PackedScene" uid="uid://dh3d8skk5b13h" path="res://Meshs/WORLD2/0/ext.tscn" id="2_et3lb"]
+[ext_resource type="Environment" uid="uid://c3ecpysnsccbb" path="res://Scenes/worlds/WORLD2_env.tres" id="3_bqyem"]
+[ext_resource type="PackedScene" uid="uid://b3edj1jmkebei" path="res://Scenes/pp/Pp.tscn" id="3_hvdhe"]
+
+[node name="World2" type="Node3D"]
+script = ExtResource("1_et3lb")
+
+[node name="OW" type="Node3D" parent="."]
+
+[node name="Pueblo" parent="OW" instance=ExtResource("2_et3lb")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -2.00804, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="OW"]
+environment = ExtResource("3_bqyem")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="OW"]
+transform = Transform3D(0.698015, 0.630927, 0.338682, -0.263955, -0.212963, 0.940731, 0.66566, -0.746041, 0.0178848, 0.112176, 4.11074, 0)
+light_color = Color(0.905882, 1, 0.913725, 1)
+light_energy = 0.596
+shadow_enabled = true
+sky_mode = 1
+
+[node name="Pp" parent="OW" instance=ExtResource("3_hvdhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.157951, -1.0627, 7.26285)
+
+[node name="BTL" type="Node3D" parent="."]
+
+[node name="DNC" type="Node3D" parent="."]

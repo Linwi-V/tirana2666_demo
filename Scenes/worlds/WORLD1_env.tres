@@ -1,0 +1,38 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://dusvo0sb2luqt"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f6dm0"]
+energy_multiplier = 0.8
+
+[sub_resource type="Sky" id="Sky_p2dw1"]
+sky_material = SubResource("PanoramaSkyMaterial_f6dm0")
+
+[resource]
+background_mode = 2
+background_color = Color(0, 0.0705882, 0.12549, 1)
+sky = SubResource("Sky_p2dw1")
+sky_rotation = Vector3(0, 5.15745, 0)
+ambient_light_source = 3
+ambient_light_color = Color(0, 0.0705882, 0.12549, 1)
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 0.72
+tonemap_white = 1.28
+ssao_enabled = true
+ssil_enabled = true
+ssil_intensity = 12.15
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.1
+glow_bloom = 0.36
+glow_blend_mode = 0
+fog_enabled = true
+fog_light_color = Color(0.208777, 0.422356, 0.662226, 1)
+fog_aerial_perspective = 0.965
+fog_height_density = 0.1127
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0183
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+adjustment_enabled = true
+adjustment_brightness = 1.46
+adjustment_contrast = 1.1
+adjustment_saturation = 1.2
