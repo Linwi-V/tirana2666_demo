@@ -1,12 +1,13 @@
-manchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[gd_scene load_steps=3 format=3 uid="uid://db46av4jrq2v4"]
 
-[node name="ButtonsMenu" parent="GUI" instance=ExtResource("4_ck6hx")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 1920.0
-offset_bottom = 1080.0
-grow_horizontal = 1
-grow_vertical = 1
+[ext_resource type="PackedScene" uid="uid://vu3cn0dhrrvb" path="res://Scenes/menu/buttons_menu.tscn" id="1_v5dlt"]
+[ext_resource type="Texture2D" uid="uid://eqo060yg147y" path="res://Assets/MENU/splash_ph.png" id="2_fcwyn"]
+
+[node name="Menu" type="Node"]
+
+[node name="SplashPh" type="Sprite2D" parent="."]
+position = Vector2(1041, 409)
+scale = Vector2(1.60413, 0.810436)
+texture = ExtResource("2_fcwyn")
+
+[node name="ButtonsMenu" parent="." instance=ExtResource("1_v5dlt")]

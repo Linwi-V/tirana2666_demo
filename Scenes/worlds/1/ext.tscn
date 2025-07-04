@@ -1,0 +1,27 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6u4tjn3huw6u"]
+
+[ext_resource type="PackedScene" uid="uid://w8cs0vs58e0n" path="res://Meshs/WORLD1/0/piso_piedra.tscn" id="1_88am2"]
+[ext_resource type="PackedScene" uid="uid://sehdn2610lpn" path="res://Meshs/WORLD1/0/casa_tortu_only.glb" id="1_vji6m"]
+[ext_resource type="PackedScene" uid="uid://cuucmdc8xory7" path="res://Meshs/WORLD1/0/piso_tierra.tscn" id="3_88am2"]
+[ext_resource type="PackedScene" uid="uid://c0ar4wbqdb3j3" path="res://Meshs/WORLD1/0/escalon_1.glb" id="3_tbbd2"]
+[ext_resource type="PackedScene" uid="uid://bs3vtwr42bf4t" path="res://Meshs/WORLD1/0/escalon_2.glb" id="4_xaiik"]
+[ext_resource type="PackedScene" uid="uid://dpisw8d3xd3sj" path="res://Meshs/WORLD1/0/piso_portal.glb" id="4_xhy65"]
+[ext_resource type="PackedScene" uid="uid://c8aq3tltp41o8" path="res://Meshs/WORLD1/0/piso_tortu.glb" id="6_axkja"]
+
+[node name="EXT" type="Node3D"]
+
+[node name="meshs" type="Node3D" parent="."]
+
+[node name="piso_piedra" parent="meshs" instance=ExtResource("1_88am2")]
+
+[node name="piso_portal" parent="meshs" instance=ExtResource("4_xhy65")]
+
+[node name="piso_tierra" parent="meshs" instance=ExtResource("3_88am2")]
+
+[node name="piso_tortu" parent="meshs" instance=ExtResource("6_axkja")]
+
+[node name="casa_tortu_only" parent="meshs" instance=ExtResource("1_vji6m")]
+
+[node name="escalon_1" parent="meshs" instance=ExtResource("3_tbbd2")]
+
+[node name="escalon_2" parent="meshs" instance=ExtResource("4_xaiik")]

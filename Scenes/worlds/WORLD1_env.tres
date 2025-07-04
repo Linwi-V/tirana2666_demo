@@ -1,6 +1,9 @@
-[gd_resource type="Environment" load_steps=3 format=3 uid="uid://dusvo0sb2luqt"]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dusvo0sb2luqt"]
+
+[ext_resource type="Texture2D" uid="uid://c0ellfn6tp2c" path="res://Assets/WORLD1/limbo_bg.png" id="1_f6dm0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f6dm0"]
+panorama = ExtResource("1_f6dm0")
 energy_multiplier = 0.8
 
 [sub_resource type="Sky" id="Sky_p2dw1"]
@@ -10,7 +13,7 @@ sky_material = SubResource("PanoramaSkyMaterial_f6dm0")
 background_mode = 2
 background_color = Color(0, 0.0705882, 0.12549, 1)
 sky = SubResource("Sky_p2dw1")
-sky_rotation = Vector3(0, 5.15745, 0)
+sky_rotation = Vector3(0, 5.15745, 2.37714)
 ambient_light_source = 3
 ambient_light_color = Color(0, 0.0705882, 0.12549, 1)
 reflected_light_source = 2

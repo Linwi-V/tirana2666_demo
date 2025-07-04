@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=4 uid="uid://w8cs0vs58e0n"]
+
+[ext_resource type="Texture2D" uid="uid://uo76rchxi5gj" path="res://Meshs/WORLD1/0/piso_piedra_black-stone_1194-5746.png" id="1_gmqbe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0m11"]
+resource_name = "Material.006"
+cull_mode = 2
+albedo_texture = ExtResource("1_gmqbe")
+roughness = 0.5
+texture_repeat = false
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ywpoo"]
+_surfaces = [{
+"aabb": AABB(-0.847016, -1.02445e-08, -0.760902, 1.21073, 0.375792, 1.30254),
+"format": 34896613377,
+"index_count": 90,
+"index_data": PackedByteArray("AAABAAIAAQABAAIAAgAAAAAAAgACAAAAAQACAAIAAwAAAAIAAgALAAMACAADAAsAAAADAAgAAgAFAAsABQACAAEACAALAAoACgALAAUABgAIAAoAAAAIAAYACgAFAAkAAQAJAAUABgAKAAwADAAKAAkADAAJAAcAAQAHAAkABAAGAAwABAAMAAcABgAEAAAABwABAAQAAAAAAAQAAAAEAAEAAAAEAAQABAABAAEABAAEAAEA"),
+"lods": [0.0255353, PackedByteArray("AAABAAIABQACAAEAAgAFAAMAAwAAAAIAAAAEAAEAAAADAAgABwABAAQABgAEAAAABAAGAAcAAAAIAAYAAQAHAAkAAQAJAAUABgAJAAcACAADAAoABgAIAAoACgADAAUABgAKAAkACgAFAAkA"), 0.0446778, PackedByteArray("AAABAAIAAwAAAAIAAAAEAAEAAgAFAAMABQACAAEAAAADAAYABgADAAUABgAEAAAAAQAHAAUABgAFAAcABwABAAQABAAGAAcA")],
+"name": "Material.006",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("nwIAAP//AAAq+F0a1BYAAEQGAAAAAAAAKgsu3AAAAAD//wAA+uwAACr4//8AEgAAnwKW23T+AAD//9/hYuoAAAAAkNtkfgAAFPzw2CeAAAC/e4TShogAAEiD0PMaDAAAT4F25Ij6AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s4do3"]
+resource_name = "piso_piedra_Plane_001"
+_surfaces = [{
+"aabb": AABB(-0.847016, -1.02445e-08, -0.760902, 1.21073, 0.375792, 1.30254),
+"attribute_data": PackedByteArray("/3///+n//3//f/9/6f///+n//3//f/+R6f//kf9//3//f///6f//f+n/////f/9//3///+n///H/f//x6f///wD2//////9//////wD2/3//f/9/gof//4KH/3//f///9L//v+n//7//f/+/APb/v4R//7/0v/9//3//f/9/////f///6f////9//3/p////6f//f+n//3/0v/+/6f//v/S//3/0v////3//v/S//3/0v/+/9L////S////0v/+/"),
+"format": 34896613399,
+"index_count": 90,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABQAEAB0ABQAdAAcAHgAfACAAIAAfACEAHgAiAB8AIAAhACMAJAAiAB4AIwAhACUAJAAlACIAIwAlACQAJgAJACcAJgAoAAkADAANAA4ADQAMACkADQApAA8AEAARABIAEQAQABsAEQAbABMAFAAVABYAFQAUABwAFQAcABcAKgArACwAKgALACsACAAYAC0ACAAaABgALgAZAAoALgAvABkA"),
+"lods": [0.0255353, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABQAEAAcAGAAJABkAGAALAAkAGgALABgACAAaABgACAAYABkACAAZAAoADAANAA4ADQAMAA8AEAARABIAEQAQABsAEQAbABMAFAAVABYAFQAUABwAFQAcABcA"), 0.0446778, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABQAEAAcACAAJAAoACAALAAkADAANAA4ADQAMAA8AEAARABIAEQAQABMAFAAVABYAFQAUABcA")],
+"material": SubResource("StandardMaterial3D_o0m11"),
+"name": "Material.006",
+"primitive": 3,
+"uv_scale": Vector4(2.00131, 2, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("nwIAAP//Uz8q+F0a1BZTP0QGAAAAADI///8AAPrsSz8q+P//ABLFAEQGAAAAAM0AKvhdGtQWxQAqCy7cAADSAJ8Cltt0/uDAKvj//wASZ7z//9/hYuqgwSoLLtwAAIy+nwKW23T+jXz//wAA+uyOfJ8CAAD//458///f4WLqinz//9/hYuoC1yr4XRrUFo3X//8AAPrsFtcq+P//ABLc1yoLLtwAALEqnwIAAP//CitEBgAAAACIKp8Cltt0/g0rv3uE0oaI4MAU/PDYJ4CLwQAAkNtkfvLAFPzw2CeAy9YAAJDbZH56K0iD0PMaDMcARAYAAAAA/7+fAgAA////v58CAAD///+///8AAPrs/79EBgAAAAD/v///AAD67P+/KvhdGtQW/78q+F0a1Bb/v797hNKGiGe8FPzw2CeAfLxIg9DzGgxnvE+BduSI+nx8AACQ22R+iL5Ig9DzGgyIvr97hNKGiIW+T4F25Ij64cBPgXbkiPqJwb97hNKGiHrBOgDsfRsA7X3mBKCLdwk+evYBgnj/AoZ3+AGAeIsDAneb/KmB+P79gr341XCB82+HaGhNE6dsyhVVbG4U+G1gG6Cr3VX2q4VWrav1VSWs4la2VAOr7lR0q51U0arxVHirQfzWgW/6I3TO9RmFfquaVTZVA6wwAkt4////f////3////9/////f////3////9/////f////38f/wCDOP0/d175mISMW5MRePT4hlr0BodT9Y+G6f35e5z6enRQ/Mx3")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ywpoo")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mwbn8"]
+data = PackedVector3Array(-0.8346, 0, 0.5416, 0.3267, 0.0387, -0.6447, -0.8174, 0, -0.7609, -0.8346, 0, 0.5416, 0.3637, 0, 0.4449, 0.3267, 0.0387, -0.6447, 0.3267, 0.3758, -0.6693, -0.8174, 0, -0.7609, 0.3267, 0.0387, -0.6447, -0.8174, 0, -0.7609, 0.3267, 0.3758, -0.6693, -0.2261, 0.3579, -0.6993, -0.8174, 0, -0.7609, -0.2261, 0.3579, -0.6993, -0.7942, 0.3232, -0.7609, -0.8174, 0, -0.7609, -0.8346, 0, 0.5416, -0.8346, 0, 0.5416, -0.8346, 0, 0.5416, -0.8346, 0, 0.5416, 0.3637, 0, 0.4449, -0.8174, 0, -0.7609, -0.8174, 0, -0.7609, -0.8346, 0, 0.5416, -0.8346, 0, 0.5416, 0.3637, 0, 0.4449, 0.3637, 0, 0.4449, 0.3267, 0.0387, -0.6447, -0.8174, 0, -0.7609, -0.8174, 0, -0.7609, 0.3637, 0, 0.4449, 0.3637, 0, 0.4449, 0.3267, 0.0387, -0.6447, 0.3267, 0.0387, -0.6447, 0.3267, 0.0387, -0.6447, -0.8174, 0, -0.7609, 0.3637, 0, 0.4449, 0.3267, 0.0387, -0.6447, 0.3267, 0.0387, -0.6447, -0.2618, 0.309, -0.0663, 0.3267, 0.3758, -0.6693, 0.3452, 0.3185, -0.1088, -0.2618, 0.309, -0.0663, -0.2261, 0.3579, -0.6993, 0.3267, 0.3758, -0.6693, -0.8346, 0.3223, 0.5338, 0.3637, 0, 0.4449, -0.8346, 0, 0.5416, 0.3637, 0, 0.4449, -0.8346, 0.3223, 0.5338, -0.2355, 0.3354, 0.5138, 0.3637, 0, 0.4449, -0.2355, 0.3354, 0.5138, 0.3637, 0.3316, 0.4317, 0.3637, 0.3316, 0.4317, 0.3267, 0.0387, -0.6447, 0.3637, 0, 0.4449, 0.3267, 0.0387, -0.6447, 0.3637, 0.3316, 0.4317, 0.3452, 0.3185, -0.1088, 0.3267, 0.0387, -0.6447, 0.3452, 0.3185, -0.1088, 0.3267, 0.3758, -0.6693, -0.7942, 0.3232, -0.7609, -0.8346, 0, 0.5416, -0.8174, 0, -0.7609, -0.8346, 0, 0.5416, -0.7942, 0.3232, -0.7609, -0.847, 0.3223, -0.1178, -0.8346, 0, 0.5416, -0.847, 0.3223, -0.1178, -0.8346, 0.3223, 0.5338, -0.847, 0.3223, -0.1178, -0.2261, 0.3579, -0.6993, -0.2618, 0.309, -0.0663, -0.847, 0.3223, -0.1178, -0.7942, 0.3232, -0.7609, -0.2261, 0.3579, -0.6993, -0.8346, 0.3223, 0.5338, -0.2618, 0.309, -0.0663, -0.2355, 0.3354, 0.5138, -0.8346, 0.3223, 0.5338, -0.847, 0.3223, -0.1178, -0.2618, 0.309, -0.0663, -0.2355, 0.3354, 0.5138, 0.3452, 0.3185, -0.1088, 0.3637, 0.3316, 0.4317, -0.2355, 0.3354, 0.5138, -0.2618, 0.309, -0.0663, 0.3452, 0.3185, -0.1088)
+
+[node name="piso_piedra" type="Node3D"]
+
+[node name="pisote" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.258284, -1.65139, 6.40737)
+mesh = SubResource("ArrayMesh_s4do3")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="pisote"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pisote/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_mwbn8")

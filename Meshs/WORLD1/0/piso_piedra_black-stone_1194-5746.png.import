@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://uo76rchxi5gj"
+path.s3tc="res://.godot/imported/piso_piedra_black-stone_1194-5746.png-52ca17ec863ff994e4f099abb4e0b8dc.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "a6063385d289a6dd8373bd92e9fa2245"
+}
+
+[deps]
+
+source_file="res://Meshs/WORLD1/0/piso_piedra_black-stone_1194-5746.png"
+dest_files=["res://.godot/imported/piso_piedra_black-stone_1194-5746.png-52ca17ec863ff994e4f099abb4e0b8dc.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
