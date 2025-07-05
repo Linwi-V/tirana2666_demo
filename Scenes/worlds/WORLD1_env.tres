@@ -1,10 +1,10 @@
 [gd_resource type="Environment" load_steps=4 format=3 uid="uid://dusvo0sb2luqt"]
 
-[ext_resource type="Texture2D" uid="uid://c0ellfn6tp2c" path="res://Assets/WORLD1/limbo_bg.png" id="1_f6dm0"]
+[ext_resource type="Texture2D" uid="uid://2wfh5deel2f0" path="res://Assets/WORLD1/cielolimbo.PNG" id="1_f6dm0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f6dm0"]
 panorama = ExtResource("1_f6dm0")
-energy_multiplier = 0.8
+energy_multiplier = 0.1
 
 [sub_resource type="Sky" id="Sky_p2dw1"]
 sky_material = SubResource("PanoramaSkyMaterial_f6dm0")
@@ -13,13 +13,13 @@ sky_material = SubResource("PanoramaSkyMaterial_f6dm0")
 background_mode = 2
 background_color = Color(0, 0.0705882, 0.12549, 1)
 sky = SubResource("Sky_p2dw1")
-sky_rotation = Vector3(0, 5.15745, 2.37714)
+sky_rotation = Vector3(0, 5.15745, 0)
 ambient_light_source = 3
-ambient_light_color = Color(0, 0.0705882, 0.12549, 1)
+ambient_light_sky_contribution = 0.24
 reflected_light_source = 2
 tonemap_mode = 2
-tonemap_exposure = 0.72
-tonemap_white = 1.28
+tonemap_exposure = 1.73
+tonemap_white = 3.02
 ssao_enabled = true
 ssil_enabled = true
 ssil_intensity = 12.15

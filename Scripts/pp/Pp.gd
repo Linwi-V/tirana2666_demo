@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
 enum State { IDLE, MOVE, JUMP, BUSY }
-var state = State.IDLE
+var state = State.JUMP
 
-const SPEED = 3.0
-const JUMP_VELOCITY = 4.5 * 2
+const SPEED = 4.0
+const JUMP_VELOCITY = 4.5 
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # Animación
@@ -15,11 +15,17 @@ var lag_frame = 0.2
 var idle = load("res://Sprites/Chars/ph/64X128_Idle_Free.png")
 var walk = load("res://Sprites/Chars/ph/64X128_Runing_Free.png")
 
+#safe  space si se cae
+var last_safe_place
 # Dirección forzada para estado BUSY
 var external_direction := Vector3.ZERO
 
 func _physics_process(delta):
-	velocity.y -= GRAVITY * delta
+	if get_last_slide_collision() != null:
+		var choque = get_last_slide_collision().get_collider()
+		if choque.is_in_group("safe_space"):
+			last_safe_place= choque.global_transform.origin
+			last_safe_place.y+=2.5
 	match state:
 		State.IDLE:
 			handle_idle_state()
@@ -29,7 +35,7 @@ func _physics_process(delta):
 			handle_jump_state()
 		State.BUSY:
 			handle_busy_state()
-
+	velocity.y -= GRAVITY * delta
 	update_animation(delta)
 	
 
@@ -37,22 +43,19 @@ func handle_idle_state():
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if input_dir != Vector2.ZERO:
 		state = State.MOVE
-	elif not is_on_floor():
-		state = State.JUMP
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	elif Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		state = State.JUMP
-
+	move_and_slide()
+	
 func handle_move_state():
+	
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var dir = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if dir == Vector3.ZERO:
 		state = State.IDLE
-	elif not is_on_floor():
-		state = State.JUMP
-
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	elif Input.is_action_just_pressed("ui_accept"):
 		velocity.y = JUMP_VELOCITY
 		state = State.JUMP
 		
@@ -72,11 +75,15 @@ func handle_jump_state():
 	dir= rotation_nueva * dir
 	velocity.x = dir.x * SPEED
 	velocity.z = dir.z * SPEED
+	
 	move_and_slide()
-
+	
 	if is_on_floor():
-		state = State.MOVE if dir != Vector3.ZERO else State.IDLE
-
+		if dir != Vector3.ZERO:
+			state = State.MOVE
+		else:
+			state= State.IDLE
+	
 func handle_busy_state():
 	if external_direction != Vector3.ZERO:
 		velocity.x = external_direction.x * SPEED

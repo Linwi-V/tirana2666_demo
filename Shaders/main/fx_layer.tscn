@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbjkk8nx5e54w"]
+
+[ext_resource type="PackedScene" uid="uid://ci8ecs6df2poy" path="res://Shaders/CRT/Crt.tscn" id="1_r2oat"]
+[ext_resource type="PackedScene" uid="uid://p1l2r0ujti5t" path="res://Shaders/Vignette/Vignette.tscn" id="2_o6m5w"]
+
+[node name="FXLayer" type="CanvasLayer"]
+layer = 71
+
+[node name="Crt" parent="." instance=ExtResource("1_r2oat")]
+
+[node name="Vignette" parent="." instance=ExtResource("2_o6m5w")]

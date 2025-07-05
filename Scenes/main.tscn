@@ -1,15 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://csbt3m45tjb0v"]
+[gd_scene load_steps=2 format=3 uid="uid://csbt3m45tjb0v"]
 
 [ext_resource type="Script" uid="uid://ig24q5bnj85q" path="res://Scripts/main.gd" id="1_8gbba"]
-[ext_resource type="PackedScene" uid="uid://ci8ecs6df2poy" path="res://Shaders/CRT/Crt.tscn" id="1_bo1nx"]
-[ext_resource type="PackedScene" uid="uid://p1l2r0ujti5t" path="res://Shaders/Vignette/Vignette.tscn" id="2_8gbba"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_8gbba")
-
-[node name="FXLayer" type="CanvasLayer" parent="."]
-layer = 71
-
-[node name="Crt" parent="FXLayer" instance=ExtResource("1_bo1nx")]
-
-[node name="Vignette" parent="FXLayer" instance=ExtResource("2_8gbba")]

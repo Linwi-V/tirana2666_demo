@@ -1,27 +1,57 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6u4tjn3huw6u"]
+[gd_scene load_steps=9 format=3 uid="uid://c6u4tjn3huw6u"]
 
 [ext_resource type="PackedScene" uid="uid://w8cs0vs58e0n" path="res://Meshs/WORLD1/0/piso_piedra.tscn" id="1_88am2"]
+[ext_resource type="PackedScene" uid="uid://c41ay5hi0q5um" path="res://Meshs/WORLD1/0/portal.tscn" id="1_oxwf0"]
+[ext_resource type="PackedScene" uid="uid://chybirptatqwh" path="res://Meshs/WORLD1/0/piso_tortu.tscn" id="1_qkr8m"]
 [ext_resource type="PackedScene" uid="uid://sehdn2610lpn" path="res://Meshs/WORLD1/0/casa_tortu_only.glb" id="1_vji6m"]
 [ext_resource type="PackedScene" uid="uid://cuucmdc8xory7" path="res://Meshs/WORLD1/0/piso_tierra.tscn" id="3_88am2"]
 [ext_resource type="PackedScene" uid="uid://c0ar4wbqdb3j3" path="res://Meshs/WORLD1/0/escalon_1.glb" id="3_tbbd2"]
 [ext_resource type="PackedScene" uid="uid://bs3vtwr42bf4t" path="res://Meshs/WORLD1/0/escalon_2.glb" id="4_xaiik"]
 [ext_resource type="PackedScene" uid="uid://dpisw8d3xd3sj" path="res://Meshs/WORLD1/0/piso_portal.glb" id="4_xhy65"]
-[ext_resource type="PackedScene" uid="uid://c8aq3tltp41o8" path="res://Meshs/WORLD1/0/piso_tortu.glb" id="6_axkja"]
 
 [node name="EXT" type="Node3D"]
 
 [node name="meshs" type="Node3D" parent="."]
 
+[node name="portal" parent="meshs" instance=ExtResource("1_oxwf0")]
+transform = Transform3D(-5.39484, -9.97027e-09, -0.0420897, -1.0049e-08, 5.395, 1.0049e-08, 0.0420897, 1.01271e-08, -5.39484, -1.28688, 1.10105, 16.0933)
+
+[node name="piso_tortu" parent="meshs" instance=ExtResource("1_qkr8m")]
+
 [node name="piso_piedra" parent="meshs" instance=ExtResource("1_88am2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07718, 10.1224)
 
 [node name="piso_portal" parent="meshs" instance=ExtResource("4_xhy65")]
-
-[node name="piso_tierra" parent="meshs" instance=ExtResource("3_88am2")]
-
-[node name="piso_tortu" parent="meshs" instance=ExtResource("6_axkja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.969123, -1.18607, -4.12963)
 
 [node name="casa_tortu_only" parent="meshs" instance=ExtResource("1_vji6m")]
 
 [node name="escalon_1" parent="meshs" instance=ExtResource("3_tbbd2")]
 
 [node name="escalon_2" parent="meshs" instance=ExtResource("4_xaiik")]
+
+[node name="plataformas" type="Node3D" parent="meshs"]
+
+[node name="piso_tierra" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(0.996019, 0.0883402, 0.011897, -0.0891377, 0.987108, 0.132936, 0, -0.133467, 0.991053, -0.43682, -1.24236, 5.19466)
+
+[node name="piso_tierra2" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(1.28804, 0.860614, -1.14277, -0.643765, 1.72191, 0.571159, 1.27756, 4.24043e-08, 1.43996, -5.33456, -1.44081, 3.60557)
+
+[node name="piso_tierra3" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(-0.608618, 0.0293259, -0.510636, 0.0224659, 0.794459, 0.0188491, 0.510984, 0, -0.609032, -0.074497, -1.24708, 3.31331)
+
+[node name="piso_tierra3" parent="meshs/plataformas/piso_tierra3" instance=ExtResource("3_88am2")]
+transform = Transform3D(-0.608619, 0.0293259, -0.510637, 0.0224659, 0.79446, 0.0188491, 0.510984, -1.86265e-09, -0.609032, -2.20783, -0.413068, -5.56823)
+
+[node name="piso_tierra4" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(1.16265, -0.22852, -0.6905, 0.129612, 2.0499, -0.076976, 0.778636, 0, 1.04387, 1.88254, -1.70122, 7.65698)
+
+[node name="piso_tierra7" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(-1.38933, 0.01338, -1.30515, 0.205856, 1.41026, -0.102379, 1.73464, -0.156645, -1.03319, 5.19286, -1.96969, 8.54266)
+
+[node name="piso_tierra5" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(1.21243, -0.0745531, -0.00409499, 0.0907803, 0.995629, 0.0560918, -0.000127321, -0.0562397, 0.99844, -1.08581, -1.43618, 7.72713)
+
+[node name="piso_tierra6" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.66441, -1.24236, 7.65698)

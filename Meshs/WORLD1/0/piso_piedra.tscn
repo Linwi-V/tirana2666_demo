@@ -49,7 +49,6 @@ data = PackedVector3Array(-0.8346, 0, 0.5416, 0.3267, 0.0387, -0.6447, -0.8174, 
 [node name="piso_piedra" type="Node3D"]
 
 [node name="pisote" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.258284, -1.65139, 6.40737)
 mesh = SubResource("ArrayMesh_s4do3")
 skeleton = NodePath("")
 

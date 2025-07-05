@@ -11,7 +11,7 @@ var state_nodes: Dictionary
 
 func _ready():
 	
-	##no sombra aqui
+	##no sombra aquiw a
 	$OW/Pp/Sprite3D.alpha_cut=2
 	
 	state_nodes = {
