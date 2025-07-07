@@ -16,16 +16,21 @@ var idle = load("res://Sprites/Chars/ph/64X128_Idle_Free.png")
 var walk = load("res://Sprites/Chars/ph/64X128_Runing_Free.png")
 
 #safe  space si se cae
-var last_safe_place
+var last_safe_place = position
+
 # Dirección forzada para estado BUSY
 var external_direction := Vector3.ZERO
 
+#utilidad para cuando puedas interactuar
+var current_npc: Node = null
+
+
 func _physics_process(delta):
-	if get_last_slide_collision() != null:
-		var choque = get_last_slide_collision().get_collider()
-		if choque.is_in_group("safe_space"):
-			last_safe_place= choque.global_transform.origin
-			last_safe_place.y+=2.5
+	
+	if current_npc!= null and Input.is_action_just_pressed("ui_accept") and state != State.BUSY:
+		print("dialogo")
+		set_busy()
+		
 	match state:
 		State.IDLE:
 			handle_idle_state()
@@ -132,3 +137,18 @@ func release_busy():
 func set_external_direction(dir: Vector3):
 	if state == State.BUSY:
 		external_direction = dir.normalized()
+
+
+#Funciones para NPCs
+
+func set_current_npc(npc: Node):
+	current_npc = npc
+
+func clear_current_npc(npc: Node):
+	if current_npc == npc:
+		current_npc = null
+		
+#funcion para respawn
+func safe_place(pos: Node3D):
+	last_safe_place= pos.global_transform.origin
+	last_safe_place.y +=2.5

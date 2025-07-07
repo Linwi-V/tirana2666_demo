@@ -34,20 +34,20 @@ func _physics_process(_delta: float) -> void:
 		
 	elif current_state == State.PRESSED:
 		sync=false
-		if $StaticBody3D.position.y > -2*amplitude:
+		if $StaticBody3D.position.y > -1.1*amplitude:
 			$StaticBody3D.position.y -= 0.002
 		
 
 func _on_safe_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		current_state = State.PRESSED
+		get_tree().call_group("player", "safe_place", self)
 
 	pass # Replace with function body.
 
 
 func _on_safe_area_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
-
 		current_state= State.FLOATING
 	pass # Replace with function body.
 	

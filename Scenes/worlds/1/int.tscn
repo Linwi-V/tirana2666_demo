@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://c34b4l3rh5vks"]
+
+[ext_resource type="PackedScene" uid="uid://btgjf0r2ly3h3" path="res://Scenes/npcs/npc.tscn" id="1_4x0wc"]
+[ext_resource type="Script" uid="uid://mjtqi2dalhnm" path="res://Scripts/worlds/WORLD1/npcs/npcs_int_w1.gd" id="1_suqlj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_oicrr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4x0wc"]
+albedo_texture = SubResource("PlaceholderTexture2D_oicrr")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_suqlj"]
+material = SubResource("StandardMaterial3D_4x0wc")
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_oicrr"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[node name="INT" type="Node3D"]
+
+[node name="meshs" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="meshs"]
+mesh = SubResource("PlaneMesh_suqlj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="meshs/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="meshs/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_oicrr")
+
+[node name="npcs" type="Node3D" parent="."]
+script = ExtResource("1_suqlj")
+
+[node name="Tortu" parent="npcs" instance=ExtResource("1_4x0wc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.491007, 0.728484)

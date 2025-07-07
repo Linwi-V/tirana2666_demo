@@ -1,0 +1,161 @@
+[gd_scene load_steps=22 format=3 uid="uid://btgjf0r2ly3h3"]
+
+[ext_resource type="Texture2D" uid="uid://cxfujrr2jjxpf" path="res://Sprites/Chars/ph/64X128_Idle_Free.png" id="1_20uak"]
+[ext_resource type="Script" uid="uid://7qbpkkak8lyh" path="res://Scripts/npcs/npc_base.gd" id="1_gmoox"]
+[ext_resource type="Texture2D" uid="uid://blb88baiyo7fl" path="res://Assets/NPCS/emotes/speech_bubble_animation-11x11.png" id="2_b1b6i"]
+[ext_resource type="Texture2D" uid="uid://ddumx1tgxm0j6" path="res://Assets/NPCS/emotes/exclamation-7x8.png" id="3_gmoox"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_20uak"]
+radius = 0.2
+height = 0.95
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x25rg"]
+radius = 0.75
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnk88"]
+atlas = ExtResource("3_gmoox")
+region = Rect2(0, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gysvp"]
+atlas = ExtResource("3_gmoox")
+region = Rect2(7, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss3in"]
+atlas = ExtResource("3_gmoox")
+region = Rect2(14, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgehn"]
+atlas = ExtResource("3_gmoox")
+region = Rect2(21, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsvem"]
+atlas = ExtResource("3_gmoox")
+region = Rect2(28, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yk50"]
+atlas = ExtResource("3_gmoox")
+region = Rect2(35, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6ysv"]
+atlas = ExtResource("2_b1b6i")
+region = Rect2(0, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tho2u"]
+atlas = ExtResource("2_b1b6i")
+region = Rect2(11, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfcu8"]
+atlas = ExtResource("2_b1b6i")
+region = Rect2(22, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uiq5"]
+atlas = ExtResource("2_b1b6i")
+region = Rect2(33, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8aih3"]
+atlas = ExtResource("2_b1b6i")
+region = Rect2(44, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icy7c"]
+atlas = ExtResource("2_b1b6i")
+region = Rect2(55, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg4om"]
+atlas = ExtResource("2_b1b6i")
+region = Rect2(66, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4bb1"]
+atlas = ExtResource("2_b1b6i")
+region = Rect2(77, 0, 11, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ras1v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnk88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gysvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss3in")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgehn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsvem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yk50")
+}],
+"loop": false,
+"name": &"exclamation",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6ysv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tho2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfcu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uiq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8aih3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icy7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg4om")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4bb1")
+}],
+"loop": false,
+"name": &"talk",
+"speed": 10.0
+}]
+
+[node name="Node3D" type="CharacterBody3D" groups=["npc"]]
+script = ExtResource("1_gmoox")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.065267, 0)
+billboard = 1
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("1_20uak")
+hframes = 8
+vframes = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0122011, 0)
+shape = SubResource("CapsuleShape3D_20uak")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_x25rg")
+
+[node name="SpriteEmotes" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.627225, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_ras1v")
+animation = &"talk"
+frame = 7
+frame_progress = 1.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

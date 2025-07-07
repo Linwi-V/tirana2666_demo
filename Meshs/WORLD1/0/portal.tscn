@@ -5,7 +5,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lqr5"]
 resource_name = "Material_0"
 cull_mode = 2
-albedo_color = Color(0.453643, 0.453552, 0.282465, 1)
+albedo_color = Color(0.854902, 0.470588, 1, 1)
 albedo_texture = ExtResource("1_ovwlc")
 roughness = 0.89
 

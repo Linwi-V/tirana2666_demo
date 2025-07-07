@@ -2,24 +2,23 @@
 
 [ext_resource type="Texture2D" uid="uid://2wfh5deel2f0" path="res://Assets/WORLD1/cielolimbo.PNG" id="1_f6dm0"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f6dm0"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tqvm8"]
 panorama = ExtResource("1_f6dm0")
-energy_multiplier = 0.1
 
-[sub_resource type="Sky" id="Sky_p2dw1"]
-sky_material = SubResource("PanoramaSkyMaterial_f6dm0")
+[sub_resource type="Sky" id="Sky_f6dm0"]
+sky_material = SubResource("PanoramaSkyMaterial_tqvm8")
 
 [resource]
 background_mode = 2
 background_color = Color(0, 0.0705882, 0.12549, 1)
-sky = SubResource("Sky_p2dw1")
-sky_rotation = Vector3(0, 5.15745, 0)
+sky = SubResource("Sky_f6dm0")
+sky_rotation = Vector3(0, 3.14159, 0)
 ambient_light_source = 3
 ambient_light_sky_contribution = 0.24
 reflected_light_source = 2
 tonemap_mode = 2
-tonemap_exposure = 1.73
-tonemap_white = 3.02
+tonemap_exposure = 1.2
+tonemap_white = 2.58
 ssao_enabled = true
 ssil_enabled = true
 ssil_intensity = 12.15
@@ -29,13 +28,13 @@ glow_intensity = 0.1
 glow_bloom = 0.36
 glow_blend_mode = 0
 fog_enabled = true
-fog_light_color = Color(0.208777, 0.422356, 0.662226, 1)
-fog_aerial_perspective = 0.965
-fog_height_density = 0.1127
+fog_light_color = Color(0.697899, 0.429838, 0.752258, 1)
+fog_aerial_perspective = 1.0
+fog_height_density = 0.0322
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0183
 volumetric_fog_albedo = Color(0, 0, 0, 1)
 adjustment_enabled = true
-adjustment_brightness = 1.46
-adjustment_contrast = 1.1
-adjustment_saturation = 1.2
+adjustment_brightness = 1.11
+adjustment_contrast = 1.46
+adjustment_saturation = 1.12
