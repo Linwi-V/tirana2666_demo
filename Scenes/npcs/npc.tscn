@@ -149,6 +149,7 @@ shape = SubResource("SphereShape3D_x25rg")
 [node name="SpriteEmotes" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.627225, 0)
 billboard = 1
+alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_ras1v")
 animation = &"exclamation"

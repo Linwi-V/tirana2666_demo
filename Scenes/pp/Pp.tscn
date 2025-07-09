@@ -22,7 +22,6 @@ height = 0.95
 
 [node name="Pp" type="CharacterBody3D" groups=["player"]]
 collision_layer = 3
-safe_margin = 0.1
 script = ExtResource("1_ruw3j")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

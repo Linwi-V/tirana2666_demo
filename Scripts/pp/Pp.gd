@@ -116,11 +116,12 @@ func handle_jump_state():
 			state= State.IDLE
 	
 func handle_busy_state():
-
+	
 	#movs
 	if external_direction != Vector3.ZERO:
-		velocity.x = external_direction.x * SPEED
-		velocity.z = external_direction.z * SPEED
+		velocity.x = external_direction.x * SPEED *0.5
+		velocity.z = external_direction.z * SPEED *0.5
+		
 	else:
 		velocity.x = 0
 		velocity.z = 0
@@ -183,27 +184,51 @@ func safe_place(pos: Node3D):
 
 # señales funcion dialogos
 func d_started(_d):
-	
+	var dir = current_npc.global_position - global_position
+	dir.y = 0
+	if dir.length() < 0.1:
+		# Convertimos a Vector2 y compensamos la rotación del Pivot
+		var dir_2d = Vector2(dir.x, dir.z).rotated($Pivot.yaw).normalized()
+		var angle = dir_2d.angle()
+
+		if angle >= -PI/4 and angle < PI/4:
+			$Sprite3D.frame_coords.y = 2 # derecha
+		elif angle >= PI/4 and angle < 3*PI/4:
+			$Sprite3D.frame_coords.y = 0 # arriba
+		elif angle <= -PI/4 and angle > -3*PI/4:
+			$Sprite3D.frame_coords.y = 3 # abajo
+		else:
+			$Sprite3D.frame_coords.y = 1 # izquierda
+	else:
+		set_external_direction(current_npc.global_position - global_position)
+	#zoom
+	var tween = create_tween()
+	tween.tween_property($Pivot/SpringArm3D/Camera3D, "fov", 55, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
 	talking=true
 	can_talk=false
 	$Pivot.active=false
 	
 	pivot_og = $Pivot.global_position
-	cam_final = current_npc.global_position
+	cam_final = (self.global_position+current_npc.global_position)/2 +Vector3(0,-0.6,0)
 	moving_cam = true
 	
 	
 func d_ended(_d):
+	#zoom
+	var tween = create_tween()
+	tween.tween_property($Pivot/SpringArm3D/Camera3D, "fov", 75, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
 	current_npc.deshablas()
 	cam_final = pivot_og
 	moving_cam = true
 	talking=false
 	$Timer.start()
 
-	
+# esto pa q no puedas hablarle altiro dsps de salir sin querer
 func _on_timer_timeout() -> void:
 	if current_npc != null:
 		current_npc.hablas()
 	$Pivot.active=true
 	can_talk = true
-	pass # Replace with function body.
