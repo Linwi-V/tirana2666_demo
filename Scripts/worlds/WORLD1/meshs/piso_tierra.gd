@@ -30,6 +30,7 @@ func _physics_process(_delta: float) -> void:
 			if $StaticBody3D.position.y < -base_y + offset:
 				$StaticBody3D.position.y+=0.002
 			else:
+				$tierritas.emitting =true
 				sync=true
 		
 	elif current_state == State.PRESSED:
@@ -40,6 +41,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_safe_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
+		$tierritas.emitting = true
 		current_state = State.PRESSED
 		get_tree().call_group("player", "safe_place", self)
 

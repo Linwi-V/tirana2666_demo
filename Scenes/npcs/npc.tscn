@@ -7,7 +7,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_20uak"]
 radius = 0.2
-height = 0.95
+height = 2.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_x25rg"]
 radius = 0.75
@@ -137,7 +137,7 @@ hframes = 8
 vframes = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0122011, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.759385, 0)
 shape = SubResource("CapsuleShape3D_20uak")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -151,11 +151,7 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.627225, 0)
 billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_ras1v")
-animation = &"talk"
-frame = 7
-frame_progress = 1.0
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+animation = &"exclamation"
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

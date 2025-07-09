@@ -5,7 +5,6 @@ enum State {
 	BATTLE,
 	DANCE
 }
-
 var current_state: State = State.OVERWORLD
 var state_nodes: Dictionary
 

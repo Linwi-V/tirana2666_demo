@@ -72,3 +72,10 @@ margin = 0.195
 [node name="Camera3D" type="Camera3D" parent="Pivot/SpringArm3D"]
 attributes = ExtResource("3_c13wy")
 current = true
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.7
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
