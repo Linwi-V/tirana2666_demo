@@ -1,0 +1,156 @@
+[gd_scene load_steps=11 format=3 uid="uid://lnacxbw1eicg"]
+
+[ext_resource type="Script" uid="uid://dba53fa8uw5ef" path="res://Scripts/BTL/btl_manager.gd" id="1_xsev4"]
+[ext_resource type="PackedScene" uid="uid://dohlqsxt82612" path="res://Scenes/BTL/Enemies/enemy_container_base.tscn" id="2_idkhm"]
+[ext_resource type="Shader" uid="uid://mpggk5c4p3t2" path="res://Shaders/Menu/Menu.gdshader" id="2_vkbv2"]
+[ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="3_idkhm"]
+[ext_resource type="PackedScene" uid="uid://dqvqy3jlkvy02" path="res://Scenes/BTL/Allies/ally_container_base.tscn" id="3_muaw0"]
+[ext_resource type="StyleBox" uid="uid://dughx5hxn44at" path="res://Scenes/BTL/Styles/BTL_Button.tres" id="4_muaw0"]
+[ext_resource type="Texture2D" uid="uid://p0b3hvq6ptvx" path="res://Assets/BTL/BGs/BTL_Dummy.tres" id="5_muaw0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbnk0"]
+shader = ExtResource("2_vkbv2")
+shader_parameter/base_displacement = Vector2(0, 0)
+shader_parameter/repetion_x = 5.505
+shader_parameter/scale_x = 0.86
+shader_parameter/speed_x = 3.68
+shader_parameter/color_count = 3
+shader_parameter/fps = 15.0
+shader_parameter/frame_count = 0
+
+[sub_resource type="Theme" id="Theme_vn03m"]
+default_font = ExtResource("3_idkhm")
+default_font_size = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pdr8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[node name="BTL" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BTL_Manager" type="Node" parent="."]
+script = ExtResource("1_xsev4")
+Enemy = ExtResource("2_idkhm")
+Ally = ExtResource("3_muaw0")
+
+[node name="Background" type="TextureRect" parent="BTL_Manager"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_wbnk0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_muaw0")
+
+[node name="Enemies" type="Node" parent="BTL_Manager"]
+
+[node name="EnemyContainersBack" type="HBoxContainer" parent="BTL_Manager/Enemies"]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -900.0
+offset_right = 900.0
+offset_bottom = 526.0
+grow_horizontal = 2
+theme_override_constants/separation = -470
+
+[node name="EnemyContainersFront" type="HBoxContainer" parent="BTL_Manager/Enemies"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -923.0
+offset_top = -405.0
+offset_right = 927.0
+offset_bottom = 294.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 150
+
+[node name="UI" type="CanvasLayer" parent="BTL_Manager"]
+
+[node name="AllyContainers" type="HBoxContainer" parent="BTL_Manager/UI"]
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -350.0
+offset_right = 1205.0
+offset_bottom = -25.0
+grow_vertical = 0
+theme_override_constants/separation = 25
+
+[node name="CommandPanel" type="PanelContainer" parent="BTL_Manager/UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -680.0
+offset_top = -350.0
+offset_right = -30.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = SubResource("Theme_vn03m")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6pdr8")
+
+[node name="CommandContainer" type="GridContainer" parent="BTL_Manager/UI/CommandPanel"]
+layout_mode = 2
+columns = 2
+
+[node name="Atacar" type="Button" parent="BTL_Manager/UI/CommandPanel/CommandContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 130
+theme_override_styles/focus = ExtResource("4_muaw0")
+text = "Atacar"
+flat = true
+icon_alignment = 1
+
+[node name="Habilidades" type="Button" parent="BTL_Manager/UI/CommandPanel/CommandContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 130
+theme_override_styles/focus = ExtResource("4_muaw0")
+text = "Habilidades"
+flat = true
+
+[node name="Objetos" type="Button" parent="BTL_Manager/UI/CommandPanel/CommandContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 130
+theme_override_styles/focus = ExtResource("4_muaw0")
+text = "Objetos"
+flat = true
+
+[node name="Escapar" type="Button" parent="BTL_Manager/UI/CommandPanel/CommandContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 135
+theme_override_styles/focus = ExtResource("4_muaw0")
+disabled = true
+text = "Escapar"
+flat = true

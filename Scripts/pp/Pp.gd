@@ -33,11 +33,13 @@ var moving_cam
 var pivot_og
 var cam_final
 var can_talk := true
+var fov_og
 
 # señales 
 signal dialog_changer(npc)
 
 func _ready() -> void:
+	fov_og = $Pivot/SpringArm3D/Camera3D.fov
 	DialogueManager.dialogue_started.connect(d_started)
 	DialogueManager.dialogue_ended.connect(d_ended)
 
@@ -131,10 +133,12 @@ func handle_busy_state():
 
 func update_animation(delta):
 	var sprite = $Sprite3D
+	var mat = $Sprite3D.material_override
 	var dir_mov = Vector2(velocity.x, velocity.z)
 	var dir = dir_mov.rotated($Pivot.yaw).normalized()
 	if dir.length() > 0.1:
 		sprite.texture = walk
+		mat.albedo_texture = walk
 		var angle = dir.angle()
 		if angle >= -PI/4 and angle < PI/4:
 			sprite.frame_coords.y = 2 # derecha
@@ -146,7 +150,8 @@ func update_animation(delta):
 			sprite.frame_coords.y = 1 # izquierda
 	else:
 		sprite.texture = idle
-
+		mat.albedo_texture = idle
+		
 	if sprite.texture == walk:
 		tiempo += delta
 		if tiempo > lag_frame:
@@ -186,21 +191,19 @@ func safe_place(pos: Node3D):
 func d_started(_d):
 	var dir = current_npc.global_position - global_position
 	dir.y = 0
-	if dir.length() < 0.1:
-		# Convertimos a Vector2 y compensamos la rotación del Pivot
-		var dir_2d = Vector2(dir.x, dir.z).rotated($Pivot.yaw).normalized()
-		var angle = dir_2d.angle()
+	# Convertimos a Vector2 y compensamos la rotación del Pivot
+	var dir_2d = Vector2(dir.x, dir.z).rotated($Pivot.yaw).normalized()
+	var angle = dir_2d.angle()
 
-		if angle >= -PI/4 and angle < PI/4:
-			$Sprite3D.frame_coords.y = 2 # derecha
-		elif angle >= PI/4 and angle < 3*PI/4:
-			$Sprite3D.frame_coords.y = 0 # arriba
-		elif angle <= -PI/4 and angle > -3*PI/4:
-			$Sprite3D.frame_coords.y = 3 # abajo
-		else:
-			$Sprite3D.frame_coords.y = 1 # izquierda
+	if angle >= -PI/4 and angle < PI/4:
+		$Sprite3D.frame_coords.y = 2 # derecha
+	elif angle >= PI/4 and angle < 3*PI/4:
+		$Sprite3D.frame_coords.y = 0 # arriba
+	elif angle <= -PI/4 and angle > -3*PI/4:
+		$Sprite3D.frame_coords.y = 3 # abajo
 	else:
-		set_external_direction(current_npc.global_position - global_position)
+		$Sprite3D.frame_coords.y = 1 # izquierda
+	
 	#zoom
 	var tween = create_tween()
 	tween.tween_property($Pivot/SpringArm3D/Camera3D, "fov", 55, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -218,8 +221,7 @@ func d_started(_d):
 func d_ended(_d):
 	#zoom
 	var tween = create_tween()
-	tween.tween_property($Pivot/SpringArm3D/Camera3D, "fov", 75, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
+	tween.tween_property($Pivot/SpringArm3D/Camera3D, "fov", fov_og, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	current_npc.deshablas()
 	cam_final = pivot_og
 	moving_cam = true
@@ -228,7 +230,10 @@ func d_ended(_d):
 
 # esto pa q no puedas hablarle altiro dsps de salir sin querer
 func _on_timer_timeout() -> void:
+	if $Pivot.exterior:
+		$Pivot.active=true
 	if current_npc != null:
 		current_npc.hablas()
-	$Pivot.active=true
+		print($Pivot.exterior)
+		print($Pivot.active)
 	can_talk = true

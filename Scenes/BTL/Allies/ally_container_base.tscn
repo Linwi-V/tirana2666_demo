@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqvqy3jlkvy02"]
+
+[ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="1_sybcj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6qko0"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sybcj"]
+bg_color = Color(0, 1, 0, 1)
+
+[node name="AllyContainer" type="VBoxContainer"]
+texture_filter = 1
+theme_override_constants/separation = 10
+
+[node name="Vida" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6qko0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sybcj")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Vida"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -11.5
+offset_right = 46.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("1_sybcj")
+theme_override_font_sizes/font_size = 22
+text = "HP: 100/100"
+
+[node name="Ally" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(275, 275)
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5

@@ -22,6 +22,9 @@ PauseManager="*res://Scripts/autoload/PauseManager.gd"
 FadeLayer="*res://Scenes/ui/FadeLayer.tscn"
 FxLayer="*res://Shaders/main/fx_layer.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+PartyData="*res://Scripts/autoload/PartyData.gd"
+EnemyData="*res://Scripts/autoload/EnemyData.gd"
+WorldFunc="*res://Scripts/autoload/WorldFunc.gd"
 
 [debug]
 

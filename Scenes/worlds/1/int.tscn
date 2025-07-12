@@ -20,12 +20,14 @@ data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0
 
 [node name="meshs" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="meshs"]
+[node name="piso" type="MeshInstance3D" parent="meshs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+layers = 3
 mesh = SubResource("PlaneMesh_suqlj")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="meshs/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="meshs/piso"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="meshs/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="meshs/piso/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_oicrr")
 
 [node name="npcs" type="Node3D" parent="."]

@@ -1,9 +1,29 @@
-[gd_scene load_steps=22 format=3 uid="uid://btgjf0r2ly3h3"]
+[gd_scene load_steps=25 format=3 uid="uid://btgjf0r2ly3h3"]
 
 [ext_resource type="Texture2D" uid="uid://cxfujrr2jjxpf" path="res://Sprites/Chars/ph/64X128_Idle_Free.png" id="1_20uak"]
 [ext_resource type="Script" uid="uid://7qbpkkak8lyh" path="res://Scripts/npcs/npc_base.gd" id="1_gmoox"]
 [ext_resource type="Texture2D" uid="uid://blb88baiyo7fl" path="res://Assets/NPCS/emotes/speech_bubble_animation-11x11.png" id="2_b1b6i"]
 [ext_resource type="Texture2D" uid="uid://ddumx1tgxm0j6" path="res://Assets/NPCS/emotes/exclamation-7x8.png" id="3_gmoox"]
+
+[sub_resource type="Gradient" id="Gradient_ulnqb"]
+offsets = PackedFloat32Array(0.214789, 0.507042)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gmoox"]
+gradient = SubResource("Gradient_ulnqb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmoox"]
+transparency = 4
+albedo_texture = ExtResource("1_20uak")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+texture_filter = 0
+billboard_mode = 2
+billboard_keep_scale = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_20uak"]
 radius = 0.2
@@ -126,8 +146,20 @@ animations = [{
 [node name="Node3D" type="CharacterBody3D" groups=["npc"]]
 script = ExtResource("1_gmoox")
 
+[node name="Sombra" type="Decal" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, -1, 1.66095e-07, 0, -1.50996e-07, -1.1, 0, -0.488336, -1.13754e-08)
+size = Vector3(0.53949, 2.02511, 0.5)
+texture_albedo = SubResource("GradientTexture2D_gmoox")
+lower_fade = 1e+06
+distance_fade_begin = 0.5
+distance_fade_length = 15.0
+cull_mask = 1048570
+
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.065267, 0)
+layers = 9
+material_override = SubResource("StandardMaterial3D_gmoox")
+gi_mode = 2
 billboard = 1
 shaded = true
 alpha_cut = 2

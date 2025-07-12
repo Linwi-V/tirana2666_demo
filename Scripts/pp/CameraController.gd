@@ -11,13 +11,14 @@ var yaw := 0.0  # horizontal angle
 var pitch := 0.0  # vertical angle
 
 var active = true
+var exterior = true
 
 func _ready():
 	yaw = rotation.y
 	## pitch = rotation.x
 
 func _unhandled_input(event):
-	if active:
+	if active and exterior:
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				dragging = event.pressed

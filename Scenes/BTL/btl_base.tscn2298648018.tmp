@@ -1,0 +1,212 @@
+[gd_scene load_steps=15 format=3 uid="uid://lnacxbw1eicg"]
+
+[ext_resource type="Texture2D" uid="uid://ca6h5hpixhu8a" path="res://0_pruebas/btl_ph.png" id="1_xa0hx"]
+[ext_resource type="Script" uid="uid://dba53fa8uw5ef" path="res://Scripts/BTL/btl_manager.gd" id="1_xhu17"]
+[ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="2_6pdr8"]
+[ext_resource type="Shader" uid="uid://mpggk5c4p3t2" path="res://Shaders/Menu/Menu.gdshader" id="2_l6jdc"]
+[ext_resource type="StyleBox" uid="uid://dughx5hxn44at" path="res://Scenes/BTL/Styles/BTL_Button.tres" id="3_vn03m"]
+[ext_resource type="PackedScene" uid="uid://dohlqsxt82612" path="res://Scenes/BTL/Enemies/enemy_container_base.tscn" id="4_wbnk0"]
+[ext_resource type="PackedScene" uid="uid://dqvqy3jlkvy02" path="res://Scenes/BTL/Allies/ally_container_base.tscn" id="5_ur5k3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbnk0"]
+shader = ExtResource("2_l6jdc")
+shader_parameter/base_displacement = Vector2(0, 0)
+shader_parameter/repetion_x = 5.505
+shader_parameter/scale_x = 0.86
+shader_parameter/speed_x = 3.68
+shader_parameter/color_count = 3
+shader_parameter/fps = 15.0
+shader_parameter/frame_count = 0
+
+[sub_resource type="Gradient" id="Gradient_e753m"]
+offsets = PackedFloat32Array(0, 0.243169, 0.672131, 1)
+colors = PackedColorArray(0.454766, 0.866836, 0.292476, 1, 0.342665, 0.771995, 0.699687, 1, 0.631202, 0.247358, 0.119972, 1, 0.490196, 0.447059, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xa0hx"]
+gradient = SubResource("Gradient_e753m")
+height = 32
+fill = 2
+fill_from = Vector2(0.5, 0.3)
+metadata/_snap_enabled = true
+metadata/_snap_count = 20
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vn03m"]
+size = Vector2(350, 350)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4nhs8"]
+size = Vector2(350, 350)
+
+[sub_resource type="Theme" id="Theme_vn03m"]
+default_font = ExtResource("2_6pdr8")
+default_font_size = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pdr8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[node name="BTL_Base" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BTL_Manager" type="Node" parent="."]
+script = ExtResource("1_xhu17")
+
+[node name="Background" type="TextureRect" parent="BTL_Manager"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_wbnk0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_xa0hx")
+
+[node name="BtlPh" type="Sprite2D" parent="BTL_Manager"]
+visible = false
+texture = ExtResource("1_xa0hx")
+centered = false
+
+[node name="Enemies" type="Node" parent="BTL_Manager"]
+
+[node name="EnemyContainersRow1" type="HBoxContainer" parent="BTL_Manager/Enemies"]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -900.0
+offset_right = 900.0
+offset_bottom = 526.0
+grow_horizontal = 2
+theme_override_constants/separation = -470
+
+[node name="EnemyContainer1" type="VBoxContainer" parent="BTL_Manager/Enemies/EnemyContainersRow1"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="Enemy_1" type="TextureRect" parent="BTL_Manager/Enemies/EnemyContainersRow1/EnemyContainer1"]
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_vn03m")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="EnemyContainer2" type="VBoxContainer" parent="BTL_Manager/Enemies/EnemyContainersRow1"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Enemy_2" type="TextureRect" parent="BTL_Manager/Enemies/EnemyContainersRow1/EnemyContainer2"]
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_4nhs8")
+expand_mode = 5
+stretch_mode = 5
+flip_h = true
+
+[node name="EnemyContainersFront" type="HBoxContainer" parent="BTL_Manager/Enemies"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -923.0
+offset_top = -405.0
+offset_right = 927.0
+offset_bottom = 294.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 150
+
+[node name="EnemyContainer" parent="BTL_Manager/Enemies/EnemyContainersFront" instance=ExtResource("4_wbnk0")]
+layout_mode = 2
+
+[node name="UI" type="CanvasLayer" parent="BTL_Manager"]
+layer = 128
+
+[node name="AllyContainers" type="HBoxContainer" parent="BTL_Manager/UI"]
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -350.0
+offset_right = 1205.0
+offset_bottom = -25.0
+grow_vertical = 0
+theme_override_constants/separation = 25
+
+[node name="AllyContainer" parent="BTL_Manager/UI/AllyContainers" instance=ExtResource("5_ur5k3")]
+layout_mode = 2
+
+[node name="CommandPanel" type="PanelContainer" parent="BTL_Manager/UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -680.0
+offset_top = -350.0
+offset_right = -30.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = SubResource("Theme_vn03m")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6pdr8")
+
+[node name="CommandContainer" type="GridContainer" parent="BTL_Manager/UI/CommandPanel"]
+layout_mode = 2
+columns = 2
+
+[node name="Atacar" type="Button" parent="BTL_Manager/UI/CommandPanel/CommandContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 130
+theme_override_styles/focus = ExtResource("3_vn03m")
+text = "Atacar"
+flat = true
+icon_alignment = 1
+
+[node name="Habilidades" type="Button" parent="BTL_Manager/UI/CommandPanel/CommandContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 130
+theme_override_styles/focus = ExtResource("3_vn03m")
+text = "Habilidades"
+flat = true
+
+[node name="Objetos" type="Button" parent="BTL_Manager/UI/CommandPanel/CommandContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 130
+theme_override_styles/focus = ExtResource("3_vn03m")
+text = "Objetos"
+flat = true
+
+[node name="Escapar" type="Button" parent="BTL_Manager/UI/CommandPanel/CommandContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 135
+theme_override_styles/focus = ExtResource("3_vn03m")
+disabled = true
+text = "Escapar"
+flat = true

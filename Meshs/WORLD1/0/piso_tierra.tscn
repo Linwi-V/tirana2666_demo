@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cuucmdc8xory7"]
+[gd_scene load_steps=17 format=4 uid="uid://cuucmdc8xory7"]
 
 [ext_resource type="Texture2D" uid="uid://8qq5gu8tmvbu" path="res://Meshs/WORLD1/0/piso_tierra_2902.jpg" id="1_hk786"]
 [ext_resource type="Script" uid="uid://p6v64abpx1hj" path="res://Scripts/worlds/WORLD1/meshs/piso_tierra.gd" id="1_j7mug"]
@@ -57,7 +57,13 @@ colors = PackedColorArray(0.57178, 1, 0.540483, 1, 0.0980392, 0.0980392, 0.28627
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_x5cex"]
 gradient = SubResource("Gradient_j7mug")
 
+[sub_resource type="Curve" id="Curve_x5cex"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveTexture" id="CurveTexture_a51a1"]
+curve = SubResource("Curve_x5cex")
 
 [sub_resource type="Curve" id="Curve_j7mug"]
 _data = [Vector2(0.185984, 0.631268), 0.0, -1.42559, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -108,6 +114,7 @@ debug_color = Color(0.728295, 0.464307, 0.274042, 0.42)
 
 [node name="Isla_2" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 2.98023e-08, 1.86265e-09, 1, -9.31323e-10, 0, -9.31323e-10, 1, 0, 0, 0)
+layers = 3
 gi_mode = 2
 mesh = SubResource("ArrayMesh_s84ts")
 skeleton = NodePath("")

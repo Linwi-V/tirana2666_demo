@@ -15,17 +15,20 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	get_tree().call_group("player", "set_current_npc", self)
-	if body.is_in_group("player") and body.can_talk and talks:
-		hablas()
+	if body.is_in_group("player"):
+		get_tree().call_group("player", "set_current_npc", self)
+		if body.can_talk and talks:
+			hablas()
 	
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body.is_in_group("player") and talks:
-		var ani = $SpriteEmotes.animation
-		$SpriteEmotes.play_backwards(ani)
-	get_tree().call_group("player", "clear_current_npc", self)
+	if body.is_in_group("player"):
+		get_tree().call_group("player", "clear_current_npc", self)
+		if talks:
+			var ani = $SpriteEmotes.animation
+			$SpriteEmotes.play_backwards(ani)
+	
 
 
 func hablas():

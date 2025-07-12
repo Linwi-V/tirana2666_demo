@@ -3,7 +3,11 @@ extends Node3D
 const dialog = preload("res://Dialogues/prueba.dialogue")
 const dialog2 = preload("res://Dialogues/worlds/World1/main/d2.dialogue")
 # Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	#$Pp/Pivot/SpringArm3D/Camera3D.fov = 65
+	$Pp/Pivot.exterior=false
+	$Pp/Pivot.top_level=true
 	pass # Replace with function body.
 
 
