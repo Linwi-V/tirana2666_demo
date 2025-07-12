@@ -1,9 +1,12 @@
-[gd_scene format=3 uid="uid://dohlqsxt82612"]
+[gd_scene load_steps=2 format=3 uid="uid://dohlqsxt82612"]
 
-[node name="EnemyContainer" type="VBoxContainer"]
+[ext_resource type="Script" uid="uid://kvptgm70f6jm" path="res://Scripts/BTL/EnemyInstance.gd" id="1_6hnno"]
+
+[node name="EnemyContainer" type="VBoxContainer" groups=["instancia_enemigo"]]
 size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_constants/separation = 10
+script = ExtResource("1_6hnno")
 
 [node name="Enemy" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(450, 450)

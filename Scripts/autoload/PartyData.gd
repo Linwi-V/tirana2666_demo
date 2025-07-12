@@ -1,7 +1,7 @@
 extends Node
 
 # Personajes jugables activos (orden importa para los turnos)
-var active_party := ["Mónica","Mónica","Mónica","Mónica"] 
+var active_party := ["Mónica","Mónica"] 
 var party_level := 1
 
 # Personajes disponibles en el juego
