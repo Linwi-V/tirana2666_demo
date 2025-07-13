@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://4vcsomfciatw"
+path="res://.godot/imported/tutorial1_turno1.dialogue-5c64c14b1a7c704b5d943c6be33d7f5d.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World1/BTL/tutorial1_turno1.dialogue"
+dest_files=["res://.godot/imported/tutorial1_turno1.dialogue-5c64c14b1a7c704b5d943c6be33d7f5d.tres"]
+
+[params]
+
+defaults=true

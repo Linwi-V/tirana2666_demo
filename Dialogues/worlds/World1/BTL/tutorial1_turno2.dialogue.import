@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bolkim8lxl251"
+path="res://.godot/imported/tutorial1_turno2.dialogue-71e313798d4162a0c61ab749475e76bb.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World1/BTL/tutorial1_turno2.dialogue"
+dest_files=["res://.godot/imported/tutorial1_turno2.dialogue-71e313798d4162a0c61ab749475e76bb.tres"]
+
+[params]
+
+defaults=true

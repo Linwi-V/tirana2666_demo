@@ -26,10 +26,6 @@ PartyData="*res://Scripts/autoload/PartyData.gd"
 EnemyData="*res://Scripts/autoload/EnemyData.gd"
 WorldFunc="*res://Scripts/autoload/WorldFunc.gd"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [dialogue_manager]
 
 runtime/balloon_path="res://Scenes/ui/Dialogue/balloon.tscn"
@@ -47,6 +43,13 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 
+ui_accept={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194309,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194310,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
+]
+}
 ui_focus_prev={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194306,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
@@ -88,7 +91,7 @@ ui_down={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogues/worlds/World1/main/d2.dialogue", "res://Dialogues/prueba.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogues/worlds/World1/main/d2.dialogue", "res://Dialogues/prueba.dialogue", "res://Dialogues/worlds/World1/BTL/tutorial1_turno1.dialogue", "res://Dialogues/worlds/World1/BTL/tutorial1_turno2.dialogue", "res://Dialogues/worlds/World1/BTL/tutorial1_turno3.dialogue")
 
 [memory]
 

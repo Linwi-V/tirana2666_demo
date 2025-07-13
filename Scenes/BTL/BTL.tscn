@@ -31,6 +31,7 @@ corner_radius_bottom_right = 75
 corner_radius_bottom_left = 75
 
 [node name="BTL" type="Control"]
+process_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,6 +53,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_muaw0")
+
+[node name="DarkOverlay" type="ColorRect" parent="BTL_Manager"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.0588235)
 
 [node name="Enemies" type="Node" parent="BTL_Manager"]
 
@@ -151,6 +160,7 @@ size_flags_vertical = 3
 theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
 theme_override_constants/outline_size = 135
 theme_override_styles/focus = ExtResource("4_muaw0")
-disabled = true
 text = "Escapar"
 flat = true
+
+[connection signal="pressed" from="BTL_Manager/UI/CommandPanel/CommandContainer/Atacar" to="BTL_Manager" method="_on_atacar_pressed"]

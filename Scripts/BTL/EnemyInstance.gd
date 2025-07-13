@@ -27,14 +27,7 @@ func _ready():
 	max_hp = data.stats.max_hp
 	current_hp = max_hp
 
-	
-	
-func _physics_process(delta: float) -> void:
-	time +=delta
-	if time >5:
-		recibir_dano(30)
-		time =0
-		
+
 func recibir_dano(amount: int):
 	current_hp = max(current_hp - amount, 0)
 	emit_signal("hp_changed", current_hp, self)

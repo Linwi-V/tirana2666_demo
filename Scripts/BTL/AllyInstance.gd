@@ -31,13 +31,10 @@ func _ready():
 	$Vida.max_value=max_hp
 	
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	$Vida/Label.text="HP:"+str(int($Vida.value))+"/"+str(max_hp)
-	time +=delta
-	if time >5:
-		recibir_dano(10)
-		time =0
-		
+
+
 func recibir_dano(amount: int):
 	current_hp = max(current_hp - amount, 0)
 	emit_signal("hp_changed", current_hp, self)
