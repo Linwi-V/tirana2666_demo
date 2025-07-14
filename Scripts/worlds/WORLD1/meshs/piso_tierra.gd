@@ -19,37 +19,25 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta: float) -> void:
+var accumulated_time := 0.0
+
+func _physics_process(delta: float) -> void:
 	if current_state == State.FLOATING:
-		var t = Time.get_ticks_msec() / 1000.0
+		accumulated_time += delta  # Solo avanza cuando el juego no está en pausa
+
+		var t = accumulated_time
 		var offset = sin((t + time_offset) * speed) * amplitude
+
 		if sync:
 			$StaticBody3D.position.y = base_y + offset
 		else:
 			if $StaticBody3D.position.y < -base_y + offset:
-				$StaticBody3D.position.y+=0.002
+				$StaticBody3D.position.y += 0.002
 			else:
-				$tierritas.emitting =true
-				sync=true
+				$tierritas.emitting = true
+				sync = true
 		
 	elif current_state == State.PRESSED:
-		sync=false
-		if $StaticBody3D.position.y > -1.1*amplitude:
+		sync = false
+		if $StaticBody3D.position.y > -1.1 * amplitude:
 			$StaticBody3D.position.y -= 0.002
-		
-
-func _on_safe_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		$tierritas.emitting = true
-		current_state = State.PRESSED
-		get_tree().call_group("player", "safe_place", self)
-
-	pass # Replace with function body.
-
-
-func _on_safe_area_body_exited(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		current_state= State.FLOATING
-	pass # Replace with function body.
-	

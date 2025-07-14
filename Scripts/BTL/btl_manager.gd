@@ -36,6 +36,7 @@ var player_actions := {}
 var target_index = 0
 var enemy_list = []
 
+var current_action_index = 0
 
 #-------override para comandos------
 
@@ -70,7 +71,7 @@ func _ready() -> void:
 		new_ally.hp_changed.connect(_on_ally_hp_changed)
 		new_ally.died.connect(_on_ally_died)
 		#-------------añade a escena---------
-		get_node("UI/AllyContainers").add_child(new_ally)
+		get_node("Party/AllyContainers").add_child(new_ally)
 	
 	
 	#----------crea enemigos-------------
@@ -119,6 +120,7 @@ func _change_state(new_state: BattleState) -> void:
 				turn += 1
 				print("TURNO: " + str(turn))
 				print("IDLE")
+				current_ally_index = 0
 				_change_state(BattleState.PLAYER_SELECTING)
 			)
 
@@ -148,8 +150,7 @@ func _change_state(new_state: BattleState) -> void:
 		BattleState.PLAYER_ACTING:
 			handle_state(BattleState.PLAYER_ACTING, func() -> void:
 				print(player_actions)
-				for ally in $UI/AllyContainers.get_children():
-					ally.get_node("Ally").modulate = Color(1, 1, 1)
+				perform_player_actions()
 				print("PLAYER ACTS")
 			)
 
@@ -283,11 +284,11 @@ func _handle_dialogue() -> void:
 func _on_dialogue_started(_d):
 	og_state=current_state
 	_change_state(BattleState.DIALOGUE)
-	$UI.visible=false
+	$UI/CommandPanel.visible=false
 	_fade_in_overlay()
 	
 func _on_dialogue_ended(_d):
-	$UI.visible=true
+	$UI/CommandPanel.visible=true
 	_fade_out_overlay()
 	_change_state(og_state)
 
@@ -318,15 +319,18 @@ func _on_ally_died(party_member):
 	temblor(party_member)
 	retrato.modulate = Color(0.2,0.2,0.2)
 	party_member.rip=true
-	for allies in $UI/AllyContainers.get_children():
+	for allies in $Party/AllyContainers.get_children():
 		if not allies.rip:
 			return
 			
 	_change_state(BattleState.DEFEAT)  ###aqui trans a gameover
 
 #-------------SEÑALES ENEMIGOS----------
-func _on_enemy_hp_changed(_new_hp,enemy):
-	daño_visual(enemy)
+func _on_enemy_hp_changed(_new_hp,enemy,negativo):
+	if negativo: 
+		daño_visual(enemy)
+	else:
+		heleo_visual(enemy)
 	temblor(enemy)
 
 func _on_enemy_died(enemy: Control):
@@ -372,12 +376,19 @@ func daño_visual(node:Control):
 	tween.tween_property(node, "modulate", Color(1, 0, 0), 0.05)
 	tween.tween_property(node, "modulate", original_color, 0.15)
 
+func heleo_visual(node:Control):
+	var original_color = node.modulate
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	# Flash rojo rápido
+	tween.tween_property(node, "modulate", Color(0, 1, 0), 0.05)
+	tween.tween_property(node, "modulate", original_color, 0.15)
 #---------HIGHLIGHT DE SELECCION ALIADO---------
 
 func highlight_current_ally(active: bool) -> void:
 	var current_ally = WorldFunc.Party_BTL[current_ally_index]
 	
-	for ally in $UI/AllyContainers.get_children():
+	for ally in $Party/AllyContainers.get_children():
 		if ally.character_id == current_ally:
 			ally.get_node("Ally").modulate = Color(1,1,0.5) if active else Color(1,1,1)
 
@@ -450,6 +461,142 @@ func _apply_command_overrides():
 			if button.name in command_overrides:
 				button.disabled = command_overrides[button.name]
 
+#------------ ACTOS DE PARTY------------------
+
+func perform_player_actions():
+	current_action_index = 0
+	perform_next_action()
+	
+func perform_next_action():
+	# Ver si quedan acciones por hacer
+	if current_action_index >= WorldFunc.Party_BTL.size():
+		_change_state(BattleState.ENEMY_TURN)
+		return
+
+	var actor_name = WorldFunc.Party_BTL[current_action_index]
+	var action = player_actions.get(actor_name)
+	
+	if action == null:
+		current_action_index += 1
+		perform_next_action()
+		return
+	
+	match action.type:
+		"ataque":
+			do_attack_action(actor_name, action)
+		"habilidad":
+			do_skill_action(actor_name, action)
+		"item":
+			do_item_action(actor_name, action)
+		_:
+			current_action_index += 1
+			perform_next_action()
+
+func do_attack_action(actor_name: String, action: Dictionary):
+	print(actor_name + " ataca a " + action.target)
+	current_ally_index=current_action_index
+	highlight_current_ally(true)
+	# Aquí puedes poner una animación, sonido, etc.
+	await get_tree().create_timer(1).timeout # Simula animación
+	highlight_current_ally(false)
+	# Pasa a resolver el daño
+	resolve_attack_action(actor_name, action)
+
+func do_skill_action(actor_name: String, action: Dictionary):
+	pass
+	
+func do_item_action(actor_name: String, action: Dictionary):
+	pass
+#------------ RESOLUCION DE PARTY------------------
+
+func resolve_attack_action(actor_name: String, action: Dictionary):
+	var nivel = PartyData.party_level
+	var nivel_bonus = int((nivel - 1) * 10)
+	var nivel_multiplicador = 100 + nivel_bonus
+
+	var base_attack = PartyData.characters[actor_name]["stats"]["ataque_fisico"]
+	var arma = PartyData.characters[actor_name]["equipo"]["arma"]
+	var arma_attack = 0
+	if arma != "":
+		arma_attack = PartyData.equipables[arma]["stats"]["ataque_fisico"]
+
+	var target_name = action.target
+	var enemy_base_name = target_name.substr(0, target_name.length() - 1)
+
+	var target = get_node_or_null("Enemies/EnemyContainersFront/" + target_name)
+	if target == null:
+		target = get_node_or_null("Enemies/EnemyContainersBack/" + target_name)
+
+	if target != null:
+		var enemy_data = EnemyData.enemies[enemy_base_name]
+		var enemy_defensa = enemy_data["stats"]["defensa_fisica"]
+
+		var raw_attack = (base_attack + arma_attack) * nivel_multiplicador / 100
+		var calculated_attack = int(raw_attack - enemy_defensa)
+		if calculated_attack < 0:
+			calculated_attack = 0
+
+		# Tipo (debilidades / resistencias / inmunidades / absorción)
+		var tipo = ""
+		if arma != "":
+			tipo = PartyData.equipables[arma]["tipo"]
+		else:
+			tipo = PartyData.characters[actor_name]["ataque"]["basico"]["tipo"]
+
+		var tipo_data = [enemy_data["debilidades"], enemy_data["resistencias"]]
+		var mod_tipo = TypeTable.get_damage_modifier(tipo_data, tipo)
+
+		# Crítico
+		var crit_char = PartyData.characters[actor_name]["stats"]["critico"]
+		var crit_arma = 0
+		if arma != "":
+			crit_arma = PartyData.equipables[arma]["stats"]["critico"]
+
+		var crit_chance = crit_char + crit_arma
+		var is_crit = randi_range(1, 100) <= crit_chance
+
+		var crit_mult = 1.3 if is_crit else 1.0
+
+		# Instancia daño flotante
+		var dmg_scene = preload("res://Scenes/BTL/UI/Dmg.tscn")
+		var dmg_instance = dmg_scene.instantiate()
+		$Enemies.add_child(dmg_instance)
+		var local_pos = target.get_screen_position() - $Enemies.get_screen_position()
+
+		# Evasión
+		var evasion = enemy_data["stats"]["evasion"]
+		if randi_range(1, 100) <= evasion:
+			dmg_instance.show_damage(0, local_pos + Vector2(200, 0), true, false, "normal")
+			current_action_index += 1
+			perform_next_action()
+			return
+
+		# Aplica multiplicadores tipo + crítico
+		var tipo_relacion = "normal"
+		if mod_tipo == TypeTable.INMUNE_MULT:
+			calculated_attack = 0
+			tipo_relacion = "inmune"
+		elif mod_tipo == TypeTable.ABSORBE_MULT:
+			calculated_attack = -calculated_attack
+			tipo_relacion = "absorbe"
+		elif mod_tipo == TypeTable.DEBIL_MULT:
+			calculated_attack = int(calculated_attack * mod_tipo * crit_mult)
+			tipo_relacion = "debil"
+		elif mod_tipo == TypeTable.RESIST_MULT:
+			calculated_attack = int(calculated_attack * mod_tipo * crit_mult)
+			tipo_relacion = "resistente"
+		else:
+			calculated_attack = int(calculated_attack * crit_mult)
+
+		# Aplica daño
+		target.recibir_dano(calculated_attack)
+
+		# Mostrar daño flotante
+		dmg_instance.show_damage(calculated_attack, local_pos + Vector2(300, -10), false, is_crit, tipo_relacion)
+
+	current_action_index += 1
+	perform_next_action()
+
 
 
 
@@ -460,8 +607,8 @@ func _on_atacar_pressed() -> void:
 	
 	var current_ally = WorldFunc.Party_BTL[current_ally_index]
 	player_actions[current_ally] = {
-		"type": "attack",
-		"subtype": "basic",
+		"type": "ataque",
+		"subtype": "basico",
 		"target": null  # Esperando selección de objetivo
 	}
 	

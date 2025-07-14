@@ -25,6 +25,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 PartyData="*res://Scripts/autoload/PartyData.gd"
 EnemyData="*res://Scripts/autoload/EnemyData.gd"
 WorldFunc="*res://Scripts/autoload/WorldFunc.gd"
+TypeTable="*res://Scripts/autoload/TypeTable.gd"
 
 [dialogue_manager]
 

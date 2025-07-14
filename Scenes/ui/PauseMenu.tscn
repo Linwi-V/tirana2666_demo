@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnj4eni8qpa0f"]
 
-[node name="LoadingScreen" type="Control"]
+[node name="PausingScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

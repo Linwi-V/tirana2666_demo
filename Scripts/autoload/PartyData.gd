@@ -12,7 +12,7 @@ var characters := {
 		
 		"stats": {
 			"max_hp": 100,
-			"ataque_fisico": 12,
+			"ataque_fisico": 5,
 			"defensa_fisica": 8,
 			"ataque_magico": 12,
 			"defensa_magica": 8,
@@ -21,7 +21,45 @@ var characters := {
 			"medidor": 0,
 			"puntos_habilidad_innato": 0
 		},
+		
+		"equipo": {
+			"arma":"",
+			"armadura":"",
+		},
+		
+		"debilidades": ["fuego"],
+		
+		"resistencias": ["rayo"],
+		
+		"inmunidades": [],
+		
+		"absorciones": [],
+		
+		"ataque": {
+			"basico": {
+				"nombre": "Ataque",
+				"desbloqueado": true,
+				"costo": 0,
+				"daño": 0, # no se agrega daño en basicos, solo stats y equipo
+				"tipo": "",
+				"inflinge": "",
+				"descripcion": "Golpe."
+			},
+		},
+		
+		"habilidades": {
+			"disparo": {
+				"nombre": "Disparo",
+				"desbloqueado": true,
+				"costo": 3,
+				"daño": 15,
+				"tipo": "rayo",
+				"inflinge": "Paralisis",
+				"descripcion": "Dispara."
+			},
+		}
 	},
+	
 	"Mónica": {
 		
 		"textura": "res://Assets/PARTY/BTL/monica_ph.png",
@@ -33,23 +71,110 @@ var characters := {
 			"ataque_magico": 12,
 			"defensa_magica": 8,
 			"evasion": 12,
-			"critico": 8,
+			"critico": 85,
 			"medidor": 0,
-			"puntos_habilidad_innato": 0
+			"puntos_habilidad_innato": 3
+		},
+		
+		"equipo": {
+			"arma":"pistola",
+			"armadura":"",
 		},
 		
 		"debilidades": ["fuego"],
 		
 		"resistencias": ["rayo"],
 		
+		"inmunidades": [],
+		
+		"absorciones": [],
+		
+		"ataque": {
+			"basico": {
+				"nombre": "Ataque",
+				"desbloqueado": true,
+				"costo": 0,
+				"daño": 0, # no se agrega daño en basicos, solo stats y equipo
+				"tipo": "",
+				"inflinge": "",
+				"descripcion": "Golpe."
+			},
+		},
 		"habilidades": {
 			"disparo": {
 				"nombre": "Disparo",
 				"desbloqueado": true,
 				"costo": 3,
+				"daño": 15,
 				"tipo": "rayo",
-				"descripcion": "Dispara."
+				"inflinge": "Paralisis",
+				"descripcion": "Dispara.",
 			},
 		}
+	},
+}
+var inventario={
+	"pocion":{
+		"nombre":"Poción",
+		"textura": "", #nada aun
+		"cantidad": 1,
+		"daño": -15, #helea
+		"targets":"ally", #el target es en party solamente puede ser tambien "all", "all_enemy", "enemy" y "all_ally"
+		"tipo":"",
+		"descripcion":"Recupera una pequeña cantidad de HP."
+		#agregar eventualmente si inflinge estados y cosas asi
+	},
+	"jugo_banana":{
+		"nombre":"Jugo de Banana",
+		"textura": "", #nada aun
+		"cantidad": 0,  # si tiene 0 no aparece
+		"daño": -30, #helea
+		"targets":"ally", #el target es en party solamente puede ser tambien "all", "all_enemy", "enemy" y "all_ally"
+		"tipo":"",
+		"descripcion":"Recupera una cantidad de HP."
+		#agregar eventualmente si inflinge estados y cosas asi
+	},
+}
+var equipables={
+	"pistola":{
+		"nombre":"Pistola Laser",
+		"textura": "", #nada aun
+		"cantidad": 1,
+		"equipable_en": ["Mónica","Godot"],
+		"equipo":"arma",
+		"tipo":"rayo",
+		"descripcion":"Pistola Laser Básica.",
+		"stats": {
+			"max_hp": 0,
+			"ataque_fisico": 5,
+			"defensa_fisica": 0,
+			"ataque_magico": 5,
+			"defensa_magica": 0,
+			"evasion": 0,
+			"critico": 2,
+			"medidor": 0,
+			"puntos_habilidad_innato": 0
+		},
+		#agregar eventualmente si inflinge estados y cosas asi
+	},
+	"chaleco":{
+		"nombre":"Chaleco",
+		"textura": "", #nada aun
+		"cantidad": 0,
+		"equipable_en": ["Mónica","Godot"],
+		"equipo":"armadura",
+		"tipo":"",
+		"descripcion":"Protege algo.",
+		"stats": {
+			"max_hp": 10,
+			"ataque_fisico": 0,
+			"defensa_fisica": 5,
+			"ataque_magico": 0,
+			"defensa_magica": 5,
+			"evasion": 5,
+			"critico": 0,
+			"medidor": 0,
+			"puntos_habilidad_innato": 0
+		},
 	},
 }

@@ -16,5 +16,5 @@ func _input(event):
 		toggle_pause()
 
 func toggle_pause():
-	get_tree().paused = !get_tree().paused
+	get_tree().paused = get_tree().paused
 	pause_menu.visible = get_tree().paused

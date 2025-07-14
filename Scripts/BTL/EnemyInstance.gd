@@ -29,15 +29,17 @@ func _ready():
 
 
 func recibir_dano(amount: int):
-	current_hp = max(current_hp - amount, 0)
-	emit_signal("hp_changed", current_hp, self)
-	
+	if amount==0:
+		return
+	elif amount<0:
+		current_hp = max(current_hp - amount, 0)
+		emit_signal("hp_changed", current_hp, self,true)
+	else:
+		current_hp = max(current_hp - amount, 0)
+		emit_signal("hp_changed", current_hp, self,false)
 	if current_hp <= 0:
 		emit_signal("died",self)
 
-func curar(amount: int):
-	current_hp = min(current_hp + amount, max_hp)
-	emit_signal("hp_changed", current_hp)
 
 func agregar_estado(estado: String):
 	if estado in estados:

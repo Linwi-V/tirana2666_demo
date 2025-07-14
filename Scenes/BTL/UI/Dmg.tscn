@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7amt202rty3f"]
+
+[ext_resource type="Theme" uid="uid://bppfbmioagco0" path="res://Scenes/ui/Dialogue/theme.tres" id="1_xnrl5"]
+[ext_resource type="Script" uid="uid://boacypnx4k505" path="res://Scripts/BTL/UI/dmg.gd" id="2_bd5bo"]
+
+[node name="Dmg" type="Label"]
+modulate = Color(0.509286, 0.509286, 0.509286, 1)
+offset_right = 1.0
+offset_bottom = 51.0
+theme = ExtResource("1_xnrl5")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 45
+script = ExtResource("2_bd5bo")

@@ -18,9 +18,10 @@ var enemies := {
 			"velocidad": 5,  # para orden de ataque de enemigos
 		},
 		
-		"debilidades": ["hielo"],
+		"debilidades": [],
 		"resistencias": ["fuego"],
-		
+		"inmunidades": [],
+		"absorciones": [],
 		"habilidades": {
 			"mordisco": {
 				"nombre": "Mordisco",
