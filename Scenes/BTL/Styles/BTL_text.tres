@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c22qh6pxn01rm"]
+
+[ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="1_tstkq"]
+
+[resource]
+default_font = ExtResource("1_tstkq")
+default_font_size = 36

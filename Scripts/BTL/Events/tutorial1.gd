@@ -9,6 +9,7 @@ const d2 = preload("res://Dialogues/worlds/World1/BTL/tutorial1_turno2.dialogue"
 const d3 = preload("res://Dialogues/worlds/World1/BTL/tutorial1_turno3.dialogue")
 
 func trigger_turn1(btl_manager):
+	await get_tree().create_timer(1.5).timeout
 	DialogueManager.show_dialogue_balloon(d1)
 	btl_manager.set_command_override("Habilidades", true)
 	btl_manager.set_command_override("Objetos", true)

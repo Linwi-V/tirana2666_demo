@@ -38,6 +38,10 @@ var enemy_list = []
 
 var current_action_index = 0
 
+var enemy_actions := []
+var current_enemy_index := 0
+
+
 #-------override para comandos------
 
 var command_overrides := {}
@@ -114,12 +118,16 @@ func _ready() -> void:
 #-------------FSM LOGICA AQUI----------------
 
 func _change_state(new_state: BattleState) -> void:
+	if current_state == BattleState.VICTORY or current_state == BattleState.DEFEAT:
+		return
+
 	match new_state:
 		BattleState.IDLE:
 			handle_state(BattleState.IDLE, func() -> void:
 				turn += 1
 				print("TURNO: " + str(turn))
 				print("IDLE")
+				check_combat_end()
 				current_ally_index = 0
 				_change_state(BattleState.PLAYER_SELECTING)
 			)
@@ -140,7 +148,7 @@ func _change_state(new_state: BattleState) -> void:
 			handle_state(BattleState.TARGET_SELECTING, func() -> void:
 				print("TARGET_SELECTING")
 				set_panel_comandos(false)
-				enemy_list = get_tree().get_nodes_in_group("instancia_enemigo")
+				enemy_list = get_alive_enemies()
 				target_index = 0
 				highlight_enemies(false) # Limpia
 				highlight_enemies(true, target_index) # Resalta actual
@@ -161,9 +169,12 @@ func _change_state(new_state: BattleState) -> void:
 			
 		BattleState.ENEMY_TURN:
 			handle_state(BattleState.ENEMY_TURN, func() -> void:
+				
 				set_panel_comandos(false)
 				print("ENEMY TURN")
-
+				prepare_enemy_actions()
+				perform_enemy_actions()
+				
 			)
 
 		BattleState.ENEMY_RESOLVING:
@@ -173,11 +184,13 @@ func _change_state(new_state: BattleState) -> void:
 
 		BattleState.VICTORY:
 			handle_state(BattleState.VICTORY, func() -> void:
+				set_panel_comandos(false)
 				print("GANASTE")
 			)
 
 		BattleState.DEFEAT:
 			handle_state(BattleState.DEFEAT, func() -> void:
+				set_panel_comandos(false)
 				print("PERDISTE")
 			)
 
@@ -193,7 +206,7 @@ func handle_state(next_state: BattleState, fallback_func: Callable) -> void:
 	# Si no hay evento, sigue con el flujo normal
 	fallback_func.call()
 
-# TEST MANUAL SOLO POR AHORA
+# TESTEO MANUAL SOLO POR AHORA
 func _input(_event):
 	
 	if Input.is_action_just_pressed("ui_text_backspace"):
@@ -251,17 +264,6 @@ func _input(_event):
 			on_enemy_target_selected(enemy_list[target_index])
 			return
 			
-	# --- Placeholder de pruebas para avanzar estados ---
-	if Input.is_action_just_pressed("ui_accept"):
-		match current_state:
-			BattleState.PLAYER_ACTING:
-				_change_state(BattleState.PLAYER_RESOLVING)
-			BattleState.PLAYER_RESOLVING:
-				_change_state(BattleState.ENEMY_TURN)
-			BattleState.ENEMY_TURN:
-				_change_state(BattleState.ENEMY_RESOLVING)
-			BattleState.ENEMY_RESOLVING:
-				_change_state(BattleState.IDLE)
 
 #------------CHECKEO DE EVENTOS-----------
 func _check_battle_events() -> bool:
@@ -306,31 +308,29 @@ func _fade_out_overlay():
 	tween.tween_property(overlay, "color:a", 0.0, 0.3)  # Vuelve a transparente
 
 #-------------SEÑALES PARTY----------
-func _on_ally_hp_changed(new_hp,party_member):
+func _on_ally_hp_changed(new_hp,party_member,negativo):
+	if negativo: 
+		heleo_visual(party_member)
+	else:
+		daño_visual(party_member)
 	var hp = party_member.get_node("Vida")
 	var tween = hp.create_tween()
-	daño_visual(party_member)
 	temblor(party_member)
 	tween.tween_property(hp, "value", new_hp, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func _on_ally_died(party_member):
 	var retrato = party_member.get_node("Ally")
-
 	temblor(party_member)
 	retrato.modulate = Color(0.2,0.2,0.2)
 	party_member.rip=true
-	for allies in $Party/AllyContainers.get_children():
-		if not allies.rip:
-			return
-			
-	_change_state(BattleState.DEFEAT)  ###aqui trans a gameover
+	check_combat_end()
 
 #-------------SEÑALES ENEMIGOS----------
 func _on_enemy_hp_changed(_new_hp,enemy,negativo):
 	if negativo: 
-		daño_visual(enemy)
-	else:
 		heleo_visual(enemy)
+	else:
+		daño_visual(enemy)
 	temblor(enemy)
 
 func _on_enemy_died(enemy: Control):
@@ -345,10 +345,7 @@ func _on_enemy_died(enemy: Control):
 	enemy.queue_free()
 	await get_tree().create_timer(0.1).timeout
 	# Chequea si quedan enemigos
-	var quedan_enemigos := get_tree().get_nodes_in_group("enemy_instance").size() > 0
-	if not quedan_enemigos:
-		if current_state!=BattleState.VICTORY:
-			_change_state(BattleState.VICTORY) ####aqui trans a ganar o ekis
+	check_combat_end()
 
 #---------TEMBLOR--------
 func temblor(node: Control):
@@ -397,6 +394,10 @@ func highlight_current_ally(active: bool) -> void:
 func highlight_enemies(active: bool, selected_idx: int = -1) -> void:
 	for i in range(enemy_list.size()):
 		var enemy = enemy_list[i]
+
+		if enemy == null or not is_instance_valid(enemy):
+			continue  # Salta si el nodo está liberado
+
 		if active and i == selected_idx:
 			enemy.modulate = Color(1, 0.7, 0.7)  # Enemigo seleccionado
 		else:
@@ -406,24 +407,37 @@ func highlight_enemies(active: bool, selected_idx: int = -1) -> void:
 func on_enemy_target_selected(enemy_node: Control) -> void:
 	if current_state != BattleState.TARGET_SELECTING:
 		return
-	
+
+	# Refrescar la lista de enemigos vivos
+	var alive = get_alive_enemies()
+
+	# Si el nodo pasó a rip o no está en la lista, elegimos el primero vivo o null
+	if enemy_node == null or enemy_node.rip or not alive.has(enemy_node):
+		if alive.size() > 0:
+			enemy_node = alive[0]
+		else:
+			enemy_node = null
+
+	# Si no quedan enemigos vivos, avanzamos
+	if enemy_node == null:
+		_change_state(BattleState.PLAYER_ACTING)
+		return
+
+	# Guardar la acción para el aliado actual
 	var current_ally = WorldFunc.Party_BTL[current_ally_index]
 	player_actions[current_ally]["target"] = enemy_node.name
-	
-	print(current_ally + " atacará a " + enemy_node.name)
-	
+
+	# Limpiar resaltados
 	highlight_enemies(false)
 	highlight_current_ally(false)
-	
+
+	# Avanzar al siguiente aliado o al turno de acción
 	current_ally_index += 1
-	
 	if current_ally_index >= WorldFunc.Party_BTL.size():
 		current_ally_index = 0
 		_change_state(BattleState.PLAYER_ACTING)
 	else:
 		_change_state(BattleState.PLAYER_SELECTING)
-
-
 
 
 #-------- ACTIVA DESACTIVA PANEL COMANDOS--------
@@ -470,6 +484,7 @@ func perform_player_actions():
 func perform_next_action():
 	# Ver si quedan acciones por hacer
 	if current_action_index >= WorldFunc.Party_BTL.size():
+		check_combat_end()
 		_change_state(BattleState.ENEMY_TURN)
 		return
 
@@ -480,7 +495,26 @@ func perform_next_action():
 		current_action_index += 1
 		perform_next_action()
 		return
+# Verificar que action.target no sea null
+	if action.target != null:
+	# Intentamos obtener el nodo en front y back
+		var node_front = get_node_or_null("Enemies/EnemyContainersFront/" + action.target)
+		var node_back  = get_node_or_null("Enemies/EnemyContainersBack/"  + action.target)
 	
+	# Coalesce manualmente: si front es null, uso back
+		var target : Node = null
+		if node_front != null:
+			target = node_front
+		else:
+			target = node_back
+	# Ahora sí podemos validar que target es Node y no bool
+		if target == null or target.rip:
+		# auto-miss
+			display_damage(null, 0, Vector2.ZERO, true, false, "normal")
+			current_action_index += 1
+			perform_next_action()
+			return
+
 	match action.type:
 		"ataque":
 			do_attack_action(actor_name, action)
@@ -493,7 +527,6 @@ func perform_next_action():
 			perform_next_action()
 
 func do_attack_action(actor_name: String, action: Dictionary):
-	print(actor_name + " ataca a " + action.target)
 	current_ally_index=current_action_index
 	highlight_current_ally(true)
 	# Aquí puedes poner una animación, sonido, etc.
@@ -509,98 +542,418 @@ func do_item_action(actor_name: String, action: Dictionary):
 	pass
 #------------ RESOLUCION DE PARTY------------------
 
-func resolve_attack_action(actor_name: String, action: Dictionary):
-	var nivel = PartyData.party_level
-	var nivel_bonus = int((nivel - 1) * 10)
-	var nivel_multiplicador = 100 + nivel_bonus
+# Helpers para cálculos y visualizaciones
 
-	var base_attack = PartyData.characters[actor_name]["stats"]["ataque_fisico"]
-	var arma = PartyData.characters[actor_name]["equipo"]["arma"]
-	var arma_attack = 0
-	if arma != "":
-		arma_attack = PartyData.equipables[arma]["stats"]["ataque_fisico"]
+func calculate_raw_attack(base_attack: int, weapon_attack: int, level: int) -> int:
+	var nivel_bonus = int((level - 1) * 10)
+	var nivel_mult = (100 + nivel_bonus) / 100.0
+	return int((base_attack + weapon_attack) * nivel_mult)
 
-	var target_name = action.target
-	var enemy_base_name = target_name.substr(0, target_name.length() - 1)
+func check_critical(crit_char: int, crit_weapon: int) -> bool:
+	return randi_range(1, 100) <= (crit_char + crit_weapon)
 
-	var target = get_node_or_null("Enemies/EnemyContainersFront/" + target_name)
-	if target == null:
-		target = get_node_or_null("Enemies/EnemyContainersBack/" + target_name)
+func check_evasion(evasion: int) -> bool:
+	return randi_range(1, 100) <= evasion
 
-	if target != null:
-		var enemy_data = EnemyData.enemies[enemy_base_name]
-		var enemy_defensa = enemy_data["stats"]["defensa_fisica"]
+func get_type_relation(enemy_data: Dictionary, attack_type: String) -> Dictionary:
+	var tipo_data = {
+		"inmunidades": enemy_data["inmunidades"],
+		"debilidades": enemy_data["debilidades"],
+		"resistencias": enemy_data["resistencias"],
+		"absorciones": enemy_data["absorciones"]
+	}
+	var mod = TypeTable.get_damage_modifier(tipo_data, attack_type)
+	var relation = "normal"
+	match mod:
+		TypeTable.INMUNE_MULT:
+			relation = "inmune"
+		TypeTable.ABSORBE_MULT:
+			relation = "absorbe"
+		TypeTable.DEBIL_MULT:
+			relation = "debil"
+		TypeTable.RESIST_MULT:
+			relation = "resistente"
+	return {"mult": mod, "relation": relation}
 
-		var raw_attack = (base_attack + arma_attack) * nivel_multiplicador / 100
-		var calculated_attack = int(raw_attack - enemy_defensa)
-		if calculated_attack < 0:
-			calculated_attack = 0
+func display_damage(target: Control, damage: int, local_pos: Vector2, is_miss: bool, is_crit: bool, relation: String) -> void:
+	var dmg_scene = preload("res://Scenes/BTL/UI/Dmg.tscn")
+	var dmg_instance = dmg_scene.instantiate()
+	$Enemies.add_child(dmg_instance)
+	dmg_instance.show_damage(damage, local_pos + Vector2(200, 0), is_miss, is_crit, relation)
 
-		# Tipo (debilidades / resistencias / inmunidades / absorción)
-		var tipo = ""
-		if arma != "":
-			tipo = PartyData.equipables[arma]["tipo"]
-		else:
-			tipo = PartyData.characters[actor_name]["ataque"]["basico"]["tipo"]
-
-		var tipo_data = [enemy_data["debilidades"], enemy_data["resistencias"]]
-		var mod_tipo = TypeTable.get_damage_modifier(tipo_data, tipo)
-
-		# Crítico
-		var crit_char = PartyData.characters[actor_name]["stats"]["critico"]
-		var crit_arma = 0
-		if arma != "":
-			crit_arma = PartyData.equipables[arma]["stats"]["critico"]
-
-		var crit_chance = crit_char + crit_arma
-		var is_crit = randi_range(1, 100) <= crit_chance
-
-		var crit_mult = 1.3 if is_crit else 1.0
-
-		# Instancia daño flotante
-		var dmg_scene = preload("res://Scenes/BTL/UI/Dmg.tscn")
-		var dmg_instance = dmg_scene.instantiate()
-		$Enemies.add_child(dmg_instance)
-		var local_pos = target.get_screen_position() - $Enemies.get_screen_position()
-
-		# Evasión
-		var evasion = enemy_data["stats"]["evasion"]
-		if randi_range(1, 100) <= evasion:
-			dmg_instance.show_damage(0, local_pos + Vector2(200, 0), true, false, "normal")
-			current_action_index += 1
-			perform_next_action()
-			return
-
-		# Aplica multiplicadores tipo + crítico
-		var tipo_relacion = "normal"
-		if mod_tipo == TypeTable.INMUNE_MULT:
-			calculated_attack = 0
-			tipo_relacion = "inmune"
-		elif mod_tipo == TypeTable.ABSORBE_MULT:
-			calculated_attack = -calculated_attack
-			tipo_relacion = "absorbe"
-		elif mod_tipo == TypeTable.DEBIL_MULT:
-			calculated_attack = int(calculated_attack * mod_tipo * crit_mult)
-			tipo_relacion = "debil"
-		elif mod_tipo == TypeTable.RESIST_MULT:
-			calculated_attack = int(calculated_attack * mod_tipo * crit_mult)
-			tipo_relacion = "resistente"
-		else:
-			calculated_attack = int(calculated_attack * crit_mult)
-
-		# Aplica daño
-		target.recibir_dano(calculated_attack)
-
-		# Mostrar daño flotante
-		dmg_instance.show_damage(calculated_attack, local_pos + Vector2(300, -10), false, is_crit, tipo_relacion)
-
+func _next_player_action() -> void:
 	current_action_index += 1
 	perform_next_action()
 
 
+# Refactor de resolve_attack_action()
+
+func resolve_attack_action(actor_name: String, action: Dictionary) -> void:
+	# Datos del actor
+	var level = PartyData.party_level
+	var base_atk = PartyData.characters[actor_name]["stats"]["ataque_fisico"]
+	var weapon = PartyData.characters[actor_name]["equipo"]["arma"]
+	var weapon_atk = 0
+	if weapon != "":
+		weapon_atk = PartyData.equipables[weapon]["stats"]["ataque_fisico"]
+	var crit_char = PartyData.characters[actor_name]["stats"]["critico"]
+	var crit_weapon = 0
+	if weapon != "":
+		crit_weapon = PartyData.equipables[weapon]["stats"]["critico"]
+
+	# 1. Cálculo bruto
+	var raw = calculate_raw_attack(base_atk, weapon_atk, level)
+
+	# Selección de nodo enemigo
+	var target_name = action.target
+	var enemy_node = get_node_or_null("Enemies/EnemyContainersFront/" + target_name)
+	if enemy_node == null:
+		enemy_node = get_node_or_null("Enemies/EnemyContainersBack/" + target_name)
+	if enemy_node == null:
+		_next_player_action()
+		return
+
+	# Datos del enemigo
+	var enemy_id = target_name.substr(0, target_name.length() - 1)
+	var enemy_data = EnemyData.enemies[enemy_id]
+	var defense = enemy_data["stats"]["defensa_fisica"]
+	var evasion = enemy_data["stats"]["evasion"]
+
+	# 2. Evasión
+	if check_evasion(evasion):
+		var pos = enemy_node.get_screen_position() - $Enemies.get_screen_position()
+		display_damage(enemy_node, 0, pos, true, false, "normal")
+		_next_player_action()
+		return
+
+	# 3. Tipo y relación
+	var attack_type = ""
+	if weapon != "":
+		attack_type = PartyData.equipables[weapon]["tipo"]
+	else:
+		attack_type = PartyData.characters[actor_name]["ataque"]["basico"]["tipo"]
+	var type_info = get_type_relation(enemy_data, attack_type)
+
+	# 4. Crítico
+	var is_crit = check_critical(crit_char, crit_weapon)
+	var crit_mult = 1.0
+	if is_crit:
+		crit_mult = 1.3
+
+	# 5. Cálculo de daño final
+	var dmg = raw - defense
+	if dmg < 0:
+		dmg = 0
+	dmg = int(dmg * type_info["mult"] * crit_mult)
+
+	# 6. Aplicar daño y mostrar
+	enemy_node.recibir_dano(dmg)
+	var local_pos = enemy_node.get_screen_position() - $Enemies.get_screen_position()
+	display_damage(enemy_node, dmg, local_pos, false, is_crit, type_info["relation"])
+
+	# Avanza al siguiente
+	_next_player_action()
+
+#------FUNCS TURNO ENEMIGO--------------
+func prepare_enemy_actions() -> void:
+	enemy_actions.clear()
+	current_enemy_index = 0
+
+	# 2.1 Recolecta instancias vivas y ordena por velocidad descendente
+	var enemies = get_tree().get_nodes_in_group("instancia_enemigo")
+	enemies.sort_custom(_compare_enemy_speed)
+
+	for enemy in enemies:
+		if enemy.rip:
+			continue
+		var action = select_enemy_action(enemy)
+		if action.is_empty():
+			continue
+		enemy_actions.append({
+			"actor":   enemy,
+			"ability": action.ability,
+			"target":  action.target
+		})
+
+func _compare_enemy_speed(a, b) -> int:
+	var sa = EnemyData.enemies[a.character_id]["stats"]["velocidad"]
+	var sb = EnemyData.enemies[b.character_id]["stats"]["velocidad"]
+	return sb - sa  # b antes que a si es más rápido
+
+func select_enemy_action(enemy: Node) -> Dictionary:
+	# Datos del enemigo
+	var data = EnemyData.enemies[enemy.character_id]
+	var abil = data["habilidades"]
+
+	# 1) Separar habilidades forzadas vs. siempre disponibles
+	var forced := []
+	var always := []
+	for namex in abil.keys():
+		var info = abil[namex]
+		if info["scripted"] == turn:
+			forced.append(namex)
+		elif info["scripted"] < 0:
+			always.append(namex)
+
+	# 2) Definir el pool final: primero forzadas, si no hay, usar always
+	var available := []
+	if not forced.is_empty():
+		available = forced
+	else:
+		available = always
+
+	if available.is_empty():
+		return {}
+
+	# 3) Elegir según ai_type
+	var chosen := ""
+	var ai = data["ai_type"]
+	match ai:
+		"agresivo":
+			# la de mayor poder
+			chosen = available[0]
+			for n in available:
+				if abil[n]["poder"] > abil[chosen]["poder"]:
+					chosen = n
+		"random":
+			chosen = available[randi_range(0, available.size() - 1)]
+		"aux":
+			# prioridad curación self si está dañado
+			var used_heal := false
+			for n in available:
+				var i = abil[n]
+				if i["target"] == "self" and i["poder"] < 0:
+					var hp    = enemy.get_node("Vida").value
+					var maxhp = data["stats"]["max_hp"]
+					if hp < maxhp:
+						chosen = n
+						used_heal = true
+						break
+			if not used_heal:
+				chosen = available[randi_range(0, available.size() - 1)]
+		_:
+			chosen = available[0]
+
+	# 4) Resolver target igual que antes
+	var target_node: Node = enemy
+	var tinfo = abil[chosen]
+	if tinfo["target"] == "party":
+		var vivos := []
+		for ally in $Party/AllyContainers.get_children():
+			if not ally.rip:
+				vivos.append(ally)
+		if vivos.size() > 0:
+			if ai == "agresivo":
+				target_node = vivos[0]
+				for a in vivos:
+					if a.get_node("Vida").value < target_node.get_node("Vida").value:
+						target_node = a
+			else:
+				target_node = vivos[randi_range(0, vivos.size() - 1)]
+
+	return {
+		"ability": chosen,
+		"target":  target_node.name
+	}
+func perform_enemy_actions() -> void:
+	if enemy_actions.is_empty():
+		_change_state(BattleState.IDLE)
+		return
+	current_enemy_index = 0
+	perform_next_enemy_action()
+
+# Helper para buscar un aliado vivo por nombre
+func find_alive_ally_by_name(name: String) -> Node:
+	for a in $Party/AllyContainers.get_children():
+		if is_instance_valid(a) and not a.rip and a.name == name:
+			return a
+	return null
 
 
+func perform_next_enemy_action() -> void:
+	if current_enemy_index >= enemy_actions.size():
+		_change_state(BattleState.IDLE)
+		return
 
+	var entry        = enemy_actions[current_enemy_index]
+	var enemy        = entry["actor"]
+	var ability_name = entry["ability"]
+	var target_name  = entry["target"]
+
+	# Validar que el enemigo siga existiendo
+	if not is_instance_valid(enemy) or enemy.rip:
+		current_enemy_index += 1
+		perform_next_enemy_action()
+		return
+
+	var edata = EnemyData.enemies.get(enemy.character_id)
+	if edata == null:
+		current_enemy_index += 1
+		perform_next_enemy_action()
+		return
+
+	var tinfo = edata["habilidades"].get(ability_name)
+	if tinfo == null:
+		current_enemy_index += 1
+		perform_next_enemy_action()
+		return
+
+	# Obtener target válido
+	var target: Node = null
+	if tinfo["target"] == "self":
+		target = enemy
+	else:
+		target = find_alive_ally_by_name(target_name)
+	if target == null:
+		var pos_miss = enemy.get_node("Enemy").get_global_position()
+		display_damage(enemy, 0, pos_miss, true, false, "normal")
+		current_enemy_index += 1
+		perform_next_enemy_action()
+		return
+
+	# Animación + espera
+	highlight_enemies(true, current_enemy_index)
+	await get_tree().create_timer(0.5).timeout
+	highlight_enemies(false, current_enemy_index)
+	await get_tree().create_timer(0.5).timeout
+
+	# VALIDACIÓN FINAL antes de resolver
+	if not is_instance_valid(enemy):
+		current_enemy_index += 1
+		perform_next_enemy_action()
+		return
+
+	resolve_enemy_ability_action(enemy, ability_name, target.name)
+	current_enemy_index += 1
+	perform_next_enemy_action()
+
+func resolve_enemy_ability_action(enemy: Node, ability_name: String, target_name: String) -> void:
+	# Datos del enemigo y la habilidad
+	var edata = EnemyData.enemies[enemy.character_id]
+	var abil  = edata["habilidades"][ability_name]
+	var raw_power = abil["poder"]            # >0 daño, <0 curación
+	var atk_fisico = edata["stats"]["ataque_fisico"]
+	var atk_magico = edata["stats"]["ataque_magico"]   
+	var estilo     = abil["estilo"]             # "fisico" o "magico"
+	var tipo = abil["tipo"]    
+	var is_heal   = raw_power < 0
+	# Determinar nodo objetivo
+	var target: Node = null
+	if abil["target"] == "self":
+		target = enemy
+	else:
+		target = $Party/AllyContainers.get_node(target_name)
+	if target == null:
+		return
+
+	# Obtener posición para el feedback (sprite “Ally” o “Enemy”)
+	var sprite: Node
+	if abil["target"] == "self":
+		sprite = target.get_node("Enemy")
+	else:
+		sprite = target.get_node("Ally")
+	var pos = sprite.get_global_position()
+
+	# Si ataca a la party, chequeamos defensa y evasión
+	var defense = 0
+	var evasion = 0
+	if abil["target"] != "self":
+		var pdata = PartyData.characters[target.character_id]
+		if estilo == "fisico":
+			defense = pdata["stats"]["defensa_fisica"]
+			raw_power += atk_fisico
+		else:
+			defense = pdata["stats"]["defensa_magica"]
+			raw_power += atk_magico
+		evasion = pdata["stats"]["evasion"]
+		
+		# 1) Evasión
+		if check_evasion(evasion):
+			display_damage(target, 0, pos, true, false, "normal")
+			return
+
+	# 2) Modificador de tipo
+	var tipo_data = {
+		"inmunidades":  edata["inmunidades"],
+		"debilidades":  edata["debilidades"],
+		"resistencias": edata["resistencias"],
+		"absorciones":  edata["absorciones"]
+	}
+	var mult      = TypeTable.get_damage_modifier(tipo_data, tipo)
+	var relation  = "normal"
+	if mult == TypeTable.INMUNE_MULT:
+		relation = "inmune"
+	elif mult == TypeTable.ABSORBE_MULT:
+		relation = "absorbe"
+	elif mult == TypeTable.DEBIL_MULT:
+		relation = "debil"
+	elif mult == TypeTable.RESIST_MULT:
+		relation = "resistente"
+
+	# 3) Crítico (daño y curación pueden crítico)
+	var is_crit = false
+	var crit_chance = edata["stats"]["critico"]
+	if randi_range(1, 100) <= crit_chance:
+		is_crit = true
+
+	var crit_mult = 1.0
+	if is_crit:
+		crit_mult = 1.3
+
+	# 4) Cálculo final
+	var effective = raw_power
+	if abil["target"] != "self" and not is_heal:
+		effective = raw_power - defense
+		if effective < 0:
+			effective = 0
+
+	var final_amount = int(effective * mult * crit_mult)
+
+	# 5) Aplica daño o curación con una sola llamada
+	target.recibir_dano(final_amount)
+
+	# 6) Feedback visual
+	display_damage(target, final_amount, pos, false, is_crit, relation)
+
+#-------HELEPRS PARA QUE NO SE CHINGUE CUANDO SE MUERE ALGN----------
+
+# Devuelve enemigos en escena que aún no murieron
+func get_alive_enemies() -> Array:
+	var alive := []
+	for e in get_tree().get_nodes_in_group("instancia_enemigo"):
+		if not e.rip and is_instance_valid(e):
+			alive.append(e)
+	return alive
+
+# Devuelve aliados vivos
+func get_alive_allies() -> Array:
+	var alive := []
+	for a in $Party/AllyContainers.get_children():
+		if not a.rip and is_instance_valid(a):
+			alive.append(a)
+	return alive
+
+func check_combat_end() -> void:
+	var enemies_alive := get_alive_enemies().size()
+	var party_alive := get_alive_allies().size()
+	if enemies_alive == 0:
+		if current_state != BattleState.VICTORY:
+			_change_state(BattleState.VICTORY)
+		return
+
+	if party_alive == 0:
+		if current_state != BattleState.DEFEAT:
+			_change_state(BattleState.DEFEAT)
+		return
+
+#---------------HELPER LIMPIA HIJOS-----------------
+func queue_free_children(nodo):
+	for child in nodo.get_children():
+		child.queue_free()
+		
+		
+
+#--------------------------------BOTON ATACAR-------------------------
 func _on_atacar_pressed() -> void:
 	if current_state != BattleState.PLAYER_SELECTING:
 		return
@@ -613,3 +966,58 @@ func _on_atacar_pressed() -> void:
 	}
 	
 	_change_state(BattleState.TARGET_SELECTING)
+
+#------------------------BOTON OBJETOS----------
+func abrir_item_menu():
+	var lista_panel := $UI/ItemPanel/ItemListContainer/ItemButtons
+	queue_free_children(lista_panel)  # Limpia objetos anteriores
+
+	$UI/ItemPanel.visible = true
+
+	for nombre in PartyData.inventario.keys():
+		var item_data = PartyData.inventario[nombre]
+		print(item_data)
+		if item_data["cantidad"] > 0:
+			var boton = Button.new()
+			boton.text = nombre + " x" + str(item_data["cantidad"])
+			boton.name = nombre
+			boton.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			boton.pressed.connect(func(): _on_item_selected(nombre))
+			lista_panel.add_child(boton)
+	for child in lista_panel.get_children():
+		if child is Button and not child.disabled:
+			child.grab_focus()
+			break
+
+
+func _on_item_selected(item_name: String) -> void:
+	var current_ally = WorldFunc.Party_BTL[current_ally_index]
+
+	player_actions[current_ally] = {
+		"type": "item",
+		"subtype": "usar",
+		"item": item_name,
+		"target": null
+	}
+
+	$UI/ItemPanel.visible = false
+	_change_state(BattleState.TARGET_SELECTING)
+	
+func _on_objetos_pressed() -> void:
+	$UI/CommandPanel.visible = false
+	abrir_item_menu()
+	$UI/ItemPanel.visible = true
+	pass # Replace with function body.
+
+
+func _on_cancel_button_pressed() -> void:
+	$UI/CommandPanel.visible = true
+	$UI/ItemPanel.visible = false
+	var container = $UI/CommandPanel/CommandContainer
+	for button in container.get_children():
+		if button is Button and not button.disabled:
+			button.grab_focus()
+			break
+
+
+	pass # Replace with function body.

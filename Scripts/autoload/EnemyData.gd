@@ -18,7 +18,7 @@ var enemies := {
 			"velocidad": 5,  # para orden de ataque de enemigos
 		},
 		
-		"debilidades": [],
+		"debilidades": ["rayo"],
 		"resistencias": ["fuego"],
 		"inmunidades": [],
 		"absorciones": [],
@@ -26,8 +26,20 @@ var enemies := {
 			"mordisco": {
 				"nombre": "Mordisco",
 				"descripcion": "Un ataque simple con los dientes viscosos.",
-				"poder": 10,  # daño base
-				"tipo": "fisico"
+				"poder": 25,  # daño base
+				"tipo": "",
+				"estilo": "fisico",
+				"target": "party",
+				"scripted": -1
+			},
+			"pocion": {
+				"nombre": "Poción",
+				"descripcion": "Helea",
+				"poder": -10,  # daño base
+				"tipo": "",
+				"estilo": "magico",
+				"target": "self",
+				"scripted": 2
 			},
 		},
 		"ai_type": "agresivo"  

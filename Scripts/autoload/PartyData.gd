@@ -1,7 +1,7 @@
 extends Node
 
 # Personajes jugables activos (orden importa para los turnos)
-var active_party := ["Mónica","Godot"] 
+var active_party := ["Mónica"] 
 var party_level := 1
 
 # Personajes disponibles en el juego
@@ -12,7 +12,7 @@ var characters := {
 		
 		"stats": {
 			"max_hp": 100,
-			"ataque_fisico": 5,
+			"ataque_fisico": 50,
 			"defensa_fisica": 8,
 			"ataque_magico": 12,
 			"defensa_magica": 8,
@@ -71,7 +71,7 @@ var characters := {
 			"ataque_magico": 12,
 			"defensa_magica": 8,
 			"evasion": 12,
-			"critico": 85,
+			"critico": 95,
 			"medidor": 0,
 			"puntos_habilidad_innato": 3
 		},

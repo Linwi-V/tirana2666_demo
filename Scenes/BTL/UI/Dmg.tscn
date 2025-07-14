@@ -5,6 +5,7 @@
 
 [node name="Dmg" type="Label"]
 modulate = Color(0.509286, 0.509286, 0.509286, 1)
+z_index = 1
 offset_right = 1.0
 offset_bottom = 51.0
 theme = ExtResource("1_xnrl5")
