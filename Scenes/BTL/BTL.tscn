@@ -7,6 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://dughx5hxn44at" path="res://Scenes/BTL/Styles/BTL_Button.tres" id="4_muaw0"]
 [ext_resource type="Texture2D" uid="uid://p0b3hvq6ptvx" path="res://Assets/BTL/BGs/BTL_Dummy.tres" id="5_muaw0"]
 [ext_resource type="Theme" uid="uid://c22qh6pxn01rm" path="res://Scenes/BTL/Styles/BTL_text.tres" id="6_104bg"]
+[ext_resource type="StyleBox" uid="uid://rsltytampmw4" path="res://Scenes/BTL/UI/BTL_panelfull.tres" id="7_7jexa"]
 [ext_resource type="Theme" uid="uid://bppfbmioagco0" path="res://Scenes/ui/Dialogue/theme.tres" id="8_7jexa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wbnk0"]
@@ -18,14 +19,6 @@ shader_parameter/speed_x = 3.68
 shader_parameter/color_count = 3
 shader_parameter/fps = 15.0
 shader_parameter/frame_count = 0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pdr8"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
 
 [node name="BTL" type="Control"]
 process_mode = 1
@@ -132,7 +125,7 @@ offset_bottom = -25.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("6_104bg")
-theme_override_styles/panel = SubResource("StyleBoxFlat_6pdr8")
+theme_override_styles/panel = ExtResource("7_7jexa")
 
 [node name="CommandContainer" type="GridContainer" parent="BTL_Manager/UI/CommandPanel"]
 layout_mode = 2
@@ -180,37 +173,118 @@ flat = true
 
 [node name="ItemPanel" type="PanelContainer" parent="BTL_Manager/UI"]
 visible = false
+custom_minimum_size = Vector2(650, 325)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -650.0
-offset_top = -325.0
+offset_left = -657.15
+offset_top = -377.955
+offset_right = -7.15002
+offset_bottom = -52.9551
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("6_104bg")
+theme_override_styles/panel = ExtResource("7_7jexa")
 
 [node name="MarginContainer" type="MarginContainer" parent="BTL_Manager/UI/ItemPanel"]
+custom_minimum_size = Vector2(0, 295)
 layout_mode = 2
 
 [node name="ItemListContainer" type="VBoxContainer" parent="BTL_Manager/UI/ItemPanel"]
+custom_minimum_size = Vector2(0, 295)
 layout_mode = 2
 theme = ExtResource("8_7jexa")
+theme_override_constants/separation = 5
+alignment = 1
 
 [node name="Label" type="Label" parent="BTL_Manager/UI/ItemPanel/ItemListContainer"]
 layout_mode = 2
 text = "Selecciona Objeto"
 horizontal_alignment = 1
 
-[node name="ItemButtons" type="VBoxContainer" parent="BTL_Manager/UI/ItemPanel/ItemListContainer"]
+[node name="ItemScroll" type="ScrollContainer" parent="BTL_Manager/UI/ItemPanel/ItemListContainer"]
+custom_minimum_size = Vector2(0, 205)
 layout_mode = 2
-theme = ExtResource("8_7jexa")
+follow_focus = true
+vertical_scroll_mode = 3
+
+[node name="ItemButtons" type="VBoxContainer" parent="BTL_Manager/UI/ItemPanel/ItemListContainer/ItemScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="CancelButton" type="Button" parent="BTL_Manager/UI/ItemPanel/ItemListContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 50
 theme_override_styles/focus = ExtResource("4_muaw0")
 text = "Cancelar"
+flat = true
+
+[node name="ItemDesPanel" type="PanelContainer" parent="BTL_Manager/UI"]
+visible = false
+custom_minimum_size = Vector2(650, 160)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -660.0
+offset_top = -555.0
+offset_right = -10.0
+offset_bottom = -395.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+theme = ExtResource("6_104bg")
+theme_override_styles/panel = ExtResource("7_7jexa")
+
+[node name="MarginContainer" type="MarginContainer" parent="BTL_Manager/UI/ItemDesPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="ItemDesLabel" type="Label" parent="BTL_Manager/UI/ItemDesPanel/MarginContainer"]
+custom_minimum_size = Vector2(540, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+autowrap_mode = 2
+
+[node name="CombatMsgPanel" type="PanelContainer" parent="BTL_Manager/UI"]
+visible = false
+custom_minimum_size = Vector2(650, 160)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -680.0
+offset_top = -280.0
+offset_right = -30.0
+offset_bottom = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+theme = ExtResource("6_104bg")
+theme_override_styles/panel = ExtResource("7_7jexa")
+
+[node name="MarginContainer" type="MarginContainer" parent="BTL_Manager/UI/CombatMsgPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="CombatMsgLabel" type="Label" parent="BTL_Manager/UI/CombatMsgPanel/MarginContainer"]
+custom_minimum_size = Vector2(540, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+autowrap_mode = 2
 
 [connection signal="pressed" from="BTL_Manager/UI/CommandPanel/CommandContainer/Atacar" to="BTL_Manager" method="_on_atacar_pressed"]
 [connection signal="pressed" from="BTL_Manager/UI/CommandPanel/CommandContainer/Objetos" to="BTL_Manager" method="_on_objetos_pressed"]

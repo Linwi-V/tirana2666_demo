@@ -4,6 +4,9 @@ extends Node
 @export var Enemy : PackedScene
 @export var Ally : PackedScene
 
+#-----------PARA DIALOGOS-----------------
+var _msg_panel
+var _msg_label
 #-----------SCRIPT DE PELEAS OPCIONAL---------
 var battle_event_controller: Node = null
 
@@ -14,9 +17,7 @@ enum BattleState {
 	PLAYER_SELECTING,
 	TARGET_SELECTING,
 	PLAYER_ACTING,
-	PLAYER_RESOLVING,
 	ENEMY_TURN,
-	ENEMY_RESOLVING,
 	VICTORY,
 	DEFEAT
 }
@@ -36,6 +37,9 @@ var player_actions := {}
 var target_index = 0
 var enemy_list = []
 
+# Lista dinámica de nodos que recibirán target (aliados/enemigos)
+var target_list: Array = []
+
 var current_action_index = 0
 
 var enemy_actions := []
@@ -53,6 +57,10 @@ func _ready() -> void:
 	#----------- SEÑALES DIALOGOS--------
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
+	#---------------panel acciones-----------
+	_msg_panel = $UI/CombatMsgPanel
+	_msg_label = $UI/CombatMsgPanel/MarginContainer/CombatMsgLabel
+
 	#-----------EMBOSCADA--------------
 	ambush = WorldFunc.BTL_AMBUSH
 	
@@ -67,7 +75,7 @@ func _ready() -> void:
 		var new_ally = Ally.instantiate()
 		var retrato = new_ally.get_node("Ally")
 		#--------------cambio nombre----------
-		new_ally.name=chars+str(i)
+		new_ally.name=chars
 		#--------entrega id y textura----------
 		new_ally.character_id=chars
 		retrato.texture = load(PartyData.characters[chars]["textura"])
@@ -129,6 +137,7 @@ func _change_state(new_state: BattleState) -> void:
 				print("IDLE")
 				check_combat_end()
 				current_ally_index = 0
+				await get_tree().create_timer(1.0).timeout
 				_change_state(BattleState.PLAYER_SELECTING)
 			)
 
@@ -139,21 +148,43 @@ func _change_state(new_state: BattleState) -> void:
 
 		BattleState.PLAYER_SELECTING:
 			handle_state(BattleState.PLAYER_SELECTING, func() -> void:
+
 				await get_tree().process_frame
+				
+		# 1) Saltar aliados muertos
+				while current_ally_index < WorldFunc.Party_BTL.size():
+					var actor_id = WorldFunc.Party_BTL[current_ally_index]
+					var node: Control = $Party/AllyContainers.get_node_or_null(actor_id)
+					if node and not node.rip:
+						break
+					current_ally_index += 1
+
+				# 2) Si no queda ningún aliado vivo → DERROTA
+				if get_alive_allies().is_empty():
+					_change_state(BattleState.DEFEAT)
+					return
+
+				# 3) Si pasamos el final de la lista (p. ej. todos actuaron), vamos a ACTING
+				if current_ally_index >= WorldFunc.Party_BTL.size():
+					_change_state(BattleState.PLAYER_ACTING)
+					return
+
+
 				set_panel_comandos(true)
 				_apply_command_overrides()
 				print("PLAYER SELECT")
 			)
 		BattleState.TARGET_SELECTING:
 			handle_state(BattleState.TARGET_SELECTING, func() -> void:
-				print("TARGET_SELECTING")
 				set_panel_comandos(false)
-				enemy_list = get_alive_enemies()
+				print("TARGET_SELECTING")
+				var actor  = WorldFunc.Party_BTL[current_ally_index]
+				var action = player_actions[actor]
+				target_list  = build_target_list(action.targets)
 				target_index = 0
-				highlight_enemies(false) # Limpia
-				highlight_enemies(true, target_index) # Resalta actual
+				highlight_target_list(target_list, true, target_index)
 				highlight_current_ally(true)
-			)
+				)
 
 		BattleState.PLAYER_ACTING:
 			handle_state(BattleState.PLAYER_ACTING, func() -> void:
@@ -162,10 +193,6 @@ func _change_state(new_state: BattleState) -> void:
 				print("PLAYER ACTS")
 			)
 
-		BattleState.PLAYER_RESOLVING:
-			handle_state(BattleState.PLAYER_RESOLVING, func() -> void:
-				print("PLAYER_RESOLVING")
-			)
 			
 		BattleState.ENEMY_TURN:
 			handle_state(BattleState.ENEMY_TURN, func() -> void:
@@ -177,10 +204,6 @@ func _change_state(new_state: BattleState) -> void:
 				
 			)
 
-		BattleState.ENEMY_RESOLVING:
-			handle_state(BattleState.ENEMY_RESOLVING, func() -> void:
-				print("ENEMY_RESOLVING")
-			)
 
 		BattleState.VICTORY:
 			handle_state(BattleState.VICTORY, func() -> void:
@@ -209,14 +232,26 @@ func handle_state(next_state: BattleState, fallback_func: Callable) -> void:
 # TESTEO MANUAL SOLO POR AHORA
 func _input(_event):
 	
-	if Input.is_action_just_pressed("ui_text_backspace"):
+	if Input.is_action_just_pressed("x"):
 		if current_state == BattleState.TARGET_SELECTING:
+			var actor = WorldFunc.Party_BTL[current_ally_index]
+			var action = player_actions.get(actor)
+			# Si era ítem, devolver cantidad
+			if action and action.type == "item":
+				PartyData.inventario[action.item]["cantidad"] += 1
+			highlight_current_ally(false)
+			highlight_target_list(enemy_list,false)
 			# Caso 1: Si estás en targeting, vuelves a seleccionar acción para el mismo aliado
 			_change_state(BattleState.PLAYER_SELECTING)
 			return
 		elif current_state == BattleState.PLAYER_SELECTING:
 			# Caso 2: Si estás en selección de acción y no es el primer aliado,
 			# retrocedes a targeting del aliado anterior
+
+			if $UI/ItemPanel.visible:
+				$UI/ItemPanel.visible=false
+				$UI/ItemDesPanel.visible=false
+				$UI/CommandPanel/CommandContainer/Objetos.grab_focus()
 			if current_ally_index > 0:
 				highlight_current_ally(false)
 				current_ally_index -= 1
@@ -229,41 +264,19 @@ func _input(_event):
 		var enemy_count = enemy_list.size()
 		
 		if Input.is_action_just_pressed("ui_right"):
-			target_index = (target_index + 1) % enemy_list.size()
-			highlight_enemies(true, target_index)
+			target_index = (target_index + 1) % target_list.size()
 			return
 		elif Input.is_action_just_pressed("ui_left"):
-			target_index = (target_index - 1 + enemy_list.size()) % enemy_list.size()
-			highlight_enemies(true, target_index)
+			target_index = (target_index - 1 + target_list.size()) % target_list.size()
 			return
-		elif Input.is_action_just_pressed("ui_up"):
-			if enemy_count == 4:
-				if target_index >= 1:
-					target_index = 0
-					highlight_enemies(true, target_index)
-			elif enemy_count == 5:
-				if target_index >= 2:
-					target_index -= 3
-					if target_index < 0 :
-						target_index =0
-					highlight_enemies(true, target_index)
-				return
-			
-		elif Input.is_action_just_pressed("ui_down"):
-			if enemy_count == 4:
-				if target_index == 0:
-					target_index = 3
-					highlight_enemies(true, target_index)
-			elif enemy_count == 5:
-				if target_index <= 1:
-					target_index += 3
-					highlight_enemies(true, target_index)
-				return
-			
 		elif Input.is_action_just_pressed("ui_accept"):
-			on_enemy_target_selected(enemy_list[target_index])
+			on_target_selected(target_list[target_index])
 			return
-			
+		elif Input.is_action_just_pressed("ui_cancel"):
+			cancel_targeting()
+			return
+		highlight_target_list(target_list, true, target_index)
+		return
 
 #------------CHECKEO DE EVENTOS-----------
 func _check_battle_events() -> bool:
@@ -481,40 +494,41 @@ func perform_player_actions():
 	current_action_index = 0
 	perform_next_action()
 	
-func perform_next_action():
-	# Ver si quedan acciones por hacer
+func perform_next_action() -> void:
+	# —————— 1) Saltar aliados muertos ——————
+	while current_action_index < WorldFunc.Party_BTL.size():
+		var actor_id = WorldFunc.Party_BTL[current_action_index]
+		# Buscamos la instancia en Party/AllyContainers
+		var actor_node: Control = null
+		for a in $Party/AllyContainers.get_children():
+			if a.character_id == actor_id:
+				actor_node = a
+				break
+		# Si no existe o está RIP, avanzamos el índice
+		if actor_node == null or actor_node.rip:
+			current_action_index += 1
+			continue
+		# Si encontramos uno vivo, salimos del while
+		break
+
+
+	# 0) Si ya recorrimos todos los aliados, pasamos al turno enemigo
 	if current_action_index >= WorldFunc.Party_BTL.size():
 		check_combat_end()
 		_change_state(BattleState.ENEMY_TURN)
 		return
 
+	# 1) Sacar actor y acción
 	var actor_name = WorldFunc.Party_BTL[current_action_index]
 	var action = player_actions.get(actor_name)
-	
+
+	# 2) Si no hay acción, avanzamos
 	if action == null:
 		current_action_index += 1
 		perform_next_action()
 		return
-# Verificar que action.target no sea null
-	if action.target != null:
-	# Intentamos obtener el nodo en front y back
-		var node_front = get_node_or_null("Enemies/EnemyContainersFront/" + action.target)
-		var node_back  = get_node_or_null("Enemies/EnemyContainersBack/"  + action.target)
-	
-	# Coalesce manualmente: si front es null, uso back
-		var target : Node = null
-		if node_front != null:
-			target = node_front
-		else:
-			target = node_back
-	# Ahora sí podemos validar que target es Node y no bool
-		if target == null or target.rip:
-		# auto-miss
-			display_damage(null, 0, Vector2.ZERO, true, false, "normal")
-			current_action_index += 1
-			perform_next_action()
-			return
 
+	# 3) Ejecutar según tipo
 	match action.type:
 		"ataque":
 			do_attack_action(actor_name, action)
@@ -526,20 +540,59 @@ func perform_next_action():
 			current_action_index += 1
 			perform_next_action()
 
-func do_attack_action(actor_name: String, action: Dictionary):
-	current_ally_index=current_action_index
+func do_attack_action(actor_name: String, action: Dictionary) -> void:
+	current_ally_index = current_action_index
 	highlight_current_ally(true)
-	# Aquí puedes poner una animación, sonido, etc.
-	await get_tree().create_timer(1).timeout # Simula animación
-	highlight_current_ally(false)
-	# Pasa a resolver el daño
+
+	# Simula animación breve
+	await get_tree().create_timer(0.5).timeout
+
+	# Elegir front/back manualmente
+	var node_front = get_node_or_null("Enemies/EnemyContainersFront/" + action.target)
+	var node_back  = get_node_or_null("Enemies/EnemyContainersBack/"  + action.target)
+	var node = node_front
+	if node == null:
+		node = node_back
+
+
+	# Si no existe o ya murió → mensaje de fallo en panel
+	if node == null or node.rip:
+		await mostrar_texto_combate("¡Ataque falló!", 1.0)
+		advance_action()
+		return
+
+	# Si impacta
+	await mostrar_texto_combate("%s atacó a %s." % [actor_name, node.character_id], 1.0)
 	resolve_attack_action(actor_name, action)
 
 func do_skill_action(actor_name: String, action: Dictionary):
 	pass
 	
-func do_item_action(actor_name: String, action: Dictionary):
-	pass
+func do_item_action(actor_name: String, action: Dictionary) -> void:
+	current_ally_index = current_action_index
+	highlight_current_ally(true)
+
+	var item = PartyData.inventario[action.item]
+	var nodo = get_node_or_null("Party/AllyContainers/" + action.target)
+
+	# Aunque no debería fallar, lo chequeamos
+	if nodo == null or nodo.rip:
+		await mostrar_texto_combate("Objetivo inválido", 1.0)
+		advance_action()
+		return
+
+	# Mensaje de uso
+	await mostrar_texto_combate("%s usó %s en %s." %
+		[actor_name, item["nombre"], nodo.character_id], 1.0)
+
+	# Aplica curación/daño
+	nodo.recibir_dano(item["daño"])
+	display_damage(nodo, item["daño"], nodo.global_position, false, false, "normal")
+	# Consumir ítem
+	PartyData.inventario[action.item]["cantidad"] -= 1
+
+	advance_action()
+
 #------------ RESOLUCION DE PARTY------------------
 
 # Helpers para cálculos y visualizaciones
@@ -650,7 +703,8 @@ func resolve_attack_action(actor_name: String, action: Dictionary) -> void:
 	enemy_node.recibir_dano(dmg)
 	var local_pos = enemy_node.get_screen_position() - $Enemies.get_screen_position()
 	display_damage(enemy_node, dmg, local_pos, false, is_crit, type_info["relation"])
-
+	highlight_current_ally(false)
+	
 	# Avanza al siguiente
 	_next_player_action()
 
@@ -763,9 +817,9 @@ func perform_enemy_actions() -> void:
 	perform_next_enemy_action()
 
 # Helper para buscar un aliado vivo por nombre
-func find_alive_ally_by_name(name: String) -> Node:
+func find_alive_ally_by_name(names: String) -> Node:
 	for a in $Party/AllyContainers.get_children():
-		if is_instance_valid(a) and not a.rip and a.name == name:
+		if is_instance_valid(a) and not a.rip and a.name == names:
 			return a
 	return null
 
@@ -822,7 +876,7 @@ func perform_next_enemy_action() -> void:
 		current_enemy_index += 1
 		perform_next_enemy_action()
 		return
-
+	await mostrar_texto_combate(enemy.character_id + " usó " + ability_name + " en " + target.character_id + ".", 1.0)
 	resolve_enemy_ability_action(enemy, ability_name, target.name)
 	current_enemy_index += 1
 	perform_next_enemy_action()
@@ -915,6 +969,72 @@ func resolve_enemy_ability_action(enemy: Node, ability_name: String, target_name
 	# 6) Feedback visual
 	display_damage(target, final_amount, pos, false, is_crit, relation)
 
+#.--------------------HELPER TARGETEOS--------------------------
+# Devuelve nodos vivos según el string de targets
+func build_target_list(target_type: String) -> Array:
+	match target_type:
+		"self":
+			return [ get_alive_allies()[current_ally_index] ]
+		"ally", "all_ally":
+			return get_alive_allies()
+		"enemy", "all_enemy":
+			return get_alive_enemies()
+		"all":
+			return get_alive_allies() + get_alive_enemies()
+		_:
+			return []
+
+# Limpia y resalta nodo(s) de una lista
+func highlight_target_list(list: Array, active: bool, idx: int = -1) -> void:
+	# 1) Limpiar tintes
+	for a in get_alive_allies():
+		a.modulate = Color(1,1,1)
+	for e in get_alive_enemies():
+		e.modulate = Color(1,1,1)
+	# 2) Resaltar sólo el seleccionado
+	if active and idx >= 0 and idx < list.size():
+		list[idx].modulate = Color(1, 0.7, 0.7)
+
+# Confirmar el target elegido
+func on_target_selected(node: Control) -> void:
+	var actor = WorldFunc.Party_BTL[current_ally_index]
+	player_actions[actor]["target"] = node.name
+
+	# Limpiar resaltados
+	highlight_target_list(target_list, false)
+	highlight_current_ally(false)
+
+	# Avanzar al siguiente aliado o al paso de ejecución
+	current_ally_index += 1
+	if current_ally_index >= WorldFunc.Party_BTL.size():
+		current_ally_index = 0
+		_change_state(BattleState.PLAYER_ACTING)
+	else:
+		_change_state(BattleState.PLAYER_SELECTING)
+
+# Cancelar selección de targeteo
+func cancel_targeting() -> void:
+	var actor = WorldFunc.Party_BTL[current_ally_index]
+	var action = player_actions.get(actor)
+	# Si era ítem, devolver cantidad
+	if action and action.type == "item":
+		PartyData.inventario[action.item]["cantidad"] += 1
+
+	player_actions[actor] = null
+	abrir_item_menu()
+	_change_state(BattleState.PLAYER_SELECTING)
+	
+	
+#-------------------HELPER PARA MOSTRAR Q PASA------------------------
+func mostrar_texto_combate(texto: String, duracion := 1.0) -> void:
+	$UI/CommandPanel.visible=false
+	_msg_label.text = texto
+	_msg_panel.visible = true
+	await get_tree().create_timer(duracion).timeout
+	_msg_panel.visible = false
+	$UI/CommandPanel.visible=true
+
+
 #-------HELEPRS PARA QUE NO SE CHINGUE CUANDO SE MUERE ALGN----------
 
 # Devuelve enemigos en escena que aún no murieron
@@ -951,10 +1071,16 @@ func queue_free_children(nodo):
 	for child in nodo.get_children():
 		child.queue_free()
 		
-		
+#-----HELPER COPILOT YA NI IDEA Q ESTOYU HACIENDO---------
+func advance_action() -> void:
+	highlight_current_ally(false)
+	current_action_index += 1
+	perform_next_action()
+
 
 #--------------------------------BOTON ATACAR-------------------------
 func _on_atacar_pressed() -> void:
+	
 	if current_state != BattleState.PLAYER_SELECTING:
 		return
 	
@@ -962,6 +1088,7 @@ func _on_atacar_pressed() -> void:
 	player_actions[current_ally] = {
 		"type": "ataque",
 		"subtype": "basico",
+		"targets": "enemy",
 		"target": null  # Esperando selección de objetivo
 	}
 	
@@ -969,50 +1096,79 @@ func _on_atacar_pressed() -> void:
 
 #------------------------BOTON OBJETOS----------
 func abrir_item_menu():
-	var lista_panel := $UI/ItemPanel/ItemListContainer/ItemButtons
-	queue_free_children(lista_panel)  # Limpia objetos anteriores
-
+	var lista_panel := $UI/ItemPanel/ItemListContainer/ItemScroll/ItemButtons
+	queue_free_children(lista_panel)
+	
+	$UI/ItemPanel/ItemListContainer/CancelButton.focus_entered.connect(func():
+		$UI/ItemDesPanel.visible=false)
+	# Asegurar visibilidad antes de asignar foco
 	$UI/ItemPanel.visible = true
+	await get_tree().process_frame
 
 	for nombre in PartyData.inventario.keys():
 		var item_data = PartyData.inventario[nombre]
-		print(item_data)
-		if item_data["cantidad"] > 0:
+		if item_data["cantidad"] > 0 and item_data["usable"]:
 			var boton = Button.new()
-			boton.text = nombre + " x" + str(item_data["cantidad"])
+			boton.flat=true
+			boton.focus_entered.connect(func():
+				actualizar_descripcion(PartyData.inventario[nombre]["descripcion"]))
+			boton.add_theme_constant_override("outline_size",35)
+			boton.add_theme_stylebox_override("focus",load("res://Scenes/BTL/Styles/BTL_Button.tres"))
+			boton.focus_mode=Control.FOCUS_ALL
+			boton.text = str(item_data["nombre"]) + " x" + str(item_data["cantidad"])
 			boton.name = nombre
 			boton.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			boton.pressed.connect(func(): _on_item_selected(nombre))
 			lista_panel.add_child(boton)
+	
+	# Asignar foco al primero disponible
+# Asignar foco al primero disponible y guardar el último botón
+	var ultimo_boton = null
 	for child in lista_panel.get_children():
 		if child is Button and not child.disabled:
-			child.grab_focus()
-			break
+			if ultimo_boton == null:
+				child.grab_focus()  # el primero
+			ultimo_boton = child  # se va actualizando hasta el último
+	var boton_cancelar := $UI/ItemPanel/ItemListContainer/CancelButton
+	if ultimo_boton:
+		boton_cancelar.focus_mode = Control.FOCUS_ALL
+		boton_cancelar.focus_neighbor_top = ultimo_boton.get_path()
+	else:
+		boton_cancelar.grab_focus()
 
+
+func actualizar_descripcion(texto: String) -> void:
+	$UI/ItemDesPanel.visible = true
+	$UI/ItemDesPanel/MarginContainer/ItemDesLabel.text = texto
 
 func _on_item_selected(item_name: String) -> void:
 	var current_ally = WorldFunc.Party_BTL[current_ally_index]
-
+	
+	PartyData.inventario[item_name]["cantidad"]-=1
+	
 	player_actions[current_ally] = {
-		"type": "item",
+		"type":    "item",
 		"subtype": "usar",
-		"item": item_name,
-		"target": null
+		"item":    item_name,
+		"targets": PartyData.inventario[item_name]["targets"],  # ej. "ally", "all_enemy", "all", etc.
+		"target":  null
 	}
-
+	
 	$UI/ItemPanel.visible = false
+	$UI/ItemDesPanel.visible = false
 	_change_state(BattleState.TARGET_SELECTING)
 	
 func _on_objetos_pressed() -> void:
-	$UI/CommandPanel.visible = false
+	$UI/CommandPanel.focus_mode= 0
 	abrir_item_menu()
-	$UI/ItemPanel.visible = true
 	pass # Replace with function body.
 
 
 func _on_cancel_button_pressed() -> void:
 	$UI/CommandPanel.visible = true
 	$UI/ItemPanel.visible = false
+	$UI/ItemDesPanel.visible = false
+	$UI/CommandPanel.focus_mode= 2
 	var container = $UI/CommandPanel/CommandContainer
 	for button in container.get_children():
 		if button is Button and not button.disabled:

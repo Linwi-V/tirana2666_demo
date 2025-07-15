@@ -114,26 +114,18 @@ var characters := {
 	},
 }
 var inventario={
-	"pocion":{
-		"nombre":"Poción",
+	"jugo de banana":{
+		"nombre":"Jugo de Banana",
 		"textura": "", #nada aun
 		"cantidad": 1,
 		"daño": -15, #helea
 		"targets":"ally", #el target es en party solamente puede ser tambien "all", "all_enemy", "enemy" y "all_ally"
-		"tipo":"",
-		"descripcion":"Recupera una pequeña cantidad de HP."
-		#agregar eventualmente si inflinge estados y cosas asi
+		"tipo":"", #para items q hacen daño y tienen tipo
+		"descripcion":"Recupera una pequeña cantidad de HP.",
+		"inflinge":"",
+		"usable": true #si es q es usable en batalla y aparece ahi o no
 	},
-	"jugo_banana":{
-		"nombre":"Jugo de Banana",
-		"textura": "", #nada aun
-		"cantidad": 0,  # si tiene 0 no aparece
-		"daño": -30, #helea
-		"targets":"ally", #el target es en party solamente puede ser tambien "all", "all_enemy", "enemy" y "all_ally"
-		"tipo":"",
-		"descripcion":"Recupera una cantidad de HP."
-		#agregar eventualmente si inflinge estados y cosas asi
-	},
+	
 }
 var equipables={
 	"pistola":{
