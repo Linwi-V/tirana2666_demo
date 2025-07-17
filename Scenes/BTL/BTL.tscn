@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://lnacxbw1eicg"]
+[gd_scene load_steps=13 format=3 uid="uid://lnacxbw1eicg"]
 
 [ext_resource type="Script" uid="uid://dba53fa8uw5ef" path="res://Scripts/BTL/btl_manager.gd" id="1_xsev4"]
 [ext_resource type="PackedScene" uid="uid://dohlqsxt82612" path="res://Scenes/BTL/Enemies/enemy_container_base.tscn" id="2_idkhm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://c22qh6pxn01rm" path="res://Scenes/BTL/Styles/BTL_text.tres" id="6_104bg"]
 [ext_resource type="StyleBox" uid="uid://rsltytampmw4" path="res://Scenes/BTL/UI/BTL_panelfull.tres" id="7_7jexa"]
 [ext_resource type="Theme" uid="uid://bppfbmioagco0" path="res://Scenes/ui/Dialogue/theme.tres" id="8_7jexa"]
+[ext_resource type="Texture2D" uid="uid://d35xvx228gmpw" path="res://0_pruebas/gotita.png" id="10_hvcdh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wbnk0"]
 shader = ExtResource("2_vkbv2")
@@ -19,6 +20,14 @@ shader_parameter/speed_x = 3.68
 shader_parameter/color_count = 3
 shader_parameter/fps = 15.0
 shader_parameter/frame_count = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81ypj"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
 
 [node name="BTL" type="Control"]
 process_mode = 1
@@ -222,6 +231,57 @@ theme_override_styles/focus = ExtResource("4_muaw0")
 text = "Cancelar"
 flat = true
 
+[node name="SkillPanel" type="PanelContainer" parent="BTL_Manager/UI"]
+visible = false
+custom_minimum_size = Vector2(650, 325)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -657.15
+offset_top = -377.955
+offset_right = -7.15002
+offset_bottom = -52.9551
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("6_104bg")
+theme_override_styles/panel = ExtResource("7_7jexa")
+
+[node name="MarginContainer" type="MarginContainer" parent="BTL_Manager/UI/SkillPanel"]
+custom_minimum_size = Vector2(0, 295)
+layout_mode = 2
+
+[node name="SkillListContainer" type="VBoxContainer" parent="BTL_Manager/UI/SkillPanel"]
+custom_minimum_size = Vector2(0, 295)
+layout_mode = 2
+theme = ExtResource("8_7jexa")
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Label" type="Label" parent="BTL_Manager/UI/SkillPanel/SkillListContainer"]
+layout_mode = 2
+text = "Selecciona Habilidad"
+horizontal_alignment = 1
+
+[node name="SkillScroll" type="ScrollContainer" parent="BTL_Manager/UI/SkillPanel/SkillListContainer"]
+custom_minimum_size = Vector2(0, 205)
+layout_mode = 2
+follow_focus = true
+vertical_scroll_mode = 3
+
+[node name="SkillButtons" type="VBoxContainer" parent="BTL_Manager/UI/SkillPanel/SkillListContainer/SkillScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CancelButton" type="Button" parent="BTL_Manager/UI/SkillPanel/SkillListContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 50
+theme_override_styles/focus = ExtResource("4_muaw0")
+text = "Cancelar"
+flat = true
+
 [node name="ItemDesPanel" type="PanelContainer" parent="BTL_Manager/UI"]
 visible = false
 custom_minimum_size = Vector2(650, 160)
@@ -286,6 +346,31 @@ size_flags_horizontal = 0
 size_flags_vertical = 1
 autowrap_mode = 2
 
+[node name="SkillPanelDisplay" type="PanelContainer" parent="BTL_Manager/UI"]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 116.0
+offset_bottom = 76.0
+scale = Vector2(2.5, 2.5)
+theme = ExtResource("6_104bg")
+theme_override_styles/panel = SubResource("StyleBoxFlat_81ypj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BTL_Manager/UI/SkillPanelDisplay"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="SkillIcon" type="TextureRect" parent="BTL_Manager/UI/SkillPanelDisplay/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("10_hvcdh")
+expand_mode = 3
+
+[node name="SkillPoolLabel" type="Label" parent="BTL_Manager/UI/SkillPanelDisplay/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+
 [connection signal="pressed" from="BTL_Manager/UI/CommandPanel/CommandContainer/Atacar" to="BTL_Manager" method="_on_atacar_pressed"]
+[connection signal="pressed" from="BTL_Manager/UI/CommandPanel/CommandContainer/Habilidades" to="BTL_Manager" method="_on_habilidades_pressed"]
 [connection signal="pressed" from="BTL_Manager/UI/CommandPanel/CommandContainer/Objetos" to="BTL_Manager" method="_on_objetos_pressed"]
 [connection signal="pressed" from="BTL_Manager/UI/ItemPanel/ItemListContainer/CancelButton" to="BTL_Manager" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="BTL_Manager/UI/SkillPanel/SkillListContainer/CancelButton" to="BTL_Manager" method="_on_cancel_button_pressed"]

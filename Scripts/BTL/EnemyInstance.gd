@@ -26,8 +26,12 @@ func _ready():
 	
 	max_hp = data.stats.max_hp
 	current_hp = max_hp
+	$Enemy/Vida.value=max_hp
+	$Enemy/Vida.max_value=max_hp
 
-
+func _physics_process(delta: float) -> void:
+	$Enemy/Vida/Label.text="HP:"+str(int($Enemy/Vida.value))+"/"+str(max_hp)
+	
 func recibir_dano(amount: int):
 	if amount==0:
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqvqy3jlkvy02"]
+[gd_scene load_steps=7 format=3 uid="uid://dqvqy3jlkvy02"]
 
 [ext_resource type="Script" uid="uid://tvs51jrxquon" path="res://Scripts/BTL/AllyInstance.gd" id="1_ht83y"]
 [ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="1_sybcj"]
@@ -17,6 +17,12 @@ expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sybcj"]
 bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht83y"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpj5p"]
+bg_color = Color(0, 0.688713, 0.671778, 1)
 
 [node name="AllyContainer" type="VBoxContainer" groups=["party_instance"]]
 texture_filter = 1
@@ -57,3 +63,19 @@ custom_minimum_size = Vector2(275, 275)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 5
+
+[node name="Medidor" type="ProgressBar" parent="Ally"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_sybcj")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_ht83y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tpj5p")

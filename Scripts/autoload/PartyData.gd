@@ -19,7 +19,7 @@ var characters := {
 			"evasion": 12,
 			"critico": 8,
 			"medidor": 0,
-			"puntos_habilidad_innato": 0
+			"puntos_habilidad_innato": 3
 		},
 		
 		"equipo": {
@@ -54,8 +54,8 @@ var characters := {
 				"costo": 3,
 				"daño": 15,
 				"tipo": "rayo",
-				"inflinge": "Paralisis",
-				"descripcion": "Dispara."
+				"inflinge": "",
+				"descripcion": "Dispara un disparo juajua."
 			},
 		}
 	},
@@ -107,8 +107,10 @@ var characters := {
 				"costo": 3,
 				"daño": 15,
 				"tipo": "rayo",
-				"inflinge": "Paralisis",
-				"descripcion": "Dispara.",
+				"targets": "enemy",
+				"style":"fisico",
+				"inflinge": "",
+				"descripcion": "Dispara un disparo.",
 			},
 		}
 	},

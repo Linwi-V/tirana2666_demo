@@ -37,6 +37,10 @@ var player_actions := {}
 var target_index = 0
 var enemy_list = []
 
+var skill_pool := 0
+var skill_pool_max := 0
+@onready var _skill_pool_label = $UI/SkillPanelDisplay/HBoxContainer/SkillPoolLabel
+
 # Lista dinámica de nodos que recibirán target (aliados/enemigos)
 var target_list: Array = []
 
@@ -85,6 +89,13 @@ func _ready() -> void:
 		#-------------añade a escena---------
 		get_node("Party/AllyContainers").add_child(new_ally)
 	
+	#---------------------SIST HABILIDADES ----------------------
+	for name in WorldFunc.Party_BTL:
+		var p = PartyData.characters[name]["stats"]["puntos_habilidad_innato"]
+		skill_pool += p
+		skill_pool_max = skill_pool
+		print("Skill Pool inicial:", skill_pool)
+		update_skill_pool_label()
 	
 	#----------crea enemigos-------------
 	for i in WorldFunc.Enemy_BTL.size():
@@ -133,6 +144,9 @@ func _change_state(new_state: BattleState) -> void:
 		BattleState.IDLE:
 			handle_state(BattleState.IDLE, func() -> void:
 				turn += 1
+				skill_pool = min(skill_pool + 1, skill_pool_max)
+				update_skill_pool_label()
+
 				print("TURNO: " + str(turn))
 				print("IDLE")
 				check_combat_end()
@@ -239,6 +253,9 @@ func _input(_event):
 			# Si era ítem, devolver cantidad
 			if action and action.type == "item":
 				PartyData.inventario[action.item]["cantidad"] += 1
+			if action and action.type == "habilidad":
+				skill_pool += PartyData.characters[actor]["habilidades"][action.subtype]["costo"]
+				update_skill_pool_label()
 			highlight_current_ally(false)
 			highlight_target_list(enemy_list,false)
 			# Caso 1: Si estás en targeting, vuelves a seleccionar acción para el mismo aliado
@@ -339,12 +356,15 @@ func _on_ally_died(party_member):
 	check_combat_end()
 
 #-------------SEÑALES ENEMIGOS----------
-func _on_enemy_hp_changed(_new_hp,enemy,negativo):
+func _on_enemy_hp_changed(new_hp,enemy,negativo):
 	if negativo: 
 		heleo_visual(enemy)
 	else:
 		daño_visual(enemy)
 	temblor(enemy)
+	var hp = enemy.get_node("Enemy").get_node("Vida")
+	var tween = hp.create_tween()
+	tween.tween_property(hp, "value", new_hp, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func _on_enemy_died(enemy: Control):
 	daño_visual(enemy)
@@ -565,8 +585,82 @@ func do_attack_action(actor_name: String, action: Dictionary) -> void:
 	await mostrar_texto_combate("%s atacó a %s." % [actor_name, node.character_id], 1.0)
 	resolve_attack_action(actor_name, action)
 
-func do_skill_action(actor_name: String, action: Dictionary):
-	pass
+func do_skill_action(actor_name: String, action: Dictionary) -> void:
+	current_ally_index = current_action_index
+	highlight_current_ally(true)
+
+	# Simula animación breve
+	await get_tree().create_timer(0.5).timeout
+
+	# Datos de la habilidad
+	var info = PartyData.characters[actor_name]["habilidades"][action.subtype]
+	var skill_name = info["nombre"]
+
+	# Buscar target (front/back)
+	var node = get_node_or_null("Enemies/EnemyContainersFront/" + action.target)
+	if node == null:
+		node = get_node_or_null("Enemies/EnemyContainersBack/" + action.target)
+
+	# Si no existe o ya murió → fallo
+	if node == null or node.rip:
+		await mostrar_texto_combate("Objetivo inválido", 1.0)
+		advance_action()
+		return
+
+	# Parámetros base
+	var enemy_data = EnemyData.enemies[node.character_id]
+	var evasion    = enemy_data["stats"]["evasion"]
+	var defense    = 0
+	var raw        = info["daño"]
+
+	# Sumar ataque según estilo
+	if info["style"] == "fisico":
+		raw += PartyData.characters[actor_name]["stats"]["ataque_fisico"]
+		defense = enemy_data["stats"]["defensa_fisica"]
+	else:
+		raw += PartyData.characters[actor_name]["stats"]["ataque_magico"]
+		defense = enemy_data["stats"]["defensa_magica"]
+
+	# 1) Evasión
+	if check_evasion(evasion):
+		var pos_miss = node.get_screen_position() - $Enemies.get_screen_position()
+		display_damage(node, 0, pos_miss, true, false, "normal")
+		advance_action()
+		return
+
+	# 2) Tipo y modificador
+	var type_info = get_type_relation(enemy_data, info["tipo"])
+	# type_info.mult y type_info.relation
+
+	# 3) Crítico
+	var crit_char   = PartyData.characters[actor_name]["stats"]["critico"]
+	var crit_weapon = 0
+	var weapon      = PartyData.characters[actor_name]["equipo"]["arma"]
+	if weapon != "":
+		crit_weapon = PartyData.equipables[weapon]["stats"]["critico"]
+	var is_crit = check_critical(crit_char, crit_weapon)
+	var crit_mult = 1.0
+	if is_crit:
+		crit_mult=1.3
+
+	# 4) Cálculo de daño final
+	var dmg = raw - defense
+	if dmg < 0:
+		dmg = 0
+	dmg = int(dmg * type_info["mult"] * crit_mult)
+
+	# 5) Aplicar daño y mostrar
+	node.recibir_dano(dmg)
+	var pos = node.get_screen_position() - $Enemies.get_screen_position()
+	display_damage(node, dmg, pos, false, is_crit, type_info["relation"])
+
+	# (stub) infligir estado
+	if info["inflinge"] != "":
+		print("Inflingiendo estado: " + info["inflinge"])
+
+	# Limpiar y avanzar
+	highlight_current_ally(false)
+	advance_action()
 	
 func do_item_action(actor_name: String, action: Dictionary) -> void:
 	current_ally_index = current_action_index
@@ -590,6 +684,9 @@ func do_item_action(actor_name: String, action: Dictionary) -> void:
 	display_damage(nodo, item["daño"], nodo.global_position, false, false, "normal")
 	# Consumir ítem
 	PartyData.inventario[action.item]["cantidad"] -= 1
+	
+	if item["inflinge"] != "":
+		print("/* aquí inflinge %s */" % item["inflinge"])
 
 	advance_action()
 
@@ -1077,6 +1174,18 @@ func advance_action() -> void:
 	current_action_index += 1
 	perform_next_action()
 
+#----------------HELPER ACTUALIZA HABILIDAD-------------------
+func update_skill_pool_label() -> void:
+	_skill_pool_label.text = " x %d " % [skill_pool]
+	
+
+
+
+
+
+
+
+
 
 #--------------------------------BOTON ATACAR-------------------------
 func _on_atacar_pressed() -> void:
@@ -1093,6 +1202,14 @@ func _on_atacar_pressed() -> void:
 	}
 	
 	_change_state(BattleState.TARGET_SELECTING)
+
+
+
+
+
+
+
+
 
 #------------------------BOTON OBJETOS----------
 func abrir_item_menu():
@@ -1161,12 +1278,12 @@ func _on_item_selected(item_name: String) -> void:
 func _on_objetos_pressed() -> void:
 	$UI/CommandPanel.focus_mode= 0
 	abrir_item_menu()
-	pass # Replace with function body.
 
 
 func _on_cancel_button_pressed() -> void:
 	$UI/CommandPanel.visible = true
 	$UI/ItemPanel.visible = false
+	$UI/SkillPanel.visible = false
 	$UI/ItemDesPanel.visible = false
 	$UI/CommandPanel.focus_mode= 2
 	var container = $UI/CommandPanel/CommandContainer
@@ -1176,4 +1293,75 @@ func _on_cancel_button_pressed() -> void:
 			break
 
 
-	pass # Replace with function body.
+
+
+
+
+
+#--------------------HABILIDADES-----------------------
+func _on_habilidades_pressed() -> void:
+	$UI/CommandPanel.focus_mode= 0
+	abrir_skill_menu()
+
+
+func abrir_skill_menu() -> void:
+	var container = $UI/SkillPanel/SkillListContainer/SkillScroll/SkillButtons
+	queue_free_children(container)
+	$UI/SkillPanel/SkillListContainer/CancelButton.focus_entered.connect(func():
+		$UI/ItemDesPanel.visible=false)
+	$UI/SkillPanel.visible = true
+	await get_tree().process_frame
+	var current = WorldFunc.Party_BTL[current_ally_index]
+	for skill_name in PartyData.characters[current]["habilidades"].keys():
+		var info = PartyData.characters[current]["habilidades"][skill_name]
+		if not info["desbloqueado"]:
+			continue
+		var cost = info["costo"]
+		var btn = Button.new()
+		btn.flat=true
+		btn.focus_entered.connect(func():
+			actualizar_descripcion(info["descripcion"]))
+		btn.add_theme_constant_override("outline_size",35)
+		btn.add_theme_stylebox_override("focus",load("res://Scenes/BTL/Styles/BTL_Button.tres"))
+		btn.focus_mode=Control.FOCUS_ALL
+		btn.text = "%s (%d)" % [info["nombre"], cost]
+		btn.disabled = cost > skill_pool
+		btn.name = info["nombre"]
+		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.pressed.connect(func(): _on_skill_selected(skill_name))
+		container.add_child(btn)
+	var ultimo_boton = null
+	for child in container.get_children():
+		if child is Button and not child.disabled:
+			if ultimo_boton == null:
+				child.grab_focus()  # el primero
+			ultimo_boton = child  # se va actualizando hasta el último
+	var boton_cancelar := $UI/SkillPanel/SkillListContainer/CancelButton
+	if ultimo_boton:
+		boton_cancelar.focus_mode = Control.FOCUS_ALL
+		boton_cancelar.focus_neighbor_top = ultimo_boton.get_path()
+	else:
+		boton_cancelar.grab_focus()
+
+
+func _on_skill_selected(skill_name: String) -> void:
+	# 1) Reservar puntos
+	var current = WorldFunc.Party_BTL[current_ally_index]
+	var info = PartyData.characters[current]["habilidades"][skill_name]
+	skill_pool -= info["costo"]
+	update_skill_pool_label()
+
+	# 2) Guardar acción
+	player_actions[current] = {
+		"type":    "habilidad",
+		"subtype": skill_name,
+		"targets": info["targets"],
+		"target":  null
+	}
+
+	# 3) Cerrar menú y pasar a targeteo
+	$UI/SkillPanel.visible = false
+	$UI/ItemDesPanel.visible = false
+	_change_state(BattleState.TARGET_SELECTING)
+	
+	
