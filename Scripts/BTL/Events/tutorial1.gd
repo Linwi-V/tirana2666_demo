@@ -26,6 +26,9 @@ func trigger_turn4(btl_manager):
 	btl_manager.set_command_override("Atacar", false)
 	# Opcionalmente puedes poner algún diálogo o lógica extra aquí
 
+func trigger_death(btl_manager):
+	await FadeLayer.fade_out(0.5)
+	await SceneLoader.request_scene_change("res://Scenes/worlds/WORLD1_int.tscn")
 # ---------- TRIGGERS -------------
 func is_turn1(btl_manager):
 	return btl_manager.turn == 1
@@ -38,7 +41,7 @@ func is_turn3(btl_manager):
 
 func is_turn4(btl_manager):
 	return btl_manager.turn == 4
-
+	
 # ---------- EVENTOS ---------------
 var events := [
 	{

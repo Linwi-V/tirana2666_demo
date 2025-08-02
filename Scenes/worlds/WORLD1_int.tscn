@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvya2wm10id7o"]
+[gd_scene load_steps=6 format=3 uid="uid://bvya2wm10id7o"]
 
 [ext_resource type="Script" uid="uid://bndpdmccdbnwj" path="res://Scripts/worlds/WORLD1_INT/ow.gd" id="2_0nhxn"]
 [ext_resource type="PackedScene" uid="uid://c34b4l3rh5vks" path="res://Scenes/worlds/1/int.tscn" id="3_0nhxn"]
 [ext_resource type="PackedScene" uid="uid://b3edj1jmkebei" path="res://Scenes/pp/Pp.tscn" id="3_06bk3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1qmwd"]
+size = Vector3(10, 4, 3)
 
 [sub_resource type="Environment" id="Environment_h3wxc"]
 background_mode = 1
@@ -17,9 +20,18 @@ script = ExtResource("2_0nhxn")
 [node name="Particulas" type="Node" parent="OW"]
 
 [node name="Pp" parent="OW" instance=ExtResource("3_06bk3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.7, 0.8)
+
+[node name="pos_camara_2_ph" type="Node3D" parent="OW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
 
 [node name="Warp" type="Node" parent="OW"]
+
+[node name="warp_ext" type="Area3D" parent="OW/Warp"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Warp/warp_ext"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 6.575)
+shape = SubResource("BoxShape3D_1qmwd")
 
 [node name="Luz_Global" type="Node" parent="OW"]
 
@@ -41,3 +53,4 @@ sky_mode = 1
 environment = SubResource("Environment_h3wxc")
 
 [connection signal="dialog_changer" from="OW/Pp" to="OW" method="_on_pp_dialog_changer"]
+[connection signal="body_shape_entered" from="OW/Warp/warp_ext" to="OW" method="_on_warp_ext_body_shape_entered"]

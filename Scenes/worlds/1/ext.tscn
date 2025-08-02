@@ -13,16 +13,21 @@
 
 [node name="meshs" type="Node3D" parent="."]
 
-[node name="portal" parent="meshs" instance=ExtResource("1_oxwf0")]
-transform = Transform3D(-5.39484, -9.97027e-09, -0.0420897, -1.0049e-08, 5.395, 1.0049e-08, 0.0420897, 1.01271e-08, -5.39484, -1.28688, 1.10105, 16.0933)
+[node name="piso_tierra" parent="meshs" instance=ExtResource("3_88am2")]
+transform = Transform3D(8.6474, 0, 5.0222, 0, 8, 0, -5.0222, 0, 8.6474, -0.932098, -4, 23.7813)
+script = null
+
+[node name="portal" parent="meshs/piso_tierra" instance=ExtResource("1_oxwf0")]
+transform = Transform3D(-0.468627, -1.37077e-09, 0.2673, -1.25612e-09, 0.674375, 1.25612e-09, -0.2673, 3.75003e-10, -0.468627, 0.0148569, 0.637631, -0.096224)
 
 [node name="piso_tortu" parent="meshs" instance=ExtResource("1_qkr8m")]
 
 [node name="piso_piedra" parent="meshs" instance=ExtResource("1_88am2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.59213, 10.1224)
+transform = Transform3D(1, 0, 0, 0, 1.24055, 0.544787, 0, -0.189919, 3.55854, -1.12772, -0.965389, 21.0592)
 
 [node name="piso_portal" parent="meshs" instance=ExtResource("4_xhy65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.969123, -1.18607, -4.12963)
+visible = false
 
 [node name="casa_tortu_only" parent="meshs" instance=ExtResource("5_qkr8m")]
 
@@ -55,3 +60,15 @@ transform = Transform3D(1.21243, -0.0745531, -0.00409499, 0.0907803, 0.995629, 0
 
 [node name="piso_tierra6" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.66441, -1.24236, 7.65698)
+
+[node name="piso_tierra9" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.83848, -1.24236, 9.88499)
+
+[node name="piso_tierra10" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(0.989303, 0, -0.145876, 0, 1, 0, 0.145876, 0, 0.989303, -1.38608, -1.00826, 11.977)
+
+[node name="piso_tierra11" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(0.754755, 0, 0.656006, 0, 1, 0, -0.656006, 0, 0.754755, -0.402716, -1.056, 13.9276)
+
+[node name="piso_tierra12" parent="meshs/plataformas" instance=ExtResource("3_88am2")]
+transform = Transform3D(0.754755, 0, 0.656006, 0, 1, 0, -0.656006, 0, 0.754755, -2.18279, -0.8567, 15.4691)

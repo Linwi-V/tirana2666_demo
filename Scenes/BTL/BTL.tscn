@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://lnacxbw1eicg"]
+[gd_scene load_steps=14 format=3 uid="uid://lnacxbw1eicg"]
 
 [ext_resource type="Script" uid="uid://dba53fa8uw5ef" path="res://Scripts/BTL/btl_manager.gd" id="1_xsev4"]
 [ext_resource type="PackedScene" uid="uid://dohlqsxt82612" path="res://Scenes/BTL/Enemies/enemy_container_base.tscn" id="2_idkhm"]
@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://rsltytampmw4" path="res://Scenes/BTL/UI/BTL_panelfull.tres" id="7_7jexa"]
 [ext_resource type="Theme" uid="uid://bppfbmioagco0" path="res://Scenes/ui/Dialogue/theme.tres" id="8_7jexa"]
 [ext_resource type="Texture2D" uid="uid://d35xvx228gmpw" path="res://0_pruebas/gotita.png" id="10_hvcdh"]
+[ext_resource type="AudioStream" uid="uid://gi070uhj56k6" path="res://0_pruebas/Punch 1.mp3" id="12_1ira7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wbnk0"]
 shader = ExtResource("2_vkbv2")
@@ -368,6 +369,14 @@ expand_mode = 3
 [node name="SkillPoolLabel" type="Label" parent="BTL_Manager/UI/SkillPanelDisplay/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
+
+[node name="Audio" type="Node" parent="BTL_Manager"]
+
+[node name="BTL_Fx" type="AudioStreamPlayer" parent="BTL_Manager/Audio"]
+stream = ExtResource("12_1ira7")
+volume_db = -18.0
+mix_target = 2
+bus = &"SFX"
 
 [connection signal="pressed" from="BTL_Manager/UI/CommandPanel/CommandContainer/Atacar" to="BTL_Manager" method="_on_atacar_pressed"]
 [connection signal="pressed" from="BTL_Manager/UI/CommandPanel/CommandContainer/Habilidades" to="BTL_Manager" method="_on_habilidades_pressed"]

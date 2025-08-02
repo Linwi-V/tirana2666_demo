@@ -1,6 +1,7 @@
 extends Control
 
 signal hp_changed(new_hp,node)
+signal medidor_changed(new_med,node)
 signal died(node)
 
 # Identificador del personaje, para obtener datos estáticos
@@ -29,11 +30,10 @@ func _ready():
 
 	$Vida.value=max_hp
 	$Vida.max_value=max_hp
-	
+	$Vida/Medidor.value = data["stats"]["medidor"]
 	
 func _physics_process(_delta: float) -> void:
 	$Vida/Label.text="HP:"+str(int($Vida.value))+"/"+str(max_hp)
-
 
 
 func recibir_dano(amount: int):
@@ -48,6 +48,9 @@ func recibir_dano(amount: int):
 	if current_hp <= 0:
 		emit_signal("died",self)
 
+func cambio_medidor(amount:int):
+	emit_signal("medidor_changed",amount,self)
+	
 func agregar_estado(estado: String):
 	if estado in estados:
 		return

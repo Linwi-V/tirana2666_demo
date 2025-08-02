@@ -5,7 +5,7 @@ extends Node3D
 func _ready() -> void:
 	await get_tree().create_timer(1).timeout
 	await FadeLayer.fade_out()
-	await SceneLoader.request_scene_change("res://Scenes/intro/Cinematic2.tscn")
+	await SceneLoader.request_scene_change("res://Scenes/worlds/WORLD1_ext.tscn")
 	pass # Replace with function body.
 
 

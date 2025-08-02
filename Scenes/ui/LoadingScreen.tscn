@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cwbbreokh0v58"]
+[gd_scene load_steps=2 format=3 uid="uid://cwbbreokh0v58"]
+
+[ext_resource type="Theme" uid="uid://bppfbmioagco0" path="res://Scenes/ui/Dialogue/theme.tres" id="1_lfs8a"]
 
 [node name="LoadingScreen" type="Control"]
 layout_mode = 3
@@ -17,16 +19,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.909824, 0.000466676, 0.866355, 1)
+theme = ExtResource("1_lfs8a")
+color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="Fondo"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 294.0
-offset_right = 2958.0
-offset_bottom = 1114.0
+offset_left = 1478.0
+offset_top = 850.0
+offset_right = 1953.0
+offset_bottom = 961.0
 scale = Vector2(0.68, 1)
-theme_override_font_sizes/font_size = 350
+theme_override_font_sizes/font_size = 110
+text = "LOADING"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="Label2" type="Label" parent="Fondo"]
+layout_mode = 0
+offset_left = 1478.0
+offset_top = 850.0
+offset_right = 1953.0
+offset_bottom = 961.0
+scale = Vector2(0.68, 1)
+theme_override_font_sizes/font_size = 110
 text = "LOADING"
 horizontal_alignment = 1
 vertical_alignment = 3

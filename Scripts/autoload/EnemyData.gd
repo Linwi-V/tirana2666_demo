@@ -42,7 +42,12 @@ var enemies := {
 				"scripted": 2
 			},
 		},
-		"ai_type": "agresivo"  
+		"ai_type": "agresivo",
+		"muerte": {
+				"scripted": "true",
+				"exp": "100",
+				"oro": "10"
+			},  
 	},
 	
 }

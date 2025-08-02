@@ -1,0 +1,18 @@
+[
+  {
+    "time": 1.500,
+    "key": "ui_left"
+  },
+  {
+    "time": 2.000,
+    "key": "ui_down"
+  },
+  {
+    "time": 2.500,
+    "key": "ui_up"
+  },
+  {
+    "time": 3.000,
+    "key": "ui_right"
+  }
+]

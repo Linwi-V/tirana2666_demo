@@ -7,6 +7,7 @@ extends Node
 #-----------PARA DIALOGOS-----------------
 var _msg_panel
 var _msg_label
+
 #-----------SCRIPT DE PELEAS OPCIONAL---------
 var battle_event_controller: Node = null
 
@@ -86,12 +87,13 @@ func _ready() -> void:
 		#---------------señales---------------
 		new_ally.hp_changed.connect(_on_ally_hp_changed)
 		new_ally.died.connect(_on_ally_died)
+		new_ally.medidor_changed.connect(_on_ally_medidor_changed)
 		#-------------añade a escena---------
 		get_node("Party/AllyContainers").add_child(new_ally)
 	
 	#---------------------SIST HABILIDADES ----------------------
-	for name in WorldFunc.Party_BTL:
-		var p = PartyData.characters[name]["stats"]["puntos_habilidad_innato"]
+	for namer in WorldFunc.Party_BTL:
+		var p = PartyData.characters[namer]["stats"]["puntos_habilidad_innato"]
 		skill_pool += p
 		skill_pool_max = skill_pool
 		print("Skill Pool inicial:", skill_pool)
@@ -129,9 +131,12 @@ func _ready() -> void:
 	
 	#------Setea ESTADO---------------
 	if ambush:
+		await mostrar_texto_combate("¡Emboscada enemiga!",2.5)
 		_change_state(BattleState.ENEMY_TURN)
 	else:
+		mostrar_texto_combate("¡Enemigos quieren luchar!")
 		_change_state(BattleState.IDLE)
+	
 	
 
 #-------------FSM LOGICA AQUI----------------
@@ -143,13 +148,13 @@ func _change_state(new_state: BattleState) -> void:
 	match new_state:
 		BattleState.IDLE:
 			handle_state(BattleState.IDLE, func() -> void:
+				check_combat_end()
 				turn += 1
 				skill_pool = min(skill_pool + 1, skill_pool_max)
 				update_skill_pool_label()
-
+				$UI/CommandPanel/CommandContainer/Atacar.grab_focus()
 				print("TURNO: " + str(turn))
 				print("IDLE")
-				check_combat_end()
 				current_ally_index = 0
 				await get_tree().create_timer(1.0).timeout
 				_change_state(BattleState.PLAYER_SELECTING)
@@ -163,9 +168,12 @@ func _change_state(new_state: BattleState) -> void:
 		BattleState.PLAYER_SELECTING:
 			handle_state(BattleState.PLAYER_SELECTING, func() -> void:
 
-				await get_tree().process_frame
-				
+				#await get_tree().process_frame
+				print("antes")
+				await get_tree().create_timer(0.5).timeout
+				print("despues")
 		# 1) Saltar aliados muertos
+				print(current_ally_index)
 				while current_ally_index < WorldFunc.Party_BTL.size():
 					var actor_id = WorldFunc.Party_BTL[current_ally_index]
 					var node: Control = $Party/AllyContainers.get_node_or_null(actor_id)
@@ -185,6 +193,14 @@ func _change_state(new_state: BattleState) -> void:
 
 
 				set_panel_comandos(true)
+				var btn_atacar = $UI/CommandPanel/CommandContainer/Atacar
+				var current = WorldFunc.Party_BTL[current_ally_index]
+				var medidor = PartyData.characters[current]["stats"]["medidor"]
+				if medidor >= 100:
+					btn_atacar.text = "Especial"
+				else:
+					btn_atacar.text = "Atacar"
+
 				_apply_command_overrides()
 				print("PLAYER SELECT")
 			)
@@ -195,6 +211,7 @@ func _change_state(new_state: BattleState) -> void:
 				var actor  = WorldFunc.Party_BTL[current_ally_index]
 				var action = player_actions[actor]
 				target_list  = build_target_list(action.targets)
+				print("target list::: " + str(target_list))
 				target_index = 0
 				highlight_target_list(target_list, true, target_index)
 				highlight_current_ally(true)
@@ -222,6 +239,8 @@ func _change_state(new_state: BattleState) -> void:
 		BattleState.VICTORY:
 			handle_state(BattleState.VICTORY, func() -> void:
 				set_panel_comandos(false)
+				if WorldFunc.BTL_EVENT_SCRIPT_PATH!="":
+					battle_event_controller.trigger_death(self)
 				print("GANASTE")
 			)
 
@@ -341,8 +360,12 @@ func _fade_out_overlay():
 func _on_ally_hp_changed(new_hp,party_member,negativo):
 	if negativo: 
 		heleo_visual(party_member)
+		$Audio/BTL_Fx.set_stream(load("res://0_pruebas/healeo.mp3"))
+		$Audio/BTL_Fx.play()
 	else:
 		daño_visual(party_member)
+		$Audio/BTL_Fx.set_stream(load("res://0_pruebas/hurt party.mp3"))
+		$Audio/BTL_Fx.play()
 	var hp = party_member.get_node("Vida")
 	var tween = hp.create_tween()
 	temblor(party_member)
@@ -350,17 +373,28 @@ func _on_ally_hp_changed(new_hp,party_member,negativo):
 
 func _on_ally_died(party_member):
 	var retrato = party_member.get_node("Ally")
+	$Audio/BTL_Fx.set_stream(load("res://0_pruebas/death.mp3"))
+	$Audio/BTL_Fx.play()
 	temblor(party_member)
 	retrato.modulate = Color(0.2,0.2,0.2)
 	party_member.rip=true
+	
 	check_combat_end()
 
+func _on_ally_medidor_changed(valor,party_member):
+	var medidor = party_member.get_node("Vida").get_node("Medidor")
+	var tween = medidor.create_tween()
+	tween.tween_property(medidor, "value", medidor.value+valor, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 #-------------SEÑALES ENEMIGOS----------
 func _on_enemy_hp_changed(new_hp,enemy,negativo):
 	if negativo: 
 		heleo_visual(enemy)
+		$Audio/BTL_Fx.set_stream(load("res://0_pruebas/healeo.mp3"))
+		$Audio/BTL_Fx.play()
 	else:
 		daño_visual(enemy)
+		$Audio/BTL_Fx.set_stream(load("res://0_pruebas/Punch 1.mp3"))
+		$Audio/BTL_Fx.play()
 	temblor(enemy)
 	var hp = enemy.get_node("Enemy").get_node("Vida")
 	var tween = hp.create_tween()
@@ -370,6 +404,8 @@ func _on_enemy_died(enemy: Control):
 	daño_visual(enemy)
 	temblor(enemy)
 	await get_tree().create_timer(0.5).timeout
+	$Audio/BTL_Fx.set_stream(load("res://0_pruebas/death.mp3"))
+	$Audio/BTL_Fx.play()
 	# Desvanecer 
 	var fade_tween := enemy.create_tween()
 	fade_tween.tween_property(enemy, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -377,6 +413,7 @@ func _on_enemy_died(enemy: Control):
 	#matar
 	enemy.queue_free()
 	await get_tree().create_timer(0.1).timeout
+	
 	# Chequea si quedan enemigos
 	check_combat_end()
 
@@ -397,7 +434,7 @@ func temblor(node: Control):
 	tween.tween_property(node, "position", original_position + Vector2(0, shake_strength), shake_duration)
 	tween.tween_property(node, "position", original_position, shake_duration)
 
-#---------DAÑO VISUAL--------
+#---------DAÑO-HELEO-MEDIDOR VISUAL--------
 func daño_visual(node:Control):
 	var original_color = node.modulate
 	var tween = create_tween()
@@ -413,6 +450,7 @@ func heleo_visual(node:Control):
 	# Flash rojo rápido
 	tween.tween_property(node, "modulate", Color(0, 1, 0), 0.05)
 	tween.tween_property(node, "modulate", original_color, 0.15)
+
 #---------HIGHLIGHT DE SELECCION ALIADO---------
 
 func highlight_current_ally(active: bool) -> void:
@@ -561,6 +599,7 @@ func perform_next_action() -> void:
 			perform_next_action()
 
 func do_attack_action(actor_name: String, action: Dictionary) -> void:
+	
 	current_ally_index = current_action_index
 	highlight_current_ally(true)
 
@@ -574,7 +613,7 @@ func do_attack_action(actor_name: String, action: Dictionary) -> void:
 	if node == null:
 		node = node_back
 
-
+	print(node)
 	# Si no existe o ya murió → mensaje de fallo en panel
 	if node == null or node.rip:
 		await mostrar_texto_combate("¡Ataque falló!", 1.0)
@@ -739,6 +778,7 @@ func _next_player_action() -> void:
 # Refactor de resolve_attack_action()
 
 func resolve_attack_action(actor_name: String, action: Dictionary) -> void:
+
 	# Datos del actor
 	var level = PartyData.party_level
 	var base_atk = PartyData.characters[actor_name]["stats"]["ataque_fisico"]
@@ -750,10 +790,20 @@ func resolve_attack_action(actor_name: String, action: Dictionary) -> void:
 	var crit_weapon = 0
 	if weapon != "":
 		crit_weapon = PartyData.equipables[weapon]["stats"]["critico"]
+	
 
+	
 	# 1. Cálculo bruto
 	var raw = calculate_raw_attack(base_atk, weapon_atk, level)
-
+	
+	#aumento medidor en global	
+	if PartyData.characters[actor_name]["stats"]["medidor"] <100:
+		PartyData.characters[actor_name]["stats"]["medidor"] += 25
+		$Party/AllyContainers.get_node(actor_name).cambio_medidor(25)
+	else:
+		PartyData.characters[actor_name]["stats"]["medidor"] = 0
+		$Party/AllyContainers.get_node(actor_name).cambio_medidor(-100)
+		raw= raw*3
 	# Selección de nodo enemigo
 	var target_name = action.target
 	var enemy_node = get_node_or_null("Enemies/EnemyContainersFront/" + target_name)
@@ -1123,7 +1173,9 @@ func cancel_targeting() -> void:
 	
 	
 #-------------------HELPER PARA MOSTRAR Q PASA------------------------
-func mostrar_texto_combate(texto: String, duracion := 1.0) -> void:
+func mostrar_texto_combate(texto: String, duracion := 1.5) -> void:
+	$Audio/BTL_Fx.set_stream(load("res://0_pruebas/pop.mp3"))
+	$Audio/BTL_Fx.play()
 	$UI/CommandPanel.visible=false
 	_msg_label.text = texto
 	_msg_panel.visible = true
@@ -1189,7 +1241,6 @@ func update_skill_pool_label() -> void:
 
 #--------------------------------BOTON ATACAR-------------------------
 func _on_atacar_pressed() -> void:
-	
 	if current_state != BattleState.PLAYER_SELECTING:
 		return
 	

@@ -7,7 +7,7 @@ var party_level := 1
 # Personajes disponibles en el juego
 var characters := {
 	"Godot": {
-		
+
 		"textura": "res://icon.svg",
 		
 		"stats": {
@@ -70,8 +70,8 @@ var characters := {
 			"defensa_fisica": 8,
 			"ataque_magico": 12,
 			"defensa_magica": 8,
-			"evasion": 12,
-			"critico": 95,
+			"evasion": 0,
+			"critico": 0,
 			"medidor": 0,
 			"puntos_habilidad_innato": 3
 		},

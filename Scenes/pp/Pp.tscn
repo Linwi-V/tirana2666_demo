@@ -1,15 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3edj1jmkebei"]
+[gd_scene load_steps=13 format=3 uid="uid://b3edj1jmkebei"]
 
-[ext_resource type="Texture2D" uid="uid://cxfujrr2jjxpf" path="res://Sprites/Chars/ph/64X128_Idle_Free.png" id="1_j8nd0"]
 [ext_resource type="Script" uid="uid://dup428pvq685f" path="res://Scripts/pp/Pp.gd" id="1_ruw3j"]
+[ext_resource type="Texture2D" uid="uid://vgv86865l65b" path="res://Sprites/Chars/katari/prota_sprt.png" id="2_dknm0"]
 [ext_resource type="CameraAttributesPractical" uid="uid://bp7uwqcl0hi0" path="res://Shaders/CamBlur/blur_chr.tres" id="3_c13wy"]
+[ext_resource type="Texture2D" uid="uid://di6q17gfth5xp" path="res://Sprites/Chars/ph/64X128_Runing_Free.png" id="3_dknm0"]
 [ext_resource type="Script" uid="uid://c7muj5brecbbe" path="res://Scripts/pp/CameraController.gd" id="3_ulnqb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulnqb"]
 transparency = 4
-albedo_texture = ExtResource("1_j8nd0")
+cull_mode = 2
+depth_draw_mode = 1
+albedo_texture = ExtResource("2_dknm0")
 backlight_enabled = true
-backlight = Color(1, 1, 1, 1)
+backlight = Color(0.564961, 0.564962, 0.564961, 1)
 texture_filter = 0
 billboard_mode = 2
 billboard_keep_scale = true
@@ -29,12 +32,51 @@ metadata/_snap_enabled = true
 radius = 0.27
 height = 0.95
 
+[sub_resource type="Animation" id="Animation_ulnqb"]
+resource_name = "DNC"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dknm0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5l5s5"]
+_data = {
+&"DNC": SubResource("Animation_ulnqb"),
+&"RESET": SubResource("Animation_dknm0")
+}
+
 [node name="Pp" type="CharacterBody3D" groups=["player"]]
 collision_layer = 3
 script = ExtResource("1_ruw3j")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.065, 0)
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13, 0)
+visible = false
 layers = 5
 material_override = SubResource("StandardMaterial3D_ulnqb")
 gi_mode = 2
@@ -42,7 +84,20 @@ billboard = 1
 shaded = true
 alpha_cut = 2
 texture_filter = 0
-texture = ExtResource("1_j8nd0")
+texture = ExtResource("3_dknm0")
+hframes = 8
+vframes = 4
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.01, 0)
+layers = 5
+material_override = SubResource("StandardMaterial3D_ulnqb")
+gi_mode = 2
+billboard = 1
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("2_dknm0")
 hframes = 8
 vframes = 4
 
@@ -76,5 +131,10 @@ current = true
 process_callback = 0
 wait_time = 0.7
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5l5s5")
+}
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

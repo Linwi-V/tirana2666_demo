@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dttgimd22gvqf"]
+
+[ext_resource type="Texture2D" uid="uid://bjcjvghu3oed2" path="res://Sprites/DNC/flechas_si.png" id="1_x1gqn"]
+[ext_resource type="Script" uid="uid://4f12k8jwoh8y" path="res://Scenes/DNC/UI/notas_limit.gd" id="2_m6oyf"]
+
+[node name="NotasLimit" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_x1gqn")
+hframes = 8
+vframes = 4
+frame = 16
+script = ExtResource("2_m6oyf")

@@ -7,6 +7,11 @@ var BTL_EVENT_SCRIPT_PATH := ""
 var BTL_AMBUSH
 
 
+var cutscene:bool=false
+#####historia
+var primera_vez_w1_int : bool = true
+var cinematic_1 = false
+var cinematic_2:bool = false
 func start_battle(
 	party_members: Array,
 	enemy_data: Array,

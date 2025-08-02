@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhq1t3tt8sx25"]
+
+[ext_resource type="CameraAttributesPractical" uid="uid://bp7uwqcl0hi0" path="res://Shaders/CamBlur/blur_chr.tres" id="1_y5283"]
+
+[node name="CameraCinematic" type="Camera3D"]
+attributes = ExtResource("1_y5283")
+current = true
+fov = 59.8
+near = 0.026

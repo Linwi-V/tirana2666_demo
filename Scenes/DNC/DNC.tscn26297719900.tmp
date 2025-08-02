@@ -1,0 +1,328 @@
+[gd_scene load_steps=7 format=3 uid="uid://blqjpwjfi1nxs"]
+
+[ext_resource type="PackedScene" uid="uid://mwtkmvct0ds6" path="res://Scenes/DNC/UI/notas_spawn.tscn" id="1_43w2h"]
+[ext_resource type="Script" uid="uid://cmmnddd8f5rnd" path="res://Scenes/DNC/dnc_manager.gd" id="1_ylmqe"]
+[ext_resource type="PackedScene" uid="uid://dttgimd22gvqf" path="res://Scenes/DNC/UI/notas_limit.tscn" id="2_xnsnd"]
+[ext_resource type="Theme" uid="uid://bppfbmioagco0" path="res://Scenes/ui/Dialogue/theme.tres" id="4_qfgpa"]
+[ext_resource type="StyleBox" uid="uid://rsltytampmw4" path="res://Scenes/BTL/UI/BTL_panelfull.tres" id="5_vx7tq"]
+[ext_resource type="Theme" uid="uid://c22qh6pxn01rm" path="res://Scenes/BTL/Styles/BTL_text.tres" id="6_vx7tq"]
+
+[node name="DNC" type="CanvasLayer"]
+
+[node name="DNC_Manager" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ylmqe")
+spawn_scene = ExtResource("1_43w2h")
+
+[node name="NotasLimits" type="Node2D" parent="DNC_Manager"]
+position = Vector2(0, -5)
+
+[node name="K_L" parent="DNC_Manager/NotasLimits" instance=ExtResource("2_xnsnd")]
+position = Vector2(768, 980)
+scale = Vector2(2, 2)
+key = "ui_left"
+
+[node name="K_D" parent="DNC_Manager/NotasLimits" instance=ExtResource("2_xnsnd")]
+position = Vector2(896, 980)
+scale = Vector2(2, 2)
+key = "ui_down"
+
+[node name="K_U" parent="DNC_Manager/NotasLimits" instance=ExtResource("2_xnsnd")]
+position = Vector2(1024, 980)
+scale = Vector2(2, 2)
+key = "ui_up"
+
+[node name="K_R" parent="DNC_Manager/NotasLimits" instance=ExtResource("2_xnsnd")]
+position = Vector2(1152, 980)
+scale = Vector2(2, 2)
+key = "ui_right"
+
+[node name="Score_UI" type="VBoxContainer" parent="DNC_Manager"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 786.0
+offset_right = 600.0
+offset_bottom = 940.0
+grow_vertical = 0
+theme = ExtResource("4_qfgpa")
+theme_override_constants/separation = 9
+
+[node name="PTJ_Panel" type="Panel" parent="DNC_Manager/Score_UI"]
+custom_minimum_size = Vector2(175, 65)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("5_vx7tq")
+
+[node name="PTJ_Label" type="Label" parent="DNC_Manager/Score_UI/PTJ_Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -18.0
+offset_right = 72.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Puntaje:"
+
+[node name="Score_Panel" type="Panel" parent="DNC_Manager/Score_UI"]
+custom_minimum_size = Vector2(400, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("5_vx7tq")
+
+[node name="Score_Label" type="Label" parent="DNC_Manager/Score_UI/Score_Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -18.0
+offset_right = 120.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "9999999999999"
+
+[node name="End_UI" type="Panel" parent="DNC_Manager"]
+visible = false
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 521.0
+offset_top = 153.0
+offset_right = 1471.0
+offset_bottom = 953.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_vx7tq")
+theme_override_styles/panel = ExtResource("5_vx7tq")
+
+[node name="End_score" type="VBoxContainer" parent="DNC_Manager/End_UI"]
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -210.0
+offset_right = 0.5
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 55
+alignment = 1
+
+[node name="Perfecto" type="HBoxContainer" parent="DNC_Manager/End_UI/End_score"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PerfectoLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Perfecto"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+fit_content = true
+
+[node name="PerfectoNumber" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Perfecto"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Genial" type="HBoxContainer" parent="DNC_Manager/End_UI/End_score"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GenialLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Genial"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+fit_content = true
+
+[node name="GenialNumber" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Genial"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Bien" type="HBoxContainer" parent="DNC_Manager/End_UI/End_score"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BienLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Bien"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20 freq=3][color=yellow]Bien![/color][/wave]:"
+fit_content = true
+
+[node name="BienNumber" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Bien"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "x 12"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Error" type="HBoxContainer" parent="DNC_Manager/End_UI/End_score"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ErrorLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Error"]
+modulate = Color(1, 0.333333, 0.333333, 1)
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=15 freq=2][color=red]Error![/color][/wave]:"
+fit_content = true
+
+[node name="ErrorNumber" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Error"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "x 12"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="MaxCombo" type="HBoxContainer" parent="DNC_Manager/End_UI/End_score"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MaxComboLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/MaxCombo"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "MAX COMBO:"
+fit_content = true
+
+[node name="MaxComboNumber" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/MaxCombo"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "x 12"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="DNC_Manager/End_UI/End_score"]
+layout_mode = 2
+
+[node name="Score" type="HBoxContainer" parent="DNC_Manager/End_UI/End_score"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ScoreLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Score"]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Puntaje"
+fit_content = true
+
+[node name="ScoreNumber" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Score"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "999999999"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Combo_UI" type="VBoxContainer" parent="DNC_Manager"]
+visible = false
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1164.38
+offset_top = 674.115
+offset_right = 1364.38
+offset_bottom = 824.115
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 0.314159
+pivot_offset = Vector2(67.5, 72)
+
+[node name="Combo_label" type="Label" parent="DNC_Manager/Combo_UI"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("6_vx7tq")
+theme_override_constants/outline_size = 12
+text = "COMBO!"
+
+[node name="COMBO_x_number" type="Label" parent="DNC_Manager/Combo_UI"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_vx7tq")
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 80
+text = "x 11"
+
+[node name="React_label" type="RichTextLabel" parent="DNC_Manager"]
+visible = false
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 669.0
+offset_top = 674.0
+offset_right = 1024.0
+offset_bottom = 774.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.359538
+pivot_offset = Vector2(125, 500)
+theme = ExtResource("4_qfgpa")
+theme_override_colors/default_color = Color(1, 0.87451, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[wave amp=60 freq=5][rainbow freq=1 sat=-8 val=0.65
+ speed=0.5]PERFECTO![/rainbow]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c8rhc04w6765f"
+path="res://.godot/imported/hurt party.mp3-8061781f6388ede8f9fc67ae6256eb87.mp3str"
+
+[deps]
+
+source_file="res://0_pruebas/hurt party.mp3"
+dest_files=["res://.godot/imported/hurt party.mp3-8061781f6388ede8f9fc67ae6256eb87.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

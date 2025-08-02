@@ -20,7 +20,15 @@ func _ready():
 	loading_screen.visible = false
 
 func request_scene_change(path: String):
-	
+	if path == "res://Scenes/worlds/WORLD1_int.tscn":
+		MusicManager.play_music(load("res://0_pruebas/oasis.mp3"),2)
+		
+
+	if path == "res://Scenes/worlds/WORLD1_ext.tscn":
+		MusicManager.play_music(load("res://0_pruebas/isla_ost.mp3"),2)
+		
+	if path == 	"res://Scenes/BTL/BTL.tscn":
+		MusicManager.play_music(load("res://0_pruebas/BTL_jueguito.wav"),0.7)
 	if current_state != State.IDLE:
 		push_warning("SceneLoader ocupado. Esperando a terminar el cambio anterior.")
 		return

@@ -33,7 +33,7 @@ func Selected(opt):
 func _on_nueva_partida_pressed() -> void:
 	$VBoxContainer/NuevaPartida.disabled=true
 	await FadeLayer.fade_out()
-	await SceneLoader.request_scene_change("res://Scenes/intro/Cinematic1.tscn")
+	await SceneLoader.request_scene_change("res://Scenes/worlds/WORLD2_ext.tscn")
 	pass # Replace with function body.
 
 

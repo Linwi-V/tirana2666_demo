@@ -1,9 +1,19 @@
-[gd_resource type="Environment" format=3 uid="uid://c3ecpysnsccbb"]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://c3ecpysnsccbb"]
+
+[ext_resource type="Texture2D" uid="uid://dp5kuiwwcr5rj" path="res://Assets/WORLD2/cielos2.png" id="1_mcq4k"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3y02c"]
+panorama = ExtResource("1_mcq4k")
+filter = false
+
+[sub_resource type="Sky" id="Sky_uek2m"]
+sky_material = SubResource("PanoramaSkyMaterial_3y02c")
 
 [resource]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.702525, 0.873127, 1, 1)
-background_energy_multiplier = 0.75
+background_energy_multiplier = 0.46
+sky = SubResource("Sky_uek2m")
 ambient_light_source = 3
 ambient_light_sky_contribution = 0.0
 reflected_light_source = 2
@@ -14,4 +24,11 @@ ssao_enabled = true
 ssao_intensity = 3.58
 glow_enabled = true
 glow_normalized = true
-glow_bloom = 0.24
+glow_intensity = 3.24
+glow_strength = 0.37
+glow_bloom = 1.0
+glow_blend_mode = 0
+adjustment_enabled = true
+adjustment_brightness = 0.98
+adjustment_contrast = 1.1
+adjustment_saturation = 1.03

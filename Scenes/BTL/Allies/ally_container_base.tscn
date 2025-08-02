@@ -20,6 +20,15 @@ bg_color = Color(0, 1, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht83y"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpj5p"]
 bg_color = Color(0, 0.688713, 0.671778, 1)
@@ -37,6 +46,27 @@ theme_override_styles/background = SubResource("StyleBoxFlat_6qko0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_sybcj")
 step = 1.0
 value = 100.0
+show_percentage = false
+
+[node name="Medidor" type="ProgressBar" parent="Vida"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.2
+offset_top = 5.0
+offset_right = -2.79999
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.999342, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_sybcj")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_ht83y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tpj5p")
 show_percentage = false
 
 [node name="Label" type="Label" parent="Vida"]
@@ -63,19 +93,3 @@ custom_minimum_size = Vector2(275, 275)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 5
-
-[node name="Medidor" type="ProgressBar" parent="Ally"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -27.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("1_sybcj")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/background = SubResource("StyleBoxFlat_ht83y")
-theme_override_styles/fill = SubResource("StyleBoxFlat_tpj5p")

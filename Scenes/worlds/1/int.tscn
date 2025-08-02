@@ -34,4 +34,4 @@ shape = SubResource("ConcavePolygonShape3D_oicrr")
 script = ExtResource("1_suqlj")
 
 [node name="Tortu" parent="npcs" instance=ExtResource("1_4x0wc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.491007, 0.728484)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.491007, 0.728484)

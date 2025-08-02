@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bw6o0a3b4qcry"]
+[gd_scene load_steps=23 format=3 uid="uid://bw6o0a3b4qcry"]
 
 [ext_resource type="Script" uid="uid://cej45bh5gtu1r" path="res://Scripts/worlds/WORLD1/ow.gd" id="2_tj0am"]
 [ext_resource type="PackedScene" uid="uid://c6u4tjn3huw6u" path="res://Scenes/worlds/1/ext.tscn" id="3_ei0au"]
@@ -67,6 +67,13 @@ height = 0.4
 radial_segments = 8
 rings = 8
 
+[sub_resource type="Curve3D" id="Curve3D_ysoqi"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0)
+}
+point_count = 1
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_prdkv"]
 render_priority = 0
 shader = ExtResource("6_mxell")
@@ -86,27 +93,33 @@ rings = 15
 [sub_resource type="BoxShape3D" id="BoxShape3D_1wvpl"]
 size = Vector3(4.805, 2.144, 1.65)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ysoqi"]
+radius = 1.0
+height = 2.797
+
 [node name="World1" type="Node3D"]
 
 [node name="OW" type="Node3D" parent="."]
 script = ExtResource("2_tj0am")
 
 [node name="Level" parent="OW" instance=ExtResource("3_ei0au")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="OW"]
 environment = ExtResource("4_0tjdq")
 
 [node name="SOL" type="DirectionalLight3D" parent="OW"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 9.41509)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 16, -25.5849)
 light_color = Color(0.076852, 0.130357, 0.302049, 1)
-light_energy = 4.016
+light_angular_distance = 33.7
 shadow_enabled = true
+sky_mode = 1
 
-[node name="LucesOmni" type="Node" parent="OW"]
+[node name="LucesOmni" type="Node3D" parent="OW"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Luzportal" type="OmniLight3D" parent="OW/LucesOmni"]
-transform = Transform3D(0.96938, -0.220989, 0.107081, 0.243964, 0.816948, -0.522569, 0.0280021, 0.532692, 0.845846, -6.93702, 6.63039, 40.7381)
+transform = Transform3D(0.96938, -0.220989, 0.107081, 0.243964, 0.816948, -0.522569, 0.0280021, 0.532692, 0.845846, -0.784876, 6.63039, 50.6445)
 light_color = Color(0.455446, 0.11591, 0.15588, 1)
 omni_range = 22.0
 omni_attenuation = 0.131
@@ -114,7 +127,8 @@ omni_attenuation = 0.131
 [node name="Luz5" type="OmniLight3D" parent="OW/LucesOmni"]
 transform = Transform3D(0.674856, 0.243964, 0.696456, -3.37685e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 0.112177, 11.1169, 9.09055)
 light_color = Color(0.0313726, 0.0392157, 0.184314, 1)
-light_energy = 16.0
+light_volumetric_fog_energy = 6.23
+light_size = 100.0
 omni_range = 43.744
 omni_attenuation = 0.131
 
@@ -157,7 +171,8 @@ distance_fade_length = 3.0
 omni_range = 15.134
 omni_attenuation = -3.519
 
-[node name="Particulas" type="Node" parent="OW"]
+[node name="Particulas" type="Node3D" parent="OW"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="OW/Particulas"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.91969, 6.56465)
@@ -165,11 +180,18 @@ amount = 100
 lifetime = 4.0
 preprocess = 2.0
 speed_scale = 0.5
+visibility_aabb = AABB(-16.28, -5.435, -11.805, 33.13, 13.675, 49.3)
 process_material = SubResource("ParticleProcessMaterial_31mmb")
 draw_pass_1 = SubResource("SphereMesh_s46tr")
 
 [node name="Pp" parent="OW" instance=ExtResource("5_trrrt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.158, 0.0903301, 7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.158, -1.30967, -6.5)
+
+[node name="Path3D" type="Path3D" parent="OW/Pp"]
+curve = SubResource("Curve3D_ysoqi")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="OW/Pp/Path3D"]
+transform = Transform3D(-0.762816, -0.392173, -0.514111, 1.49011e-08, 0.795082, -0.606502, 0.646614, -0.46265, -0.606502, 0, 0, 0)
 
 [node name="wavy" type="MeshInstance3D" parent="OW"]
 transform = Transform3D(-6.14456e-08, -2.1715, 0.382894, -2.205, 9.63836e-08, 1.92767e-07, -2.06575e-07, -0.382894, -2.1715, 0, 0, 0)
@@ -178,11 +200,13 @@ transparency = 0.5
 cast_shadow = 0
 mesh = SubResource("SphereMesh_cqxji")
 
-[node name="Fresnel" type="Node" parent="OW"]
+[node name="Fresnel" type="Node3D" parent="OW"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -14)
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="OW/Fresnel"]
 transform = Transform3D(0.664463, -0.707107, 0.241845, -0.34202, -4.10753e-08, 0.939693, -0.664463, -0.707107, -0.241845, -0.100209, 5, 31)
 visible = false
+layers = 0
 light_color = Color(1, 1, 0, 1)
 light_energy = 7.222
 spot_range = 13.0
@@ -195,17 +219,26 @@ light_energy = 7.222
 spot_range = 13.0
 spot_angle = 17.2122
 
-[node name="Warp" type="Node" parent="OW"]
+[node name="Warp" type="Node3D" parent="OW"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="WarpCasa" type="Area3D" parent="OW/Warp"]
+collision_layer = 0
+collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Warp/WarpCasa"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.440857, -0.105605, 0.297674)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.740857, -0.105605, 0.297674)
 shape = SubResource("BoxShape3D_1wvpl")
 
-[node name="BTL" type="Node3D" parent="."]
+[node name="WarpDNC" type="Area3D" parent="OW/Warp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 45.8)
+collision_layer = 0
+collision_mask = 2
 
-[node name="DNC" type="Node3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Warp/WarpDNC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0.800003)
+shape = SubResource("CapsuleShape3D_ysoqi")
 
 [connection signal="body_shape_entered" from="OW/Warp/WarpCasa" to="OW" method="_on_warp_casa_body_shape_entered"]
+[connection signal="body_shape_entered" from="OW/Warp/WarpDNC" to="OW" method="_on_warp_dnc_body_shape_entered"]

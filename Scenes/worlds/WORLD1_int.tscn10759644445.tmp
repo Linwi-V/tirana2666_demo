@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvya2wm10id7o"]
+
+[ext_resource type="Script" uid="uid://bndpdmccdbnwj" path="res://Scripts/worlds/WORLD1_INT/ow.gd" id="2_0nhxn"]
+[ext_resource type="PackedScene" uid="uid://c34b4l3rh5vks" path="res://Scenes/worlds/1/int.tscn" id="3_0nhxn"]
+[ext_resource type="PackedScene" uid="uid://b3edj1jmkebei" path="res://Scenes/pp/Pp.tscn" id="3_06bk3"]
+
+[sub_resource type="Environment" id="Environment_h3wxc"]
+background_mode = 1
+
+[node name="World1_INT" type="Node3D"]
+
+[node name="OW" type="Node3D" parent="."]
+script = ExtResource("2_0nhxn")
+
+[node name="Level" parent="OW" instance=ExtResource("3_0nhxn")]
+
+[node name="Particulas" type="Node" parent="OW"]
+
+[node name="Pp" parent="OW" instance=ExtResource("3_06bk3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.7, 0.8)
+
+[node name="pos_camara_2_ph" type="Node3D" parent="OW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+
+[node name="Warp" type="Node" parent="OW"]
+
+[node name="Luz_Global" type="Node" parent="OW"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="OW/Luz_Global"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 6)
+visible = false
+light_color = Color(1, 1, 0.372549, 1)
+omni_range = 11.183
+omni_attenuation = 0.711
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="OW/Luz_Global"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 6)
+light_energy = 0.336
+sky_mode = 1
+
+[node name="DNC" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h3wxc")
+
+[connection signal="dialog_changer" from="OW/Pp" to="OW" method="_on_pp_dialog_changer"]
