@@ -6,12 +6,12 @@ var party_level := 1
 
 # Personajes disponibles en el juego
 var characters := {
-	"Godot": {
+	"Fortunato": {
 
 		"textura": "res://icon.svg",
 		
 		"stats": {
-			"max_hp": 100,
+			"max_hp": 50,
 			"ataque_fisico": 50,
 			"defensa_fisica": 8,
 			"ataque_magico": 12,
@@ -48,14 +48,16 @@ var characters := {
 		},
 		
 		"habilidades": {
-			"disparo": {
-				"nombre": "Disparo",
+			"golpe": {
+				"nombre": "Golpetazo Chi",
 				"desbloqueado": true,
-				"costo": 3,
-				"daño": 15,
-				"tipo": "rayo",
+				"costo": 4,
+				"daño": 50,
+				"tipo": "hielo",
+				"targets": "enemy",
+				"style":"fisico",
 				"inflinge": "",
-				"descripcion": "Dispara un disparo juajua."
+				"descripcion": "Golpe Tai CHi jasjajs",
 			},
 		}
 	},

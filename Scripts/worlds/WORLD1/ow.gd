@@ -2,7 +2,8 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if not WorldFunc.cinematic_2 ==false:
+	$Pp.GRAVITY=$Pp.GRAVITY/2
+	if WorldFunc.cinematic_2 ==false:
 		$Pp.queue_free()
 		$Warp.queue_free()
 		var cam=load("res://Scenes/cinemateic cam/camera_cinematic.tscn").instantiate()
@@ -36,7 +37,7 @@ func _on_warp_casa_body_shape_entered(_body_rid: RID, _body: Node3D, _body_shape
 	$Pp.set_busy()
 	$Pp.set_external_direction(Vector3(0,0,-1))
 	await FadeLayer.fade_out()
-	await SceneLoader.request_scene_change("res://Scenes/worlds/WORLD2_ext.tscn")
+	await SceneLoader.request_scene_change("res://Scenes/worlds/WORLD1_int.tscn")
 	pass # Replace with function body.
 	
 
@@ -76,8 +77,13 @@ func _on_dnc_cerrar():
 	var tween = create_tween()
 	tween.tween_property($Pp/Pivot/SpringArm3D/Camera3D, "fov", 75, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished
-	#var dnc = get_parent().get_node("DNC")
-	#dnc.visible=false
-	#dnc.queue_free()
+	var dnc = get_parent().get_node("DNC")
+	dnc.visible=false
+	dnc.queue_free()
+	
+	#animacion 
+	await FadeLayer.fade_out(1.0)
+	await SceneLoader.request_scene_change("res://Scenes/worlds/WORLD2_int_iglesia1.tscn")
+
 	$Pp.release_busy()
 	

@@ -6,12 +6,34 @@ var BTL_BG
 var BTL_EVENT_SCRIPT_PATH := ""
 var BTL_AMBUSH
 
-
+###para no romperse nada mientras cutscene
 var cutscene:bool=false
+
+
 #####historia
 var primera_vez_w1_int : bool = true
-var cinematic_1 = false
+var segunda_vez_w1_int:bool=true
+
+var primera_vez_w2_intmain : bool = true
+var segunda_vez_w2_intmain : bool = true
+
+var primera_vez_w2_ext:bool= true
+
+
+
+#######cinematics
+var cinematic_1:bool = false
 var cinematic_2:bool = false
+
+#####quest
+var quest
+
+
+
+
+
+
+
 func start_battle(
 	party_members: Array,
 	enemy_data: Array,

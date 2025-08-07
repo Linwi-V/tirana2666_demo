@@ -70,7 +70,6 @@ func _process(delta: float) -> void:
 	if showing_end:
 		if Input.is_action_just_pressed("ui_accept"):
 			emit_signal("cerrar")
-			self.queue_free()
 		return
 	if not pausado:
 		# Acumulamos el tiempo previo al inicio de la música
@@ -323,7 +322,7 @@ func update_combo_display(combow: int) -> void:
 	t.tween_property(root, "rotation_degrees", base_rot + 10.0, 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	t.tween_property(root, "rotation_degrees", base_rot, 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
-	# 🌬 Animación de respiración constante mientras esté activo
+	# Animación de respiración constante mientras esté activo
 	var breathe := get_tree().create_tween().set_loops()
 	breathe.tween_property(root, "scale", Vector2(1.05, 1.05), 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	breathe.tween_property(root, "scale", Vector2(1.0, 1.0), 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

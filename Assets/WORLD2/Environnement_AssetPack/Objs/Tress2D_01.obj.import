@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://csb6iaawgieaj"
+path="res://.godot/imported/Tress2D_01.obj-96dddba55de77a7721ae808168c5c3bc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Tress2D_01.obj-96dddba55de77a7721ae808168c5c3bc.mesh"]
+
+source_file="res://Assets/WORLD2/Environnement_AssetPack/Objs/Tress2D_01.obj"
+dest_files=["res://.godot/imported/Tress2D_01.obj-96dddba55de77a7721ae808168c5c3bc.mesh", "res://.godot/imported/Tress2D_01.obj-96dddba55de77a7721ae808168c5c3bc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

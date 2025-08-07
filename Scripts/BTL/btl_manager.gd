@@ -227,7 +227,6 @@ func _change_state(new_state: BattleState) -> void:
 			
 		BattleState.ENEMY_TURN:
 			handle_state(BattleState.ENEMY_TURN, func() -> void:
-				
 				set_panel_comandos(false)
 				print("ENEMY TURN")
 				prepare_enemy_actions()
@@ -401,6 +400,7 @@ func _on_enemy_hp_changed(new_hp,enemy,negativo):
 	tween.tween_property(hp, "value", new_hp, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func _on_enemy_died(enemy: Control):
+	print(enemy.name)
 	daño_visual(enemy)
 	temblor(enemy)
 	await get_tree().create_timer(0.5).timeout
@@ -612,7 +612,7 @@ func do_attack_action(actor_name: String, action: Dictionary) -> void:
 	var node = node_front
 	if node == null:
 		node = node_back
-
+	print("fahshlfasklklfas")
 	print(node)
 	# Si no existe o ya murió → mensaje de fallo en panel
 	if node == null or node.rip:
@@ -1397,6 +1397,8 @@ func abrir_skill_menu() -> void:
 
 func _on_skill_selected(skill_name: String) -> void:
 	# 1) Reservar puntos
+	var container = $UI/SkillPanel/SkillListContainer/SkillScroll/SkillButtons
+	queue_free_children(container)
 	var current = WorldFunc.Party_BTL[current_ally_index]
 	var info = PartyData.characters[current]["habilidades"][skill_name]
 	skill_pool -= info["costo"]

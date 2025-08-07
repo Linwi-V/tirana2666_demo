@@ -18,8 +18,10 @@ func _ready() -> void:
 		await get_tree().create_timer(1).timeout
 		$Pp.set_external_direction(Vector3.ZERO)
 		tortux.set_external_direction(Vector3.ZERO)
+		
 		$Pp.set_current_npc(tortux)
 		$Pp.d_started(dialog)
+		
 		await get_tree().create_timer(0.5).timeout
 		tortux.velocity.y+=2
 		await get_tree().create_timer(0.5).timeout
@@ -37,21 +39,30 @@ func _ready() -> void:
 		tortux.velocity.y+=2
 		await FadeLayer.fade_out(0.2)
 		WorldFunc.start_battle(PartyData.active_party,["Eterna Ancestral"],"res://Assets/BTL/BGs/BTL_Dummy.tres",true, "res://Scripts/BTL/Events/tutorial1.gd")
-		
-	else:
+	
+	elif WorldFunc.segunda_vez_w1_int:
 		#posoicionar
 		#$Pp/Pivot/SpringArm3D/Camera3D.fov = 65
 		$Pp.position=Vector3(0,1,4)
 		WorldFunc.cutscene=false
 		$Pp/Pivot.exterior=false
 		$Pp/Pivot.top_level=true
+		$Pp.fixed_cam=true
 		$Pp.position=Vector3(-0.4,0.7,0.8)
 		$Level/npcs/Tortu.position.x=0.4
 		_on_pp_dialog_changer($Level/npcs/Tortu)
 		$Pp.set_current_npc($Level/npcs/Tortu)
 		DialogueManager.show_dialogue_balloon(dialog2)
-	pass # Replace with function body.
-
+		WorldFunc.segunda_vez_w1_int=false
+		
+	else:
+		$Pp.position=Vector3(0,1,4)
+		WorldFunc.cutscene=false
+		$Pp/Pivot.exterior=false
+		$Pp/Pivot.top_level=true
+		$Pp.fixed_cam=true
+		$Pp.position=Vector3(-0.4,0.7,0.8)
+		$Level/npcs/Tortu.position.x=0.4
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -66,8 +77,10 @@ func _on_pp_dialog_changer(npc: Variant) -> void:
 
 
 func _on_warp_ext_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+	WorldFunc.cutscene=true
 	$Pp.set_busy()
-	$Pp.set_external_direction(Vector3(1,1,1))
+	$Pp.set_external_direction(Vector3.BACK)
 	MusicManager.stop_music(0.5)
 	await FadeLayer.fade_out()
+	WorldFunc.cutscene=false
 	await SceneLoader.request_scene_change("res://Scenes/worlds/WORLD1_ext.tscn")

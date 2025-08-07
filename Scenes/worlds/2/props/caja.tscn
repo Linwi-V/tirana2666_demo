@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyidhfd6nrnc2"]
+
+[ext_resource type="PackedScene" uid="uid://cvruwtyp87j73" path="res://Meshs/WORLD2/outdoor/FBX/WoodenCrate_02.fbx" id="1_r0lwm"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hgowd"]
+points = PackedVector3Array(0.0158713, 0.00683709, 0.00596627, 0.0158713, -0.00683843, 0.00596627, 0.0158713, 0.00683709, -0.00596627, -0.0158713, 0.00683709, 0.00596627, 0.0158713, -0.00683843, -0.00596627, -0.0158713, -0.00683843, 0.00596627, -0.0158713, 0.00683709, -0.00596627, -0.0158713, -0.00683843, -0.00596627)
+
+[node name="caja" instance=ExtResource("1_r0lwm")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WoodenCrate_02" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WoodenCrate_02/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_hgowd")

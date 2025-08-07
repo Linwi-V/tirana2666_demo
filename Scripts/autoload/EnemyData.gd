@@ -49,5 +49,53 @@ var enemies := {
 				"oro": "10"
 			},  
 	},
-	
+
+"Esbirro": {
+		"nombre": "Esbirro",
+		
+		"textura": "res://icon.svg",  
+		
+		"stats": {
+			"max_hp": 70,
+			"ataque_fisico": 1,
+			"defensa_fisica": 5,
+			"ataque_magico": 0,
+			"defensa_magica": 0,
+			"evasion": 0,
+			"critico": 0,
+			"velocidad": 5,  # para orden de ataque de enemigos
+		},
+		
+		"debilidades": ["rayo"],
+		"resistencias": ["fuego"],
+		"inmunidades": [],
+		"absorciones": [],
+		"habilidades": {
+			"mordisco": {
+				"nombre": "Mordisco",
+				"descripcion": "Un ataque simple con los dientes viscosos.",
+				"poder": 25,  # daño base
+				"tipo": "",
+				"estilo": "fisico",
+				"target": "party",
+				"scripted": -1
+			},
+			"pocion": {
+				"nombre": "Poción",
+				"descripcion": "Helea",
+				"poder": -10,  # daño base
+				"tipo": "",
+				"estilo": "magico",
+				"target": "self",
+				"scripted": -1
+			},
+		},
+		"ai_type": "agresivo",
+		"muerte": {
+				"scripted": "true",
+				"exp": "100",
+				"oro": "10"
+			},  
+	},
+		
 }

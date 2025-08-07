@@ -1,26 +1,27 @@
-[gd_scene load_steps=25 format=3 uid="uid://btgjf0r2ly3h3"]
+[gd_scene load_steps=28 format=3 uid="uid://btgjf0r2ly3h3"]
 
 [ext_resource type="Texture2D" uid="uid://cxfujrr2jjxpf" path="res://Sprites/Chars/ph/64X128_Idle_Free.png" id="1_20uak"]
 [ext_resource type="Script" uid="uid://7qbpkkak8lyh" path="res://Scripts/npcs/npc_base.gd" id="1_gmoox"]
 [ext_resource type="Texture2D" uid="uid://blb88baiyo7fl" path="res://Assets/NPCS/emotes/speech_bubble_animation-11x11.png" id="2_b1b6i"]
 [ext_resource type="Texture2D" uid="uid://ddumx1tgxm0j6" path="res://Assets/NPCS/emotes/exclamation-7x8.png" id="3_gmoox"]
-
-[sub_resource type="Gradient" id="Gradient_ulnqb"]
-offsets = PackedFloat32Array(0.214789, 0.507042)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gmoox"]
-gradient = SubResource("Gradient_ulnqb")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0, 1)
-metadata/_snap_enabled = true
+[ext_resource type="Texture2D" uid="uid://vgv86865l65b" path="res://Sprites/Chars/katari/prota_sprt.png" id="5_gnk88"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmoox"]
 transparency = 4
 albedo_texture = ExtResource("1_20uak")
 backlight_enabled = true
-backlight = Color(1, 1, 1, 1)
+backlight = Color(0.562958, 0.562958, 0.562958, 1)
+texture_filter = 0
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gysvp"]
+transparency = 4
+cull_mode = 2
+depth_draw_mode = 1
+albedo_texture = ExtResource("5_gnk88")
+backlight_enabled = true
+backlight = Color(0.718381, 0.718382, 0.718381, 1)
 texture_filter = 0
 billboard_mode = 2
 billboard_keep_scale = true
@@ -28,6 +29,10 @@ billboard_keep_scale = true
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_20uak"]
 radius = 0.2
 height = 2.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gnk88"]
+radius = 0.25
+height = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_x25rg"]
 radius = 0.75
@@ -143,20 +148,24 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_gnk88"]
+offsets = PackedFloat32Array(0.214789, 0.507042)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gysvp"]
+gradient = SubResource("Gradient_gnk88")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
 [node name="Node3D" type="CharacterBody3D" groups=["npc"]]
+collision_layer = 3
 script = ExtResource("1_gmoox")
 
-[node name="Sombra" type="Decal" parent="."]
-transform = Transform3D(1.1, 0, 0, 0, -1, 1.66095e-07, 0, -1.50996e-07, -1.1, 0, -0.488336, -1.13754e-08)
-size = Vector3(0.53949, 2.02511, 0.5)
-texture_albedo = SubResource("GradientTexture2D_gmoox")
-lower_fade = 1e+06
-distance_fade_begin = 0.5
-distance_fade_length = 15.0
-cull_mask = 1048570
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D3" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.065267, 0)
+visible = false
 layers = 9
 material_override = SubResource("StandardMaterial3D_gmoox")
 gi_mode = 2
@@ -168,9 +177,27 @@ texture = ExtResource("1_20uak")
 hframes = 8
 vframes = 4
 
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.04, 0)
+layers = 5
+material_override = SubResource("StandardMaterial3D_gysvp")
+gi_mode = 2
+billboard = 1
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("5_gnk88")
+hframes = 8
+vframes = 4
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.759385, 0)
 shape = SubResource("CapsuleShape3D_20uak")
+
+[node name="CollisionShape3DFollow" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.268806, 0)
+shape = SubResource("CapsuleShape3D_gnk88")
+disabled = true
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0
@@ -185,6 +212,15 @@ alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_ras1v")
 animation = &"exclamation"
+
+[node name="Sombra" type="Decal" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, -1, 1.66095e-07, 0, -1.50996e-07, -1.1, 0, -0.41957, -3.38409e-08)
+size = Vector3(0.53949, 2.32267, 0.5)
+texture_albedo = SubResource("GradientTexture2D_gysvp")
+lower_fade = 1e+06
+distance_fade_begin = 0.5
+distance_fade_length = 15.0
+cull_mask = 1048569
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

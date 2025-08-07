@@ -4,7 +4,7 @@ enum State { IDLE, MOVE, JUMP, BUSY }
 var state = State.JUMP
 
 var velocidad_mov = 4.0
-var JUMP_VELOCITY = 4.5 
+var JUMP_VELOCITY = 2.5
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # Animación
@@ -13,7 +13,7 @@ var lag_frame = 0.1
 
 # Spritesheet
 var idle = load("res://Sprites/Chars/ph/64X128_Idle_Free.png")
-var walk = load("res://Sprites/Chars/katari/prota_sprt.png")
+var walk = load("res://Sprites/Chars/gemelos/gemela_sprt.png")
 
 #safe  space si se cae
 var last_safe_place = position
@@ -34,12 +34,12 @@ var pivot_og
 var cam_final
 var can_talk := true
 var fov_og
-
+var fixed_cam:=false
 # señales 
 signal dialog_changer(npc)
 
 #var mov camara boton
-var cam_rotation_speed = 1.5 # Velocidad de rotación en radianes por segundo
+var cam_rotation_speed = 2.5 # Velocidad de rotación en radianes por segundo
 var yaw: float = 0.0
 
 func _ready() -> void:
@@ -49,7 +49,6 @@ func _ready() -> void:
 
 #FSM AKI
 func _physics_process(delta):
-
 	
 	if moving_cam and not $Pivot.active:
 		$Pivot.global_position=$Pivot.global_position.lerp(cam_final, 5 * delta)
@@ -65,8 +64,7 @@ func _physics_process(delta):
 		DialogueManager.show_dialogue_balloon(current_dialog)
 	
 		# Rotación de cámara con ui_q y ui_e
-	if state != State.BUSY:
-			
+	if state != State.BUSY and !fixed_cam:
 		if Input.is_action_pressed("ui_q"):
 			yaw -= cam_rotation_speed * delta
 		elif Input.is_action_pressed("ui_e"):
@@ -82,8 +80,9 @@ func _physics_process(delta):
 		State.BUSY:
 			handle_busy_state()
 	velocity.y -= GRAVITY * delta
-	yaw = wrapf(yaw, -PI, PI)
-	$Pivot.rotation.y = yaw
+	if !fixed_cam:
+		yaw = wrapf(yaw, -PI, PI)
+		$Pivot.rotation.y = yaw
 	update_animation(delta)
 	
 
@@ -134,7 +133,6 @@ func handle_jump_state():
 			state= State.IDLE
 	
 func handle_busy_state():
-	
 	#movs
 	if external_direction != Vector3.ZERO:
 		velocity.x = external_direction.x * velocidad_mov
@@ -246,6 +244,7 @@ func d_ended(_d):
 	tween.tween_property($Pivot/SpringArm3D/Camera3D, "fov", fov_og, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	if current_npc != null:
 		current_npc.deshablas()
+	clear_current_npc(current_npc)
 	cam_final = pivot_og
 	moving_cam = true
 	talking=false
@@ -257,6 +256,5 @@ func _on_timer_timeout() -> void:
 		$Pivot.active=true
 	if current_npc != null:
 		current_npc.hablas()
-		print($Pivot.exterior)
-		print($Pivot.active)
+
 	can_talk = true

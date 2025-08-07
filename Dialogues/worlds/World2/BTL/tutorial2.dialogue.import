@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cp4onh6tnmmt8"
+path="res://.godot/imported/tutorial2.dialogue-f362277b0ed235e86cda0d83dc1b9cd6.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World2/BTL/tutorial2.dialogue"
+dest_files=["res://.godot/imported/tutorial2.dialogue-f362277b0ed235e86cda0d83dc1b9cd6.tres"]
+
+[params]
+
+defaults=true

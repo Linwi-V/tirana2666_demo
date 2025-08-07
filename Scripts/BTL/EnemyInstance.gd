@@ -43,6 +43,7 @@ func recibir_dano(amount: int):
 		emit_signal("hp_changed", current_hp, self,false)
 	if current_hp <= 0:
 		emit_signal("died",self)
+		rip=true
 
 
 func agregar_estado(estado: String):

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dofbtcvjqid62"
+path="res://.godot/imported/d5.dialogue-730b5858b102a8a64c60d3e85ad3559c.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World2/d5.dialogue"
+dest_files=["res://.godot/imported/d5.dialogue-730b5858b102a8a64c60d3e85ad3559c.tres"]
+
+[params]
+
+defaults=true

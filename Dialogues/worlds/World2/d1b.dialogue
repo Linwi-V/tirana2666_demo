@@ -1,0 +1,15 @@
+~ start
+
+Esbirro 1: *   ¡PAREN TODO QUE YA LLEGAMOS! 
+do salto_esbirro1()
+Esbirro 2: *   ¡Y SUELTEN ESA MÁSCARA! Que sin ella no nos vamos…
+do salto_esbirro2()
+Esbirro 1: *   Por el gran Q’ala Ch’usu luchamos…
+do salto_esbirro1()
+Esbirro 2: *   La trascendencia es aquello que buscamos…
+do salto_esbirro2()
+Esbirro 1 y 2: *   Y ahora juntos... ¡A USTEDES LOS APLASTAMOS!
+do salto_esbirro1()
+do salto_esbirro2()
+do wait(0.5)
+=> END

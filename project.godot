@@ -29,10 +29,6 @@ WorldFunc="*res://Scripts/autoload/WorldFunc.gd"
 TypeTable="*res://Scripts/autoload/TypeTable.gd"
 MusicManager="*res://Scripts/autoload/MusicManager.gd"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [dialogue_manager]
 
 runtime/balloon_path="res://Scenes/ui/Dialogue/balloon.tscn"
@@ -41,6 +37,7 @@ runtime/balloon_path="res://Scenes/ui/Dialogue/balloon.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=2
 
@@ -122,7 +119,7 @@ ui_e={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogues/worlds/World1/main/d2.dialogue", "res://Dialogues/prueba.dialogue", "res://Dialogues/worlds/World1/BTL/tutorial1_turno1.dialogue", "res://Dialogues/worlds/World1/BTL/tutorial1_turno2.dialogue", "res://Dialogues/worlds/World1/BTL/tutorial1_turno3.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogues/worlds/World1/main/d2.dialogue", "res://Dialogues/prueba.dialogue", "res://Dialogues/worlds/World1/BTL/tutorial1_turno1.dialogue", "res://Dialogues/worlds/World1/BTL/tutorial1_turno2.dialogue", "res://Dialogues/worlds/World1/BTL/tutorial1_turno3.dialogue", "res://Dialogues/worlds/World2/d1.dialogue", "res://Dialogues/worlds/World2/d2.dialogue", "res://Dialogues/worlds/World2/d3.dialogue", "res://Dialogues/worlds/World2/d1b.dialogue", "res://Dialogues/worlds/World2/d4.dialogue", "res://Dialogues/worlds/World2/d5.dialogue", "res://Dialogues/worlds/World2/d6.dialogue", "res://Dialogues/worlds/World2/BTL/tutorial2.dialogue", "res://Dialogues/worlds/World2/EXT/d1.dialogue")
 
 [memory]
 

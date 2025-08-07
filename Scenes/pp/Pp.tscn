@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://b3edj1jmkebei"]
 
 [ext_resource type="Script" uid="uid://dup428pvq685f" path="res://Scripts/pp/Pp.gd" id="1_ruw3j"]
-[ext_resource type="Texture2D" uid="uid://vgv86865l65b" path="res://Sprites/Chars/katari/prota_sprt.png" id="2_dknm0"]
+[ext_resource type="Texture2D" uid="uid://bgvefg1r0eddc" path="res://Sprites/Chars/gemelos/gemela_sprt.png" id="2_dknm0"]
 [ext_resource type="CameraAttributesPractical" uid="uid://bp7uwqcl0hi0" path="res://Shaders/CamBlur/blur_chr.tres" id="3_c13wy"]
 [ext_resource type="Texture2D" uid="uid://di6q17gfth5xp" path="res://Sprites/Chars/ph/64X128_Runing_Free.png" id="3_dknm0"]
 [ext_resource type="Script" uid="uid://c7muj5brecbbe" path="res://Scripts/pp/CameraController.gd" id="3_ulnqb"]
@@ -12,25 +12,25 @@ cull_mode = 2
 depth_draw_mode = 1
 albedo_texture = ExtResource("2_dknm0")
 backlight_enabled = true
-backlight = Color(0.564961, 0.564962, 0.564961, 1)
+backlight = Color(0.718381, 0.718382, 0.718381, 1)
 texture_filter = 0
 billboard_mode = 2
 billboard_keep_scale = true
 
-[sub_resource type="Gradient" id="Gradient_ulnqb"]
+[sub_resource type="Gradient" id="Gradient_dknm0"]
 offsets = PackedFloat32Array(0.214789, 0.507042)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ruw3j"]
-gradient = SubResource("Gradient_ulnqb")
+gradient = SubResource("Gradient_dknm0")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 1)
 metadata/_snap_enabled = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tgokj"]
-radius = 0.27
-height = 0.95
+radius = 0.25
+height = 0.5
 
 [sub_resource type="Animation" id="Animation_ulnqb"]
 resource_name = "DNC"
@@ -71,7 +71,6 @@ _data = {
 }
 
 [node name="Pp" type="CharacterBody3D" groups=["player"]]
-collision_layer = 3
 script = ExtResource("1_ruw3j")
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
@@ -108,10 +107,10 @@ texture_albedo = SubResource("GradientTexture2D_ruw3j")
 lower_fade = 1e+06
 distance_fade_begin = 0.5
 distance_fade_length = 15.0
-cull_mask = 1048570
+cull_mask = 1048569
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.039, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.204719, 0)
 shape = SubResource("CapsuleShape3D_tgokj")
 
 [node name="Pivot" type="Node3D" parent="."]

@@ -224,7 +224,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="WarpCasa" type="Area3D" parent="OW/Warp"]
 collision_layer = 0
-collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Warp/WarpCasa"]
@@ -234,7 +233,6 @@ shape = SubResource("BoxShape3D_1wvpl")
 [node name="WarpDNC" type="Area3D" parent="OW/Warp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 45.8)
 collision_layer = 0
-collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Warp/WarpDNC"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0.800003)
