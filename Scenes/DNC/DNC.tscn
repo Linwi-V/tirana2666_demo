@@ -1,11 +1,65 @@
-[gd_scene load_steps=7 format=3 uid="uid://blqjpwjfi1nxs"]
+[gd_scene load_steps=13 format=3 uid="uid://blqjpwjfi1nxs"]
 
 [ext_resource type="PackedScene" uid="uid://mwtkmvct0ds6" path="res://Scenes/DNC/UI/notas_spawn.tscn" id="1_43w2h"]
 [ext_resource type="Script" uid="uid://cmmnddd8f5rnd" path="res://Scenes/DNC/dnc_manager.gd" id="1_ylmqe"]
 [ext_resource type="PackedScene" uid="uid://dttgimd22gvqf" path="res://Scenes/DNC/UI/notas_limit.tscn" id="2_xnsnd"]
 [ext_resource type="Theme" uid="uid://bppfbmioagco0" path="res://Scenes/ui/Dialogue/theme.tres" id="4_qfgpa"]
+[ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="5_shks6"]
 [ext_resource type="StyleBox" uid="uid://rsltytampmw4" path="res://Scenes/BTL/UI/BTL_panelfull.tres" id="5_vx7tq"]
 [ext_resource type="Theme" uid="uid://c22qh6pxn01rm" path="res://Scenes/BTL/Styles/BTL_text.tres" id="6_vx7tq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.329412, 0.329412, 0.329412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri4m3"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0njw"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_cwcu7"]
+default_font = ExtResource("5_shks6")
+default_font_size = 40
+Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
+Button/styles/focus = SubResource("StyleBoxFlat_ri4m3")
+Button/styles/hover = SubResource("StyleBoxFlat_e0njw")
+Button/styles/normal = ExtResource("5_vx7tq")
+MarginContainer/constants/margin_bottom = 15
+MarginContainer/constants/margin_left = 30
+MarginContainer/constants/margin_right = 30
+MarginContainer/constants/margin_top = 15
+PanelContainer/styles/panel = ExtResource("5_vx7tq")
+
+[sub_resource type="Theme" id="Theme_shks6"]
+default_font = ExtResource("5_shks6")
+default_font_size = 36
 
 [node name="DNC" type="CanvasLayer"]
 
@@ -52,7 +106,7 @@ offset_top = 786.0
 offset_right = 600.0
 offset_bottom = 940.0
 grow_vertical = 0
-theme = ExtResource("4_qfgpa")
+theme = SubResource("Theme_cwcu7")
 theme_override_constants/separation = 9
 
 [node name="PTJ_Panel" type="Panel" parent="DNC_Manager/Score_UI"]
@@ -114,7 +168,7 @@ offset_right = 1471.0
 offset_bottom = 953.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("6_vx7tq")
+theme = SubResource("Theme_shks6")
 theme_override_styles/panel = ExtResource("5_vx7tq")
 
 [node name="End_score" type="VBoxContainer" parent="DNC_Manager/End_UI"]
@@ -143,7 +197,7 @@ size_flags_horizontal = 4
 [node name="PerfectoLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Perfecto"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 33
 bbcode_enabled = true
 fit_content = true
 vertical_alignment = 1
@@ -165,7 +219,7 @@ size_flags_horizontal = 4
 [node name="GenialLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Genial"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 33
 bbcode_enabled = true
 fit_content = true
 vertical_alignment = 1
@@ -187,7 +241,7 @@ size_flags_horizontal = 4
 [node name="BienLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Bien"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 33
 bbcode_enabled = true
 fit_content = true
 vertical_alignment = 1
@@ -210,7 +264,7 @@ size_flags_horizontal = 4
 modulate = Color(1, 0.333333, 0.333333, 1)
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 33
 bbcode_enabled = true
 fit_content = true
 vertical_alignment = 1
@@ -232,7 +286,7 @@ size_flags_horizontal = 4
 [node name="MaxComboLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/MaxCombo"]
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 33
 bbcode_enabled = true
 fit_content = true
 vertical_alignment = 1
@@ -257,7 +311,7 @@ size_flags_horizontal = 4
 [node name="ScoreLabel" type="RichTextLabel" parent="DNC_Manager/End_UI/End_score/Score"]
 custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/normal_font_size = 33
 bbcode_enabled = true
 fit_content = true
 vertical_alignment = 1

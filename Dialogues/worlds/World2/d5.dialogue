@@ -1,27 +1,27 @@
 ~ start
 
-Fortunato del Carmen: *   !!!
+Fortunato del Carmen: [#char=Fortunato,#action=Normal] *   !!!
 
-Katari del Carmen: *   ¡Holaaaaa!
+Katari del Carmen: [#char=Katari,#action=Daño] *   ¡Holaaaaa!
 
-Fortunato del Carmen: *   Pupita, ¿qué haces acá a esta hora? ¿No deberías estar ayudando en la casa?
+Fortunato del Carmen: [#char=Fortunato,#action=Hablando] *   Pupita, ¿qué haces acá a esta hora? ¿No deberías estar ayudando en la casa?
 
-Katari del Carmen: *   Nada, me mandó la Nona. Dice que otra vez usted se confundió y trajo las llaves de ella en vez de las suyas.
+Katari del Carmen: [#char=Katari,#action=Hablando] *   Nada, me mandó la Nona. Dice que otra vez usted se confundió y trajo las llaves de ella en vez de las suyas.
 
-Fortunato del Carmen: *   ¡¡¡ Siempre es lo mismo... esa burrada de tener llaveros iguales…
+Fortunato del Carmen: [#char=Fortunato,#action=Hablando] *   ¡¡¡ Siempre es lo mismo... esa burrada de tener llaveros iguales…
 
-Katari del Carmen: *   También dijo que si usted seguía así, un día de estos iba a terminar viniendo con un vestido en vez de pantalones.
+Katari del Carmen: [#char=Katari,#action=Hablando] *   También dijo que si usted seguía así, un día de estos iba a terminar viniendo con un vestido en vez de pantalones.
 
-Fortunato del Carmen: *   ¡PERO CÓMO SE LE OCURRE! Yo jamás har…… … … Momento… ¿Y para qué necesitan las llaves? ¿Van a salir?
+Fortunato del Carmen: [#char=Fortunato,#action=Daño] *   ¡PERO CÓMO SE LE OCURRE! Yo jamás har…… … … Momento… ¿Y para qué necesitan las llaves? ¿Van a salir?
 
-Katari del Carmen: *   No, lo que pasa es que me mandó a comprar CILANTRO. Pero su chauchero está anclado al llavero. Así que no teníamos plata.
+Katari del Carmen: [#char=Katari,#action=Hablando] *   No, lo que pasa es que me mandó a comprar CILANTRO. Pero su chauchero está anclado al llavero. Así que no teníamos plata.
 
-Fortunato del Carmen: *   Joajoajoajoajoa… ya veo, ya veo… bueno, aquí tienes el monedero. Aprovecha también de comprar AJÍ EN SALSA, que se me acabó en el desayuno.
+Fortunato del Carmen: [#char=Fortunato,#action=Hablando] *   Joajoajoajoajoa… ya veo, ya veo… bueno, aquí tienes el monedero. Aprovecha también de comprar AJÍ EN SALSA, que se me acabó en el desayuno.
 
-Katari del Carmen: *   ¡Gracias! Y no se atrase para el almuerzo, o se va a enojar la Nona.
+Katari del Carmen: [#char=Katari,#action=Hablando] *   ¡Gracias! Y no se atrase para el almuerzo, o se va a enojar la Nona.
 
-Fortunato del Carmen: *   Sí, sí… pronto partiré hacia allá. Mientras tanto, ve a comprar.
+Fortunato del Carmen: [#char=Fortunato,#action=Hablando] *   Sí, sí… pronto partiré hacia allá. Mientras tanto, ve a comprar.
 
-Katari del Carmen: *   ¡Nos vemos!
+Katari del Carmen: [#char=Katari,#action=Hablando] *   ¡Nos vemos!
 
 => END

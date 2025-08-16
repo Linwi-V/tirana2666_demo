@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://bjv3kprpl7rfw"]
+[gd_scene load_steps=16 format=3 uid="uid://bjv3kprpl7rfw"]
 
 [ext_resource type="Script" uid="uid://gygrq6adkimn" path="res://Scripts/worlds/WORLD2_INT/int_iglesiamain.gd" id="1_u5rdc"]
 [ext_resource type="PackedScene" uid="uid://2ljr20cvxd4f" path="res://Scenes/worlds/2/iglesia_int_main.tscn" id="3_btylm"]
 [ext_resource type="PackedScene" uid="uid://b3edj1jmkebei" path="res://Scenes/pp/Pp.tscn" id="3_tgn37"]
 [ext_resource type="Texture2D" uid="uid://nsamafeni8a1" path="res://0_pruebas/dirt_01-export.png" id="4_bs1un"]
+[ext_resource type="PackedScene" uid="uid://bqfhwo64u0fj5" path="res://Scenes/ui/mini_mapa.tscn" id="4_u5rdc"]
 
 [sub_resource type="Gradient" id="Gradient_si7ow"]
 offsets = PackedFloat32Array(0, 0.893773, 1)
@@ -89,6 +90,19 @@ script = ExtResource("1_u5rdc")
 [node name="Pp" parent="OW" instance=ExtResource("3_tgn37")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.892869, 0, -1.57113)
 
+[node name="MiniMapa" parent="OW/Pp" instance=ExtResource("4_u5rdc")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -306.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = 306.0
+grow_horizontal = 0
+grow_vertical = 1
+
 [node name="OmniLight3D" type="OmniLight3D" parent="OW"]
 transform = Transform3D(0.999931, 0.0117283, 0, -0.0117283, 0.999931, 0, 0, 0, 1, 0, 3.56799, 11.9239)
 light_color = Color(1, 0.85098, 0.392157, 1)
@@ -98,7 +112,7 @@ omni_range = 9.771
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="OW"]
 transform = Transform3D(0.999931, 0.0117283, 0, -0.0117283, 0.999931, 0, 0, 0, 1, 0, 3.56799, 4.92389)
-light_color = Color(1, 0.85098, 0.392157, 1)
+light_color = Color(0.992157, 1, 0, 1)
 light_energy = 0.839
 distance_fade_enabled = true
 omni_range = 9.771

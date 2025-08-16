@@ -1,6 +1,7 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://bppfbmioagco0"]
 
 [ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="1_2rutl"]
+[ext_resource type="StyleBox" uid="uid://rsltytampmw4" path="res://Scenes/BTL/UI/BTL_panelfull.tres" id="1_7nhqn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -38,26 +39,15 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkmqt"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [resource]
 default_font = ExtResource("1_2rutl")
-default_font_size = 36
+default_font_size = 40
 Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
 Button/styles/focus = SubResource("StyleBoxFlat_ri4m3")
 Button/styles/hover = SubResource("StyleBoxFlat_e0njw")
-Button/styles/normal = SubResource("StyleBoxFlat_e0njw")
+Button/styles/normal = ExtResource("1_7nhqn")
 MarginContainer/constants/margin_bottom = 15
 MarginContainer/constants/margin_left = 30
 MarginContainer/constants/margin_right = 30
 MarginContainer/constants/margin_top = 15
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_qkmqt")
+PanelContainer/styles/panel = ExtResource("1_7nhqn")

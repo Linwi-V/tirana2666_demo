@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://c0a6fho6yxx2f"
+path="res://.godot/imported/fin_demo.dialogue-8d05172c66f02688f82985784a1c5d1e.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World2/EXT/quests/fin_demo.dialogue"
+dest_files=["res://.godot/imported/fin_demo.dialogue-8d05172c66f02688f82985784a1c5d1e.tres"]
+
+[params]
+
+defaults=true

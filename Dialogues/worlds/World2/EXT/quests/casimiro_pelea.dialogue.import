@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dmkc4r0yiq3dm"
+path="res://.godot/imported/casimiro_pelea.dialogue-89857b6bcc1d0b9f06f58bc0b71fb01d.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World2/EXT/quests/casimiro_pelea.dialogue"
+dest_files=["res://.godot/imported/casimiro_pelea.dialogue-89857b6bcc1d0b9f06f58bc0b71fb01d.tres"]
+
+[params]
+
+defaults=true

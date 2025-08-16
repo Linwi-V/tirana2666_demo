@@ -1,0 +1,20 @@
+~ start
+do! salto("Gemelo2")
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   ¡Eso ha sido MA-CA-NU-DO!
+do! salto("Gemelo1")
+Gemelo 1: [#char=Gemelo1,#action=Hablando] *   ¡Y a la próxima te va peor!
+do! salto("Casimiro")
+Casimiro: *   ¡Guaguauguau!
+
+Katari del Carmen: [#char=Katari,#action=Sonriendo]  *   Increíble, gracias por ayudarme. Creo que no podría haber recuperado el chauchero por mi cuenta…
+
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   ¡Pa eso estamos!
+
+Gemelo 1: [#char=Gemelo1,#action=Hablando] *   Ahora tenemos que irnos rápidito a la casa, eso sí, para avisarle a mi papá que encontramos al Casi.
+
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   Casimiro, ¡vamos! Nos vemos, Katari del Carmen.
+do! salto("Casimiro")
+Casimiro: *   Guauguau
+
+
+=> END

@@ -1,0 +1,25 @@
+~ logrado
+Remedios Dolores del Carmen: *   ¡Katari, por la chita, harto que te demoraste! Hubiera ido yo mejor, no sé cómo haces para dilatar tanto algo tan simple como ir a la tienda, ya me estaba preocupando porque no llegabas.
+Simón del Carmen: *   Parece que fuiste a Pozo Almonte a comprar…
+do cambio_npc("Simon")
+Katari del Carmen: [#char=Katari,#action=Daño] *   ¡Cállate tú, cabro chico! Para la próxima te toca ir a ti.
+Remedios Dolores del Carmen: *   Ya, sin pelear, o se van a ir los dos castigados sin almuerzo. ¿Katari trajiste lo que te pedí?
+do cambio_npc("Remedios")
+Katari del Carmen: [#char=Katari,#action=Hablando] *   ¡Ay, Nona! Perdóname, pasaron un millón de leseras. Traje el Cilantro que necesitabas y un Ají en Salsa que me pidió el tata. Vengo con el manso diente.
+Remedios Dolores del Carmen: *   ¡Perfecto! Ya tengo todo listo, pico el cilantro y estamos tiquitaca. Katari, pon la mesa mientras. Simón, anda a lavarte esas manos por favor, que de acá les veo la mugre.
+=> END
+
+
+~ no_logrado
+Remedios Dolores del Carmen: *   ¡Katari, por la chita, harto que te demoraste! Hubiera ido yo mejor, no sé cómo haces para dilatar tanto algo tan simple como ir a la tienda, ya me estaba preocupando porque no llegabas.
+Simón del Carmen: *   Parece que fuiste a Pozo Almonte a comprar…
+do cambio_npc("Simon")
+Katari del Carmen: [#char=Katari,#action=Daño]  *   ¡Cállate tú, cabro chico! Para la próxima te toca ir a ti.
+Remedios Dolores del Carmen: *   Ya, sin pelear, o se van a ir los dos castigados sin almuerzo. ¿Katari trajiste lo que te pedí?
+do cambio_npc("Remedios")
+Katari del Carmen: [#char=Katari,#action=Hablando] *   ¡Ay, Nona! Perdóname, pasaron un millón de leseras. Si compré, y lo que me pidió el tata también. Vengo con el manso diente.
+do wait(1)
+Remedios Dolores del Carmen: *   ...
+Remedios Dolores del Carmen: *   Katari… acércate…
+Remedios Dolores del Carmen: *   ¿QUÉ NO SABES DISTINGUIR LO QUE ES UN CILANTRO CABRA LESA? ¡Esto no fue lo que tenías que traer! El manso diente dice la perla…
+=> END

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dtv6xqom655jq"
+path="res://.godot/imported/ladron_pelea.dialogue-4bfd32c3b3dd559f2d443da0b0b04f09.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World2/EXT/quests/ladron_pelea.dialogue"
+dest_files=["res://.godot/imported/ladron_pelea.dialogue-4bfd32c3b3dd559f2d443da0b0b04f09.tres"]
+
+[params]
+
+defaults=true

@@ -1,10 +1,189 @@
-[gd_scene load_steps=18 format=3 uid="uid://cdu5h1xv7exl3"]
+[gd_scene load_steps=57 format=3 uid="uid://cdu5h1xv7exl3"]
 
 [ext_resource type="Script" uid="uid://du8nnqtnyaqal" path="res://Scripts/worlds/WORLD2_EXT/ow.gd" id="1_517xe"]
+[ext_resource type="PackedScene" uid="uid://bqfhwo64u0fj5" path="res://Scenes/ui/mini_mapa.tscn" id="1_mndrk"]
 [ext_resource type="PackedScene" uid="uid://dh3d8skk5b13h" path="res://Scenes/worlds/2/ext.tscn" id="2_hbjcq"]
 [ext_resource type="Environment" uid="uid://c3ecpysnsccbb" path="res://Scenes/worlds/WORLD2_env.tres" id="3_mndrk"]
+[ext_resource type="Texture2D" uid="uid://3ltv3ddhtrhy" path="res://Sprites/Chars/randoms/mukel2.png" id="3_sndg3"]
 [ext_resource type="PackedScene" uid="uid://b3edj1jmkebei" path="res://Scenes/pp/Pp.tscn" id="4_ef4tv"]
+[ext_resource type="Texture2D" uid="uid://fl18djanqkjc" path="res://Sprites/Chars/randoms/mukel1.png" id="4_qa2i7"]
+[ext_resource type="Texture2D" uid="uid://bhfda2i2s1t3y" path="res://Sprites/Chars/randoms/menuno.png" id="5_0ax8w"]
 [ext_resource type="Texture2D" uid="uid://nsamafeni8a1" path="res://0_pruebas/dirt_01-export.png" id="5_sndg3"]
+[ext_resource type="Texture2D" uid="uid://dukicm0ecubm7" path="res://Sprites/Chars/randoms/man2.png" id="6_3nywp"]
+[ext_resource type="CameraAttributesPractical" uid="uid://bp7uwqcl0hi0" path="res://Shaders/CamBlur/blur_chr.tres" id="6_hbjcq"]
+[ext_resource type="AudioStream" uid="uid://bk74e5n3yasoa" path="res://musicas/World2/ambiente pueblo.ogg" id="8_ef4tv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6kga"]
+atlas = ExtResource("3_sndg3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dq1io"]
+atlas = ExtResource("3_sndg3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qa2i7"]
+atlas = ExtResource("3_sndg3")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ax8w"]
+atlas = ExtResource("3_sndg3")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nywp"]
+atlas = ExtResource("3_sndg3")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xg3r6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6kga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dq1io")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qa2i7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ax8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nywp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg3r6"]
+atlas = ExtResource("4_qa2i7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7q8pe"]
+atlas = ExtResource("4_qa2i7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eha4r"]
+atlas = ExtResource("4_qa2i7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81w27"]
+atlas = ExtResource("4_qa2i7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04t2d"]
+atlas = ExtResource("4_qa2i7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7483i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xg3r6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7q8pe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eha4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81w27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04t2d")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xw2p8"]
+atlas = ExtResource("5_0ax8w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vgxu"]
+atlas = ExtResource("5_0ax8w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acs8o"]
+atlas = ExtResource("5_0ax8w")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d182i"]
+atlas = ExtResource("5_0ax8w")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36iai"]
+atlas = ExtResource("5_0ax8w")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pv6hg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xw2p8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vgxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acs8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d182i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36iai")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ckyk"]
+atlas = ExtResource("6_3nywp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_235bp"]
+atlas = ExtResource("6_3nywp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54abj"]
+atlas = ExtResource("6_3nywp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yd4vu"]
+atlas = ExtResource("6_3nywp")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_542ri"]
+atlas = ExtResource("6_3nywp")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bpf3y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ckyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_235bp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54abj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yd4vu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_542ri")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [sub_resource type="Gradient" id="Gradient_bqyem"]
 offsets = PackedFloat32Array(0, 0.893773, 1)
@@ -58,25 +237,221 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_ef4tv")
 size = Vector2(0.1, 0.1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_k6kga"]
+size = Vector3(3.39515, 4.47852, 5.5597)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dq1io"]
+size = Vector3(3.39332, 4.47852, 5.42927)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_517xe"]
-size = Vector3(5.83105, 4.47852, 12.5849)
+size = Vector3(3.25905, 4.47852, 11.5015)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hbjcq"]
 size = Vector3(6.34082, 4.47852, 25.0409)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mndrk"]
-size = Vector3(5.83105, 4.47852, 21.0773)
+size = Vector3(6.12256, 4.47852, 21.0773)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ef4tv"]
-size = Vector3(8.49146, 1, 10.7103)
+size = Vector3(6.57221, 1, 4.39671)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qa2i7"]
+size = Vector3(6.57221, 1, 5.46762)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sndg3"]
+size = Vector3(3.601, 1, 4.44705)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbjcq"]
+radius = 0.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mndrk"]
+radius = 0.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ef4tv"]
+radius = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ax8w"]
+size = Vector3(7.36566, 2.23047, 6.77698)
 
 [node name="World2" type="Node3D"]
 
 [node name="OW" type="Node3D" parent="."]
 script = ExtResource("1_517xe")
 
-[node name="Pueblo" parent="OW" instance=ExtResource("2_hbjcq")]
+[node name="Level" parent="OW" instance=ExtResource("2_hbjcq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.00804, 0)
+
+[node name="mukel2" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10.3578, -0.415955, 12.6389)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_xg3r6")
+autoplay = "default"
+frame_progress = 0.861298
+
+[node name="mukel8" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.46955, -0.415955, -1.77869)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_xg3r6")
+autoplay = "default"
+frame_progress = 0.661986
+
+[node name="mukel16" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.85711, -0.415955, -4.69666)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_xg3r6")
+autoplay = "default"
+frame_progress = 0.661986
+
+[node name="mukel17" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.59144, -0.415955, 5.27356)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_xg3r6")
+autoplay = "default"
+frame_progress = 0.661986
+
+[node name="mukel3" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.30658, -0.415955, 11.9206)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_7483i")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.0759436
+
+[node name="mukel13" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9.40863, -0.415955, 5.79218)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_7483i")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.831276
+
+[node name="mukel9" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3.32666, -0.415955, -1.56158)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_7483i")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.468429
+
+[node name="mukel7" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.08026, -0.415955, 18.2322)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_7483i")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.211954
+
+[node name="mukel4" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.30658, -0.415955, 10.4236)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_pv6hg")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.327572
+
+[node name="mukel18" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -7.22552, -0.415955, 6.64752)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_pv6hg")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.0914661
+
+[node name="mukel19" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -10.2469, -0.415955, 17.8162)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_pv6hg")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.0914661
+
+[node name="mukel14" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10.6527, -0.415955, 10.0027)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_pv6hg")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.682508
+
+[node name="mukel10" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4.58514, -0.415955, -2.00189)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_pv6hg")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.276599
+
+[node name="mukel11" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -6.05267, -0.415955, -5.84198)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_pv6hg")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.276599
+
+[node name="mukel5" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.57581, -0.415955, 10.4236)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_bpf3y")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="mukel15" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4.42953, -0.415955, 13.4477)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_bpf3y")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="mukel12" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -9.41501, -0.415955, -0.590271)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_bpf3y")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="mukel6" type="AnimatedSprite3D" parent="OW/Level"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.90417, -0.415955, 18.034)
+modulate = Color(0.737193, 0.737193, 0.737193, 1)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_bpf3y")
+animation = &"new_animation"
+autoplay = "new_animation"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="OW"]
 environment = ExtResource("3_mndrk")
@@ -95,6 +470,19 @@ sky_mode = 1
 [node name="Pp" parent="OW" instance=ExtResource("4_ef4tv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.157951, -2.2627, -1.38738)
 
+[node name="MiniMapa" parent="OW/Pp" instance=ExtResource("1_mndrk")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -306.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = 306.0
+grow_horizontal = 0
+grow_vertical = 1
+
 [node name="Particulas" type="Node3D" parent="OW"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="OW/Particulas"]
@@ -110,19 +498,23 @@ draw_pass_1 = SubResource("QuadMesh_et3lb")
 
 [node name="Areas_cam" type="Node3D" parent="OW"]
 
-[node name="AreaEste" type="Area3D" parent="OW/Areas_cam"]
+[node name="AreaOeste" type="Area3D" parent="OW/Areas_cam"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.053, 0, 0)
 collision_layer = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cam/AreaEste"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.10592, -1.88574, 9.84121)
-shape = SubResource("BoxShape3D_517xe")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cam/AreaOeste"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.00186, -1.88574, 5.72641)
+shape = SubResource("BoxShape3D_k6kga")
 
-[node name="AreaOeste" type="Area3D" parent="OW/Areas_cam"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="OW/Areas_cam/AreaOeste"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.36608, -1.88574, 12.8267)
+shape = SubResource("BoxShape3D_dq1io")
+
+[node name="AreaEste" type="Area3D" parent="OW/Areas_cam"]
 collision_layer = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cam/AreaOeste"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.10592, -1.88574, 9.43764)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cam/AreaEste"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.84491, -1.88574, 9.46523)
 shape = SubResource("BoxShape3D_517xe")
 
 [node name="AreaSur" type="Area3D" parent="OW/Areas_cam"]
@@ -138,20 +530,89 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.4120
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cam/AreaNorte"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.815, -1.88574, 8.88898)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9608, -1.88574, 8.88898)
 shape = SubResource("BoxShape3D_mndrk")
 
-[node name="Area3D" type="Area3D" parent="OW/Areas_cam"]
+[node name="AreaTerreno" type="Area3D" parent="OW/Areas_cam"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cam/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.26447, 0, -8.03204)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cam/AreaTerreno"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4078, -2.14755, -4.78606)
 shape = SubResource("BoxShape3D_ef4tv")
+
+[node name="Camera3D" type="Camera3D" parent="OW/Areas_cam/AreaTerreno"]
+transform = Transform3D(0.618408, -0.25585, 0.743042, 0, 0.945518, 0.325568, -0.785857, -0.201334, 0.584717, -5.62, -0.78, -2.535)
+attributes = ExtResource("6_hbjcq")
+
+[node name="AreaCasimiro" type="Area3D" parent="OW/Areas_cam"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cam/AreaCasimiro"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4078, -2.14755, -11.4017)
+shape = SubResource("BoxShape3D_qa2i7")
+
+[node name="Camera3D" type="Camera3D" parent="OW/Areas_cam/AreaCasimiro"]
+transform = Transform3D(0.953548, 0.105007, -0.282347, 0.00284687, 0.934095, 0.357012, 0.301228, -0.341232, 0.890406, -11.5394, -1.13555, -7.5604)
+attributes = ExtResource("6_hbjcq")
+
+[node name="Areas_cutscenes" type="Node3D" parent="OW"]
+
+[node name="Tienda_d3" type="Area3D" parent="OW/Areas_cutscenes"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cutscenes/Tienda_d3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.67005, -2.17174, 13.3906)
+shape = SubResource("BoxShape3D_sndg3")
+
+[node name="AreaCasimiro_cut" type="Area3D" parent="OW/Areas_cutscenes"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cutscenes/AreaCasimiro_cut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.151, -2.452, -9.385)
+shape = SubResource("CapsuleShape3D_hbjcq")
+
+[node name="AreaCasimiro_cut_g1" type="Area3D" parent="OW/Areas_cutscenes"]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cutscenes/AreaCasimiro_cut_g1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.16, -2.452, -9.406)
+shape = SubResource("CapsuleShape3D_mndrk")
+
+[node name="AreaCasimiro_cut_g2" type="Area3D" parent="OW/Areas_cutscenes"]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cutscenes/AreaCasimiro_cut_g2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.65, -2.452, -8.817)
+shape = SubResource("CapsuleShape3D_ef4tv")
+
+[node name="AreaLadron" type="Area3D" parent="OW/Areas_cutscenes"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Areas_cutscenes/AreaLadron"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1809, -1.97754, -10.7976)
+shape = SubResource("BoxShape3D_0ax8w")
+
+[node name="Camera3D" type="Camera3D" parent="OW/Areas_cutscenes/AreaLadron"]
+transform = Transform3D(-4.37114e-08, 0.34202, -0.939693, 0, 0.939693, 0.34202, 1, 1.49502e-08, -4.10753e-08, 6.42, -0.63, -8.494)
+attributes = ExtResource("6_hbjcq")
 
 [node name="BTL" type="Node3D" parent="."]
 
 [node name="DNC" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9293, 0, 16.6515)
 
-[connection signal="body_shape_entered" from="OW/Areas_cam/AreaEste" to="OW" method="_on_area_este_body_shape_entered"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ef4tv")
+volume_db = -9.0
+autoplay = true
+bus = &"SFX"
+
+[connection signal="dialog_changer" from="OW/Pp" to="OW" method="_on_pp_dialog_changer"]
 [connection signal="body_shape_entered" from="OW/Areas_cam/AreaOeste" to="OW" method="_on_area_oeste_body_shape_entered"]
+[connection signal="body_shape_entered" from="OW/Areas_cam/AreaEste" to="OW" method="_on_area_este_body_shape_entered"]
 [connection signal="body_shape_entered" from="OW/Areas_cam/AreaSur" to="OW" method="_on_area_sur_body_shape_entered"]
 [connection signal="body_shape_entered" from="OW/Areas_cam/AreaNorte" to="OW" method="_on_area_norte_body_shape_entered"]
+[connection signal="body_shape_entered" from="OW/Areas_cam/AreaTerreno" to="OW" method="_on_area_terreno_body_shape_entered"]
+[connection signal="body_shape_exited" from="OW/Areas_cam/AreaTerreno" to="OW" method="_on_area_terreno_body_shape_exited"]
+[connection signal="body_shape_entered" from="OW/Areas_cam/AreaCasimiro" to="OW" method="_on_area_casimiro_body_shape_entered"]
+[connection signal="body_shape_entered" from="OW/Areas_cutscenes/Tienda_d3" to="OW" method="_on_tienda_d_3_body_shape_entered"]
+[connection signal="body_shape_entered" from="OW/Areas_cutscenes/AreaCasimiro_cut" to="OW" method="_on_area_casimiro_cut_body_shape_entered"]
+[connection signal="body_shape_entered" from="OW/Areas_cutscenes/AreaCasimiro_cut_g1" to="OW" method="_on_area_casimiro_cut_g_1_body_shape_entered"]
+[connection signal="body_shape_entered" from="OW/Areas_cutscenes/AreaCasimiro_cut_g2" to="OW" method="_on_area_casimiro_cut_g_2_body_shape_entered"]
+[connection signal="body_shape_entered" from="OW/Areas_cutscenes/AreaLadron" to="OW" method="_on_area_ladron_body_shape_entered"]
+[connection signal="body_shape_exited" from="OW/Areas_cutscenes/AreaLadron" to="OW" method="_on_area_ladron_body_shape_exited"]

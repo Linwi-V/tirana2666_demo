@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ckcya2edfj3m4"
+path="res://.godot/imported/Eterna Ancestralv2.ogg-7f0f453242b812486b4f6fc56811daf1.oggvorbisstr"
+
+[deps]
+
+source_file="res://musicas/BTL/Eterna Ancestralv2.ogg"
+dest_files=["res://.godot/imported/Eterna Ancestralv2.ogg-7f0f453242b812486b4f6fc56811daf1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -27,7 +27,10 @@ func trigger_turn4(btl_manager):
 	# Opcionalmente puedes poner algún diálogo o lógica extra aquí
 
 func trigger_death(btl_manager):
-	await FadeLayer.fade_out(0.5)
+	await get_tree().create_timer(2).timeout
+	MusicManager.stop_music(1.0)
+	await FadeLayer.fade_out(1.0)
+	
 	await SceneLoader.request_scene_change("res://Scenes/worlds/WORLD1_int.tscn")
 # ---------- TRIGGERS -------------
 func is_turn1(btl_manager):

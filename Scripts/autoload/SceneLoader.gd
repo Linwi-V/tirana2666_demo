@@ -23,12 +23,21 @@ func request_scene_change(path: String):
 	if path == "res://Scenes/worlds/WORLD1_int.tscn":
 		MusicManager.play_music(load("res://0_pruebas/oasis.mp3"),2)
 		
-
 	if path == "res://Scenes/worlds/WORLD1_ext.tscn":
-		MusicManager.play_music(load("res://0_pruebas/isla_ost.mp3"),2)
+		MusicManager.play_music(load("res://musicas/World1/limboV3.ogg"),2)
 		
 	if path == 	"res://Scenes/BTL/BTL.tscn":
-		MusicManager.play_music(load("res://0_pruebas/BTL_jueguito.wav"),0.7)
+		MusicManager.play_music(load("res://musicas/BTL/musica pueblo.ogg"),0.5)
+		
+		
+	if path == "res://Scenes/worlds/WORLD2_ext.tscn":
+		MusicManager.play_music(load("res://musicas/World2/musica casa prota.ogg"),2)
+		
+	if path == "res://Scenes/worlds/WORLD2_int_iglesia1.tscn":
+		MusicManager.play_music(load("res://musicas/World2/Iglesia.ogg"),2)
+		
+	if path == "res://Scenes/worlds/WORLD2_int_iglesia1.tscn":
+		MusicManager.play_music(load("res://musicas/World2/Iglesia.ogg"),2)
 	if current_state != State.IDLE:
 		push_warning("SceneLoader ocupado. Esperando a terminar el cambio anterior.")
 		return

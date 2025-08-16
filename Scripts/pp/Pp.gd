@@ -13,7 +13,7 @@ var lag_frame = 0.1
 
 # Spritesheet
 var idle = load("res://Sprites/Chars/ph/64X128_Idle_Free.png")
-var walk = load("res://Sprites/Chars/gemelos/gemela_sprt.png")
+var walk = load("res://Sprites/Chars/katari/prota_sprt.png")
 
 #safe  space si se cae
 var last_safe_place = position
@@ -49,7 +49,7 @@ func _ready() -> void:
 
 #FSM AKI
 func _physics_process(delta):
-	
+
 	if moving_cam and not $Pivot.active:
 		$Pivot.global_position=$Pivot.global_position.lerp(cam_final, 5 * delta)
 		if $Pivot.global_position.distance_to(cam_final) < 0.05:
@@ -61,7 +61,7 @@ func _physics_process(delta):
 	
 	elif is_on_floor() and can_talk and current_npc!= null and Input.is_action_just_pressed("ui_accept") and state != State.BUSY:
 		emit_signal("dialog_changer",current_npc)
-		DialogueManager.show_dialogue_balloon(current_dialog)
+		DialogueManager.show_dialogue_balloon(current_dialog,"start",[self])
 	
 		# Rotación de cámara con ui_q y ui_e
 	if state != State.BUSY and !fixed_cam:
@@ -83,6 +83,8 @@ func _physics_process(delta):
 	if !fixed_cam:
 		yaw = wrapf(yaw, -PI, PI)
 		$Pivot.rotation.y = yaw
+		if not talking and not moving_cam:
+			$Pivot.global_position=global_position
 	update_animation(delta)
 	
 
@@ -147,12 +149,13 @@ func handle_busy_state():
 
 func update_animation(delta):
 	var sprite = $Sprite3D
-	var mat = $Sprite3D.material_override
+	var mat = $Sprite3D.material_override.duplicate()
 	var dir_mov = Vector2(velocity.x, velocity.z)
 	var dir = dir_mov.rotated(yaw).normalized()
 	if dir.length() > 0.1:
 		sprite.texture = walk
 		mat.albedo_texture = walk
+		
 		var angle = dir.angle()
 		if angle >= -PI/4 and angle < PI/4:
 			sprite.frame_coords.y = 2 # derecha
@@ -178,7 +181,7 @@ func update_animation(delta):
 		sprite.frame_coords.x=2
 		#aqui textura idle si es q
 		#sprite.frame_coords.x = 0
-
+	$Sprite3D.material_override=mat
 # Funciones públicas para cinemáticas o NPCs
 func set_busy():
 	state = State.BUSY
@@ -191,7 +194,11 @@ func set_external_direction(dir: Vector3):
 	if state == State.BUSY:
 		external_direction = dir.normalized()
 
-
+func set_external_point(target_position: Vector3):
+	if state == State.BUSY:
+		var current_position = global_transform.origin
+		var direction = (target_position - current_position).normalized()
+		external_direction = direction
 #Funciones para NPCs
 
 func set_current_npc(npc: Node):
@@ -258,3 +265,37 @@ func _on_timer_timeout() -> void:
 		current_npc.hablas()
 
 	can_talk = true
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	##_----------anuimaciones
+
+func salto(nodo:String):
+	if nodo=="":
+		$Pp.velocity.y+=2
+	else:
+		var nodet = get_parent().get_node("Level").get_node("npcs").get_node(nodo)
+		nodet.set_busy()
+		nodet.velocity.y +=2
+		nodet.release_busy()
+
+func mirar(nodo:String,dir:String):
+	if nodo=="":
+		$Pp.velocity.y+=2
+	else:
+		var nodet = get_parent().get_node("Level").get_node("npcs").get_node(nodo)
+		match dir:
+			"derecha": nodet.external_look=Vector3.RIGHT
+			"izquierda": nodet.external_look=Vector3.LEFT
+			"arriba": nodet.external_look=Vector3.FORWARD
+			"abajo": nodet.external_look=Vector3.BACK
+			
+func retroceder_ladron():
+	var ladron = get_parent().get_node("Level").get_node("npcs").get_node("Ladron")
+	create_tween().tween_property(ladron,"position:x",14,2)

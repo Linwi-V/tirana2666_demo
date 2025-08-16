@@ -107,7 +107,19 @@ func apply_dialogue_line() -> void:
 	# Show our balloon
 	balloon.show()
 	will_hide_balloon = false
-
+	
+	var portrait_name = dialogue_line.get_tag_value("char")
+	var portrait_action= dialogue_line.get_tag_value("action")
+	if portrait_name != "" and portrait_action!="":
+		var path := "res://Assets/PARTY/BTL/%s/%s%s.png" % [portrait_name, portrait_name, portrait_action]
+		
+		var texture =load(path)
+		if texture:
+			$Balloon/CharContainer/Character.texture = texture
+		$Balloon/CharContainer.show()
+	else:
+		$Balloon/CharContainer.hide()
+		
 	dialogue_label.show()
 	if not dialogue_line.text.is_empty():
 		dialogue_label.type_out()
@@ -171,6 +183,5 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
-
 
 #endregion

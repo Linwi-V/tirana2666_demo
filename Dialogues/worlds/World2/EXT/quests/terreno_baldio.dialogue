@@ -1,0 +1,29 @@
+~ terreno_baldio_pre
+Katari del Carmen: *   Por ahí no queda la verdurería...
+=> END
+~ terreno_baldio
+do salto("Gemelo2")
+Gemelo 2: [#char=Gemelo2,#action=Daño] *   ¡Casimiro! ¡Déjenlo!
+do salto("Gemelo1")
+Gemelo 1: [#char=Gemelo1,#action=Daño] *   ¡SHU! ¡SHU! SALGAN
+do salto("")
+Katari del Carmen: [#char=Katari,#action=Daño] *   ¡Váyanse!
+do lanzar_piedra("Gemelo1")
+do! salto("Perro1")
+do! mirar("Perro1","abajo")
+do! salto("Perro2")
+do! mirar("Perro2","abajo")
+do! salto("Perro3")
+do! mirar("Perro3","abajo")
+do! salto("Perro4")
+do! mirar("Perro4","abajo")
+[#char=Gemelo1,#action=Daño] *   Gemelo 1 tiró una piedra!
+=> END
+~ terreno_baldio_post
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   ¡Qué bueno que trajiste ese pedazo de carne!
+Gemelo 1: [#char=Gemelo1,#action=Hablando] *   Pensaba dárselo al Casimiro para que nos siguiera, pero terminó siendo más útil de lo que esperaba.
+Katari del Carmen: [#char=Katari,#action=Hablando] *   ¿Están bien? ¿Alguna mordida? ¿No? ¡Perfecto! Ahora vamos por ese ladrón.
+do! salto("Gemelo1")
+do! salto("Gemelo2")
+do! salto("Casimiro")
+=> END

@@ -1,26 +1,26 @@
 ~ start
 ??????: *   Siempre espero que aparezcan en el momento menos indicado... y aun así, logran sorprenderme cuando menos lo imagino.
 
-Mónica: *   Agente Fortunato del Carmen, no pretendía importunarlo.
+Mónica: [#char=Monica,#action=Normal] *   Agente Fortunato del Carmen, no pretendía importunarlo.
 
-Fortunato del Carmen: *   No, no, tranquila. En realidad, llegas en un momento especial. Hoy es 15 de julio, y en el pueblo estamos celebrando la fiesta en honor a la Virgen del Carmen.
+Fortunato del Carmen: [#char=Fortunato,#action=Hablando] *   No, no, tranquila. En realidad, llegas en un momento especial. Hoy es 15 de julio, y en el pueblo estamos celebrando la fiesta en honor a la Virgen del Carmen.
 
-Mónica: *   Hace bastante que no participo en una celebración...
+Mónica: [#char=Monica,#action=Normal] *   Hace bastante que no participo en una celebración...
 
-Fortunato del Carmen: *   Te aseguro que esta no se parece a ninguna que hayas vivido antes.
+Fortunato del Carmen: [#char=Fortunato,#action=Hablando] *   Te aseguro que esta no se parece a ninguna que hayas vivido antes.
 
-Mónica: *   No estaría tan segura... ¡Ah! Casi lo olvido. Aquí tienes la máscara nueva que solicitaste.
+Mónica: [#char=Monica,#action=Normal] *   No estaría tan segura... ¡Ah! Casi lo olvido. Aquí tienes la máscara nueva que solicitaste.
 
-Fortunato del Carmen: *   Es aún más hermosa de lo que imaginé. Muchas gracias, Agente Mónica. Haz llegar mis agradecimientos a la central. ¿Te quedarás para la fiesta? Mañana es el día principal, pero lo de hoy también promete.
+Fortunato del Carmen: [#char=Fortunato,#action=Hablando] *   Es aún más hermosa de lo que imaginé. Muchas gracias, Agente Mónica. Haz llegar mis agradecimientos a la central. ¿Te quedarás para la fiesta? Mañana es el día principal, pero lo de hoy también promete.
 
-Mónica: *   No tienes que agradecerme, sólo hice la entrega. Me encantaría quedarme... pero debo regresar para informar que la misión ha sido completada.
+Mónica: [#char=Monica,#action=Normal] *   No tienes que agradecerme, sólo hice la entrega. Me encantaría quedarme... pero debo regresar para informar que la misión ha sido completada.
 
-Fortunato del Carmen: *   Lo entiendo. Siempre tan profesional... Aunque, a veces, también viene bien simplemente ser persona.
+Fortunato del Carmen: [#char=Fortunato,#action=Hablando] *   Lo entiendo. Siempre tan profesional... Aunque, a veces, también viene bien simplemente ser persona.
 
-Mónica: *   Con tu retiro tan cercano, alguien tiene que mantener la vara alta.
+Mónica: [#char=Monica,#action=Normal] *   Con tu retiro tan cercano, alguien tiene que mantener la vara alta.
 
-Fortunato del Carmen: *   ...
+Fortunato del Carmen: [#char=Fortunato,#action=Normal] *   ...
 
-Mónica: *   Es mejor que me vaya. El sensei me espera para tomar el té. Nos vemos pronto, Agente Fortunato del Carmen.
+Mónica: [#char=Monica,#action=Normal] *   Es mejor que me vaya. El sensei me espera para tomar el té. Nos vemos pronto, Agente Fortunato del Carmen.
 
 => END

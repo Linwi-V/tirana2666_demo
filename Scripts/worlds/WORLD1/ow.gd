@@ -2,6 +2,9 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var monica_sprite = load("res://Sprites/Chars/monica/monica_sprt.png")
+	$Pp.walk=monica_sprite
+	$Level/meshs/Portal/AnimationPlayer.play("RESET")
 	$Pp.GRAVITY=$Pp.GRAVITY/2
 	if WorldFunc.cinematic_2 ==false:
 		$Pp.queue_free()

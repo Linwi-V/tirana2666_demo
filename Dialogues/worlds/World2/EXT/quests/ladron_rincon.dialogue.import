@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://tcpwf32y3kpf"
+path="res://.godot/imported/ladron_rincon.dialogue-79b077df9cd808741e29d22e2c649ac2.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue"
+dest_files=["res://.godot/imported/ladron_rincon.dialogue-79b077df9cd808741e29d22e2c649ac2.tres"]
+
+[params]
+
+defaults=true

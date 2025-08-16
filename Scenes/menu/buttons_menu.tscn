@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://vu3cn0dhrrvb"]
+[gd_scene load_steps=5 format=3 uid="uid://vu3cn0dhrrvb"]
 
 [ext_resource type="Script" uid="uid://cvbie7re0n6jl" path="res://Scripts/menu/buttons_menu.gd" id="1_73ivg"]
 [ext_resource type="FontFile" uid="uid://b7dmogiwpayxm" path="res://Fonts/yoster.ttf" id="2_mpkr6"]
+[ext_resource type="StyleBox" uid="uid://rsltytampmw4" path="res://Scenes/BTL/UI/BTL_panelfull.tres" id="3_mpkr6"]
 
 [sub_resource type="Theme" id="Theme_yspfm"]
 default_font = ExtResource("2_mpkr6")
@@ -96,6 +97,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_yspfm")
 theme_override_constants/line_separation = 15
+theme_override_styles/focus = ExtResource("3_mpkr6")
 bbcode_enabled = true
 text = "[wave amp=30.0 freq=2.0 connected=0]Salir"
 scroll_active = false

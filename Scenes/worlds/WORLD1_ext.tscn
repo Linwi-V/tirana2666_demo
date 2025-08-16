@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://bw6o0a3b4qcry"]
+[gd_scene load_steps=20 format=3 uid="uid://bw6o0a3b4qcry"]
 
 [ext_resource type="Script" uid="uid://cej45bh5gtu1r" path="res://Scripts/worlds/WORLD1/ow.gd" id="2_tj0am"]
 [ext_resource type="PackedScene" uid="uid://c6u4tjn3huw6u" path="res://Scenes/worlds/1/ext.tscn" id="3_ei0au"]
 [ext_resource type="Environment" uid="uid://dusvo0sb2luqt" path="res://Scenes/worlds/WORLD1_env.tres" id="4_0tjdq"]
+[ext_resource type="PackedScene" uid="uid://bqfhwo64u0fj5" path="res://Scenes/ui/mini_mapa.tscn" id="5_2dkkp"]
 [ext_resource type="PackedScene" uid="uid://b3edj1jmkebei" path="res://Scenes/pp/Pp.tscn" id="5_trrrt"]
-[ext_resource type="Shader" uid="uid://bi3kkdesi1fnd" path="res://Shaders/awa/awa.gdshader" id="6_mxell"]
-[ext_resource type="Texture2D" uid="uid://b7xhcxgk5c51r" path="res://0_pruebas/awa_bn.jpg" id="7_ptgyk"]
 
 [sub_resource type="Curve" id="Curve_1m13u"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.511377, 0.384693), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -67,28 +66,23 @@ height = 0.4
 radial_segments = 8
 rings = 8
 
-[sub_resource type="Curve3D" id="Curve3D_ysoqi"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
-"tilts": PackedFloat32Array(0)
-}
-point_count = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_prdkv"]
-render_priority = 0
-shader = ExtResource("6_mxell")
-shader_parameter/slide_speed = 16.075
-shader_parameter/wobble_speed = 3.225
-shader_parameter/wobble_intensity = 2.27
-shader_parameter/texture_scale = 0.001
-shader_parameter/water = ExtResource("7_ptgyk")
-
-[sub_resource type="SphereMesh" id="SphereMesh_cqxji"]
-material = SubResource("ShaderMaterial_prdkv")
-flip_faces = true
-radius = 125.0
-height = 250.0
-rings = 15
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2dkkp"]
+emission_shape_scale = Vector3(10, 10, 10)
+emission_shape = 2
+emission_sphere_radius = 1.0
+initial_velocity_min = -0.5
+initial_velocity_max = 0.5
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 0.199984
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.45
+scale_curve = SubResource("CurveTexture_1m13u")
+color_ramp = SubResource("GradientTexture1D_bwn35")
+alpha_curve = SubResource("CurveTexture_31mmb")
+hue_variation_curve = SubResource("CurveTexture_s46tr")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1wvpl"]
 size = Vector3(4.805, 2.144, 1.65)
@@ -119,21 +113,22 @@ sky_mode = 1
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Luzportal" type="OmniLight3D" parent="OW/LucesOmni"]
-transform = Transform3D(0.96938, -0.220989, 0.107081, 0.243964, 0.816948, -0.522569, 0.0280021, 0.532692, 0.845846, -0.784876, 6.63039, 50.6445)
-light_color = Color(0.455446, 0.11591, 0.15588, 1)
-omni_range = 22.0
+transform = Transform3D(0.96938, -0.220989, 0.107081, 0.243964, 0.816948, -0.522569, 0.0280021, 0.532692, 0.845846, -0.784876, 6.63039, 46.6445)
+light_color = Color(0.168365, 0.206501, 0.553254, 1)
+omni_range = 31.226
 omni_attenuation = 0.131
 
 [node name="Luz5" type="OmniLight3D" parent="OW/LucesOmni"]
 transform = Transform3D(0.674856, 0.243964, 0.696456, -3.37685e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 0.112177, 11.1169, 9.09055)
+visible = false
 light_color = Color(0.0313726, 0.0392157, 0.184314, 1)
 light_volumetric_fog_energy = 6.23
 light_size = 100.0
 omni_range = 43.744
-omni_attenuation = 0.131
 
 [node name="Luz1" type="OmniLight3D" parent="OW/LucesOmni"]
 transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 0.112177, 2.34731, 15.0999)
+visible = false
 light_color = Color(0.208777, 0.422356, 0.662226, 1)
 light_energy = 10.68
 omni_range = 7.102
@@ -141,6 +136,7 @@ omni_attenuation = 1.411
 
 [node name="Luz2" type="OmniLight3D" parent="OW/LucesOmni"]
 transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 0.112177, 2.34731, 9.09055)
+visible = false
 light_color = Color(0.208777, 0.422356, 0.662226, 1)
 light_energy = 10.68
 omni_range = 7.102
@@ -148,21 +144,15 @@ omni_attenuation = 1.411
 
 [node name="Luz4" type="OmniLight3D" parent="OW/LucesOmni"]
 transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, -9.19852, 2.34731, 7.1044)
+visible = false
 light_color = Color(0.208777, 0.422356, 0.662226, 1)
 light_energy = 10.68
 omni_range = 7.102
 omni_attenuation = 1.411
 
-[node name="Luz3" type="OmniLight3D" parent="OW/LucesOmni"]
-transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 1.11669, 5.83652, 2.87916)
-light_color = Color(0.928303, 0.833383, 0.361079, 1)
-light_energy = 4.507
-light_size = 0.695
-omni_range = 16.223
-omni_attenuation = 1.89
-
 [node name="OmniLight3D" type="OmniLight3D" parent="OW/LucesOmni"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
+visible = false
 light_color = Color(0, 0, 0, 1)
 light_energy = 16.0
 light_indirect_energy = 16.0
@@ -171,11 +161,23 @@ distance_fade_length = 3.0
 omni_range = 15.134
 omni_attenuation = -3.519
 
+[node name="Luz3" type="OmniLight3D" parent="OW/LucesOmni"]
+transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, 1.11218, 16.7473, 16.4906)
+light_color = Color(0.208777, 0.422356, 0.662226, 1)
+omni_range = 55.586
+omni_attenuation = 1.411
+
+[node name="Luz6" type="OmniLight3D" parent="OW/LucesOmni"]
+transform = Transform3D(0.674856, 0.243964, 0.696456, -3.79792e-08, -0.943772, 0.330597, 0.737949, -0.223105, -0.63691, -2.2, 2, 3.4)
+light_color = Color(0.208777, 0.422356, 0.662226, 1)
+omni_range = 14.308
+omni_attenuation = 0.1
+
 [node name="Particulas" type="Node3D" parent="OW"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="OW/Particulas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.91969, 6.56465)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.86805e-07, -2.91969, 15.5646)
 amount = 100
 lifetime = 4.0
 preprocess = 2.0
@@ -184,21 +186,51 @@ visibility_aabb = AABB(-16.28, -5.435, -11.805, 33.13, 13.675, 49.3)
 process_material = SubResource("ParticleProcessMaterial_31mmb")
 draw_pass_1 = SubResource("SphereMesh_s46tr")
 
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="OW/Particulas"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -7.86805e-07, -0.91969, -2.43535)
+amount = 100
+lifetime = 4.0
+preprocess = 2.0
+speed_scale = 0.5
+visibility_aabb = AABB(-16.28, -5.435, -11.805, 33.13, 13.675, 49.3)
+process_material = SubResource("ParticleProcessMaterial_2dkkp")
+draw_pass_1 = SubResource("SphereMesh_s46tr")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="OW/Particulas"]
+transform = Transform3D(1.205, 0, 0, 0, 1.205, 0, 0, 0, 1.205, 3.38326e-06, -0.91969, 45.2647)
+amount = 100
+lifetime = 4.0
+preprocess = 2.0
+speed_scale = 0.5
+visibility_aabb = AABB(-16.28, -5.435, -11.805, 33.13, 13.675, 49.3)
+process_material = SubResource("ParticleProcessMaterial_2dkkp")
+draw_pass_1 = SubResource("SphereMesh_s46tr")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="OW/Particulas"]
+transform = Transform3D(0.657, 0, 0, 0, 0.657, 0, 0, 0, 0.657, -2.6, -0.91969, 43.1647)
+amount = 100
+lifetime = 4.0
+preprocess = 2.0
+speed_scale = 0.5
+visibility_aabb = AABB(-16.28, -5.435, -11.805, 33.13, 13.675, 49.3)
+process_material = SubResource("ParticleProcessMaterial_2dkkp")
+draw_pass_1 = SubResource("SphereMesh_s46tr")
+
 [node name="Pp" parent="OW" instance=ExtResource("5_trrrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.158, -1.30967, -6.5)
 
-[node name="Path3D" type="Path3D" parent="OW/Pp"]
-curve = SubResource("Curve3D_ysoqi")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="OW/Pp/Path3D"]
-transform = Transform3D(-0.762816, -0.392173, -0.514111, 1.49011e-08, 0.795082, -0.606502, 0.646614, -0.46265, -0.606502, 0, 0, 0)
-
-[node name="wavy" type="MeshInstance3D" parent="OW"]
-transform = Transform3D(-6.14456e-08, -2.1715, 0.382894, -2.205, 9.63836e-08, 1.92767e-07, -2.06575e-07, -0.382894, -2.1715, 0, 0, 0)
-visible = false
-transparency = 0.5
-cast_shadow = 0
-mesh = SubResource("SphereMesh_cqxji")
+[node name="MiniMapa" parent="OW/Pp" instance=ExtResource("5_2dkkp")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -306.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = 306.0
+grow_horizontal = 0
+grow_vertical = 1
 
 [node name="Fresnel" type="Node3D" parent="OW"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -14)
@@ -214,8 +246,9 @@ spot_angle = 17.2122
 
 [node name="SpotLight3D3" type="SpotLight3D" parent="OW/Fresnel"]
 transform = Transform3D(-0.813798, -0.5, -0.296198, -0.451971, 0.224144, 0.863413, -0.365315, 0.836516, -0.408393, -5.10021, 5, 30)
+visible = false
 light_color = Color(1, 1, 0, 1)
-light_energy = 7.222
+light_energy = 1.222
 spot_range = 13.0
 spot_angle = 17.2122
 
@@ -237,6 +270,12 @@ collision_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OW/Warp/WarpDNC"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0.800003)
 shape = SubResource("CapsuleShape3D_ysoqi")
+
+[node name="SOL2" type="DirectionalLight3D" parent="OW"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 16, -25.5849)
+light_color = Color(0.076852, 0.130357, 0.302049, 1)
+light_angular_distance = 33.7
+sky_mode = 1
 
 [connection signal="body_shape_entered" from="OW/Warp/WarpCasa" to="OW" method="_on_warp_casa_body_shape_entered"]
 [connection signal="body_shape_entered" from="OW/Warp/WarpDNC" to="OW" method="_on_warp_dnc_body_shape_entered"]

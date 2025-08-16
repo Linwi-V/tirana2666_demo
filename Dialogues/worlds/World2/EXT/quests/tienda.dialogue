@@ -1,0 +1,143 @@
+using PartyData
+
+~ start
+Tienda: Bienvenido a la tienda. ¿Qué deseas comprar hoy?
+
+- ⠀⠀⠀⠀Ají en Salsa    $100    x {{inventario["aji en salsa"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_aji_salsa
+
+- ⠀⠀⠀⠀Cilantro    $100    x {{inventario["cilantro"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_cilantro
+
+- ⠀⠀⠀⠀Ají Verde    $100    x {{inventario["aji verde"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_aji_verde
+
+- ⠀⠀⠀⠀Merkén    $100    x {{inventario["merken"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_merken
+
+- ⠀⠀⠀⠀Paprika    $100    x {{inventario["paprika"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_paprika
+
+- ⠀⠀⠀⠀Pimentón    $100    x {{inventario["pimenton"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_pimenton
+
+- ⠀⠀⠀⠀Perejil    $100    x {{inventario["perejil"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_perejil
+
+- ⠀⠀⠀⠀Ciboulette    $100    x {{inventario["ciboulette"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_ciboulette
+
+- ⠀⠀⠀⠀Acelga    $100    x {{inventario["acelga"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_acelga
+
+- ⠀⠀⠀⠀Espinaca    $100    x {{inventario["espinaca"]["cantidad"]}}⠀⠀⠀⠀ [if dinero >= 100]
+	=> confirmar_espinaca
+
+- Salir
+	Tienda: ¡Hasta luego!
+	if dinero<200
+		do WorldFunc.quest = "fin_demo"
+	=> END
+
+
+### CONFIRMACIONES
+
+~ confirmar_aji_salsa
+Tienda: ¿Seguro que quieres comprar [color=yellow]Ají en Salsa[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["aji en salsa"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Ají en Salsa[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start
+
+~ confirmar_cilantro
+Tienda: ¿Seguro que quieres comprar [color=yellow]Cilantro[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["cilantro"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Cilantro[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start
+
+~ confirmar_aji_verde
+Tienda: ¿Seguro que quieres comprar [color=yellow]Ají Verde[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["aji verde"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Ají Verde[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start
+
+~ confirmar_merken
+Tienda: ¿Seguro que quieres comprar [color=yellow]Merkén[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["merken"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Merkén[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start
+
+~ confirmar_paprika
+Tienda: ¿Seguro que quieres comprar [color=yellow]Paprika[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["paprika"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Paprika[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start
+
+~ confirmar_pimenton
+Tienda: ¿Seguro que quieres comprar [color=yellow]Pimentón[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["pimenton"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Pimentón[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start
+
+~ confirmar_perejil
+Tienda: ¿Seguro que quieres comprar [color=yellow]Perejil[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["perejil"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Perejil[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start
+
+~ confirmar_ciboulette
+Tienda: ¿Seguro que quieres comprar [color=yellow]Ciboulette[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["ciboulette"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Ciboulette[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start
+
+~ confirmar_acelga
+Tienda: ¿Seguro que quieres comprar [color=yellow]Acelga[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["acelga"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Acelga[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start
+
+~ confirmar_espinaca
+Tienda: ¿Seguro que quieres comprar [color=yellow]Espinaca[/color] por 100 pesos?
+- Sí
+	do dinero -= 100
+	do inventario["espinaca"]["cantidad"] += 1
+	Tienda: Compraste [color=yellow]Espinaca[/color]. Te quedan {{dinero}} pesos.
+	=> start
+- No
+	=> start

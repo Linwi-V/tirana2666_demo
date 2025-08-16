@@ -4,7 +4,7 @@ func _ready():
 	# Llama al SceneLoader autoload para cargar menu
 	
 	await SceneLoader.request_scene_change("res://Scenes/menu/Menu.tscn")
-	#WorldFunc.start_battle(PartyData.active_party,["Eterna Ancestral","Eterna Ancestral"])
+	#WorldFunc.start_battle(["Katari","Gemelo 2","Fortunato","Gemelo 1"],["Esbirro A","Esbirro B"])
 	
 	#await SceneLoader.request_scene_change("res://Scenes/worlds/WORLD1_int.tscn")
 	

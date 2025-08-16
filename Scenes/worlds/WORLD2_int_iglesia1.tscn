@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtaadvhx08a43"]
+[gd_scene load_steps=16 format=3 uid="uid://dtaadvhx08a43"]
 
 [ext_resource type="PackedScene" uid="uid://b3edj1jmkebei" path="res://Scenes/pp/Pp.tscn" id="1_smuer"]
 [ext_resource type="PackedScene" uid="uid://butn150in5xcx" path="res://Scenes/worlds/2/int_iglesia1.tscn" id="1_v1yc5"]
 [ext_resource type="Script" uid="uid://cqea1vi7lhd0a" path="res://Scripts/worlds/WORLD2_INT/int_iglesia1.gd" id="1_xmdm1"]
 [ext_resource type="Texture2D" uid="uid://nsamafeni8a1" path="res://0_pruebas/dirt_01-export.png" id="4_m6yq0"]
+[ext_resource type="PackedScene" uid="uid://bqfhwo64u0fj5" path="res://Scenes/ui/mini_mapa.tscn" id="4_si7ow"]
 
 [sub_resource type="Environment" id="Environment_v1yc5"]
 background_mode = 1
@@ -96,10 +97,23 @@ spot_angle_attenuation = 0.63728
 [node name="WorldEnvironment" type="WorldEnvironment" parent="OW"]
 environment = SubResource("Environment_v1yc5")
 
-[node name="int_iglesia1" parent="OW" instance=ExtResource("1_v1yc5")]
+[node name="Level" parent="OW" instance=ExtResource("1_v1yc5")]
 
 [node name="Pp" parent="OW" instance=ExtResource("1_smuer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1938, 0, 0)
+
+[node name="MiniMapa" parent="OW/Pp" instance=ExtResource("4_si7ow")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -306.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = 306.0
+grow_horizontal = 0
+grow_vertical = 1
 
 [node name="OmniLight3D" type="OmniLight3D" parent="OW"]
 transform = Transform3D(0.999931, 0.0117283, 0, -0.0117283, 0.999931, 0, 0, 0, 1, -10.8299, -0.704597, 0)

@@ -1,0 +1,4 @@
+~ start
+[#char=Gemelo1,#action=Daño] *   Gemelo 1 tiró un pedazo de carne![next=2]
+*   Los perros se van corriendo a buscarlo![next=2]
+=> END

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://wmo26o23vr2x"
+path="res://.godot/imported/terreno_baldio.dialogue-6956ae347ce26a7b621847f33f49cb27.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue"
+dest_files=["res://.godot/imported/terreno_baldio.dialogue-6956ae347ce26a7b621847f33f49cb27.tres"]
+
+[params]
+
+defaults=true

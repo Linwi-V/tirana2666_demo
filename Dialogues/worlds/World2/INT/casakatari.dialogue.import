@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ci7e4718dp8bu"
+path="res://.godot/imported/casakatari.dialogue-77d7f0491d70e13cb761e10deca10968.tres"
+
+[deps]
+
+source_file="res://Dialogues/worlds/World2/INT/casakatari.dialogue"
+dest_files=["res://.godot/imported/casakatari.dialogue-77d7f0491d70e13cb761e10deca10968.tres"]
+
+[params]
+
+defaults=true

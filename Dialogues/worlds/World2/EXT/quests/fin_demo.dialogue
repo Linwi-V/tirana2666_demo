@@ -1,0 +1,9 @@
+~ start
+Katari del Carmen: [#char=Katari,#action=Normal] *    Mi casa.
+Entrar?
+- Si
+	do FadeLayer.fade_out(1.0)
+	do! SceneLoader.request_scene_change("res://Scenes/worlds/WORLD2_int_casakatari.tscn")
+	=> END
+- No
+	=> END

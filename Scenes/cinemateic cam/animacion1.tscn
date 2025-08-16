@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://depx3qllp67uy"]
 
-[ext_resource type="Texture2D" uid="uid://eqo060yg147y" path="res://Assets/MENU/splash_ph.png" id="1_cuhmy"]
+[ext_resource type="Texture2D" uid="uid://icff0cpfpqpr" path="res://Assets/MENU/ohhh.png" id="1_cuhmy"]
 
 [sub_resource type="Animation" id="Animation_hbjcq"]
 resource_name = "Cinematic_1"
@@ -91,9 +91,9 @@ _data = {
 libraries = {
 &"": SubResource("AnimationLibrary_ef4tv")
 }
+speed_scale = 0.5
 
 [node name="SplashPh" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
-scale = Vector2(1.245, 1.06)
 texture = ExtResource("1_cuhmy")
 centered = false

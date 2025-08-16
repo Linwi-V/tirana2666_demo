@@ -1,8 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://butn150in5xcx"]
+[gd_scene load_steps=19 format=3 uid="uid://butn150in5xcx"]
 
 [ext_resource type="PackedScene" uid="uid://c0ar4wbqdb3j3" path="res://Meshs/WORLD1/0/escalon_1.glb" id="1_7uwn4"]
 [ext_resource type="Texture2D" uid="uid://bpyvrfrw8g38r" path="res://Assets/WORLD2/Environnement_AssetPack/Png/Cliff.png" id="1_pnv1f"]
 [ext_resource type="Texture2D" uid="uid://bfbyevjjtmbwq" path="res://Assets/WORLD2/Environnement_AssetPack/Png/wood_bridge.png" id="2_wborb"]
+[ext_resource type="PackedScene" uid="uid://flp08repgf0j" path="res://Meshs/WORLD2/outdoor/FBX/Barrel.fbx" id="4_hrwax"]
+[ext_resource type="PackedScene" uid="uid://dgomoj23jkjo4" path="res://Meshs/WORLD2/outdoor/glTF/Bottle1.glb" id="5_74clg"]
+[ext_resource type="PackedScene" uid="uid://cfrupji7qombs" path="res://Meshs/WORLD2/outdoor/FBX/WoodenCrate_01.fbx" id="6_r25x7"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v1yc5"]
 size = Vector2(10, 4)
@@ -153,3 +156,30 @@ transform = Transform3D(0.315, 0, 0, 0, 2.40741, 0, 0, 0, 5, -10.9372, 1.42803, 
 
 [node name="escalon_16" parent="." instance=ExtResource("1_7uwn4")]
 transform = Transform3D(0.315, 0, 0, 0, 2.40741, 0, 0, 0, 5, -11.1322, 1.49101, -8.683)
+
+[node name="Barrel" parent="." instance=ExtResource("4_hrwax")]
+transform = Transform3D(0.565, 0, 0, 0, 0.565, 0, 0, 0, 0.565, -0.17259, -0.539274, -1.28248)
+
+[node name="Barrel2" parent="." instance=ExtResource("4_hrwax")]
+transform = Transform3D(0.565, 0, 0, 0, 0.565, 0, 0, 0, 0.565, -1.2106, -0.539274, -1.28248)
+
+[node name="Barrel3" parent="." instance=ExtResource("4_hrwax")]
+transform = Transform3D(0.565, 0, 0, 0, 0.565, 0, 0, 0, 0.565, -0.17259, -0.539274, -0.382481)
+
+[node name="Bottle12" parent="." instance=ExtResource("5_74clg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02362, -0.638745, -1.3856)
+
+[node name="Bottle13" parent="." instance=ExtResource("5_74clg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40358, -0.638745, -1.3856)
+
+[node name="Bottle14" parent="." instance=ExtResource("5_74clg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02362, -0.638745, -1.02714)
+
+[node name="Bottle15" parent="." instance=ExtResource("5_74clg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78987, -0.638745, -1.3856)
+
+[node name="Bottle16" parent="." instance=ExtResource("5_74clg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.41265, -0.638745, -1.10508)
+
+[node name="WoodenCrate_01" parent="." instance=ExtResource("6_r25x7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.166167, -0.432374, 1.16867)

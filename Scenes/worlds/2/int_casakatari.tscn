@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtd81p2qpc6b3"]
+
+[ext_resource type="PackedScene" uid="uid://btgjf0r2ly3h3" path="res://Scenes/npcs/npc.tscn" id="2_jnli1"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1twkn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4x0wc"]
+albedo_texture = SubResource("PlaceholderTexture2D_1twkn")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cafmv"]
+material = SubResource("StandardMaterial3D_4x0wc")
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_88tmu"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[node name="Level" type="Node3D"]
+
+[node name="meshs" type="Node3D" parent="."]
+
+[node name="piso" type="MeshInstance3D" parent="meshs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+layers = 3
+mesh = SubResource("PlaneMesh_cafmv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="meshs/piso"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="meshs/piso/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_88tmu")
+
+[node name="npcs" type="Node3D" parent="."]
+
+[node name="Remedios" parent="npcs" instance=ExtResource("2_jnli1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.491007, 0.728484)
+
+[node name="Simon" parent="npcs" instance=ExtResource("2_jnli1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.47052, 0.491007, 2.40927)

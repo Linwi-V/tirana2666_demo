@@ -1,18 +1,18 @@
 ~ start
-Eterna Ancestral: *   Agente Mónica, tu desempeño en batalla es, como dice mi amigo Lamadrid, cada día mejor. 
-Eterna Ancestral: *   Creo que ya te estás acercando al nivel que buscas desde hace tiempo. Pero debes ser prudente, aún no es momento de actuar.
+Eterna Ancestral: [#char=Eterna,#action=Normal] *   Agente Mónica, tu desempeño en batalla es, como dice mi amigo Lamadrid, cada día mejor. 
+Eterna Ancestral: [#char=Eterna,#action=Normal] *   Creo que ya te estás acercando al nivel que buscas desde hace tiempo. Pero debes ser prudente, aún no es momento de actuar.
 
-Agente Mónica: *   ¡Ya tengo la fuerza necesaria, sensei! No necesito más entrenamiento.
+Agente Mónica: [#char=Monica,#action=Normal] *   ¡Ya tengo la fuerza necesaria, sensei! No necesito más entrenamiento.
 
-Eterna Ancestral: *   Es cierto que yo no tengo más que enseñarte. Sin embargo, a pesar de que los caminos celestiales son laxos, los atajos no existen.
-Eterna Ancestral: *   El tiempo mismo, será tu último maestro.
+Eterna Ancestral: [#char=Eterna,#action=Normal] *   Es cierto que yo no tengo más que enseñarte. Sin embargo, a pesar de que los caminos celestiales son laxos, los atajos no existen.
+Eterna Ancestral: [#char=Eterna,#action=Normal] *   El tiempo mismo, será tu último maestro.
 
-Agente Mónica: *   ¿Y cómo sabré cuando sea el momento indicado?
+Agente Mónica: [#char=Monica,#action=Normal] *   ¿Y cómo sabré cuando sea el momento indicado?
 
-Eterna Ancestral: *   Cuando ocurra, será imposible dudar de que es el momento correcto... 
-Eterna Ancestral: *   Por ahora, me temo que debo distraerte con una misión de bajo riesgo, pero no por ello de menor importancia. 
-Eterna Ancestral: *   ¿Recuerdas la nueva máscara que pidió el Agente Fortunato? Ya está lista y dispuesta para ser utilizada. Por ello, estarás a cargo de realizar la entrega de dicho artefacto.
-Eterna Ancestral: *   No deberías tardar mucho, Fortunato está radicado en el pueblo de La Tirana, en el año 1965. El portal en el exterior ya está listo para ser utilizado.
-Eterna Ancestral: *   Llegas al pueblo, entregas la máscara y antes que te des cuenta, estarás de vuelta conmigo tomando tecito con queque de plátano.
+Eterna Ancestral: [#char=Eterna,#action=Normal] *   Cuando ocurra, será imposible dudar de que es el momento correcto... 
+Eterna Ancestral: [#char=Eterna,#action=Normal] *   Por ahora, me temo que debo distraerte con una misión de bajo riesgo, pero no por ello de menor importancia. 
+Eterna Ancestral: [#char=Eterna,#action=Normal] *   ¿Recuerdas la nueva máscara que pidió el Agente Fortunato? Ya está lista y dispuesta para ser utilizada. Por ello, estarás a cargo de realizar la entrega de dicho artefacto.
+Eterna Ancestral: [#char=Eterna,#action=Normal] *   No deberías tardar mucho, Fortunato está radicado en el pueblo de La Tirana, en el año 1965. El portal en el exterior ya está listo para ser utilizado.
+Eterna Ancestral: [#char=Eterna,#action=Normal] *   Llegas al pueblo, entregas la máscara y antes que te des cuenta, estarás de vuelta conmigo tomando tecito con queque de plátano.
 
 => END

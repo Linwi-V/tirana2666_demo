@@ -1,0 +1,45 @@
+~ grito
+
+Gemelo 1: *   ¡Katari del Carmen! Qué bueno que te encontramos.[next=1.3]
+=> END
+
+~ gemelos
+
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   ¿Has visto a Casimiro?
+
+Katari del Carmen: [#char=Katari,#action=Hablando] *   ¿Su perro? Hoy al menos, no… ¿por qué?
+
+Gemelo 1: [#char=Gemelo1,#action=Hablando] *   Salió temprano en la mañana, se escapó como siempre. Pero lo raro es que todavía no vuelve.
+
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   Generalmente a esta hora ya está almorzando. Le servimos la comida y ni se asomó.
+
+Katari del Carmen: *   Mmmm… lo más probable es que se haya quedado por ahí, comiendo basura o jugando con otros perros. No creo que ande muy lejos. ¿Les ayudo a buscarlo?
+do salto("Gemelo1")
+Gemelo 1: [#char=Gemelo1,#action=Daño] *   ¡Eso sería el descueve!
+
+Katari del Carmen: [#char=Katari,#action=Hablando] *   Déjenme pasar a comprar a la tienda y vamos.
+
+do salto("Gemelo2")
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   ¡Ok! Te esperamos acá.
+
+=> END
+
+~ robada
+
+Katari del Carmen: *   …
+
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   ¿Pasa algo?
+do! salto("")
+Katari del Carmen: [#char=Katari,#action=Daño] *   ¡Parece que me robaron el monedero!
+do FadeLayer.fade_out(1.0)
+do! tirar_d_arriba()
+Señor: ¡Perdón! [next=1.5]
+do FadeLayer.fade_in()
+do! tirar_d_abajo()
+do! salto("Gemelo1")
+do! salto("Gemelo2")
+Katari del Carmen: [#char=Katari,#action=Hablando] *   Debió ser ese tipo que me chocó en la feria…
+Katari del Carmen: [#char=Katari,#action=Hablando] *   ¡Ok! Esto es lo que haremos: iremos a buscar a Casimiro y enseguida rastrearemos al gallo que me robó, y recuperamos el monedero de mi Nona.
+Gemelo 1: [#char=Gemelo1,#action=Hablando] *   Mientras antes partamos mejor.
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   ¡En marcha!
+=> END

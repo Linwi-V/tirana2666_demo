@@ -69,6 +69,7 @@ func _load_beatmap() -> void:
 func _process(delta: float) -> void:
 	if showing_end:
 		if Input.is_action_just_pressed("ui_accept"):
+			showing_end=false
 			emit_signal("cerrar")
 		return
 	if not pausado:

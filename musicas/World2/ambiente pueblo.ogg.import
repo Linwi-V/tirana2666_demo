@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bk74e5n3yasoa"
+path="res://.godot/imported/ambiente pueblo.ogg-2c68f9090ef0cda75669cad07685118c.oggvorbisstr"
+
+[deps]
+
+source_file="res://musicas/World2/ambiente pueblo.ogg"
+dest_files=["res://.godot/imported/ambiente pueblo.ogg-2c68f9090ef0cda75669cad07685118c.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

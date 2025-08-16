@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvya2wm10id7o"]
+[gd_scene load_steps=7 format=3 uid="uid://bvya2wm10id7o"]
 
 [ext_resource type="Script" uid="uid://bndpdmccdbnwj" path="res://Scripts/worlds/WORLD1_INT/ow.gd" id="2_0nhxn"]
 [ext_resource type="PackedScene" uid="uid://c34b4l3rh5vks" path="res://Scenes/worlds/1/int.tscn" id="3_0nhxn"]
 [ext_resource type="PackedScene" uid="uid://b3edj1jmkebei" path="res://Scenes/pp/Pp.tscn" id="3_06bk3"]
+[ext_resource type="PackedScene" uid="uid://bqfhwo64u0fj5" path="res://Scenes/ui/mini_mapa.tscn" id="4_0nhxn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1qmwd"]
 size = Vector3(10, 4, 3)
@@ -22,6 +23,19 @@ script = ExtResource("2_0nhxn")
 [node name="Pp" parent="OW" instance=ExtResource("3_06bk3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.7, 0.8)
 
+[node name="MiniMapa" parent="OW/Pp" instance=ExtResource("4_0nhxn")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -306.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = 306.0
+grow_horizontal = 0
+grow_vertical = 1
+
 [node name="Warp" type="Node" parent="OW"]
 
 [node name="warp_ext" type="Area3D" parent="OW/Warp"]
@@ -37,7 +51,7 @@ shape = SubResource("BoxShape3D_1qmwd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 3)
 light_color = Color(1, 1, 0.372549, 1)
 shadow_enabled = true
-omni_range = 5.178
+omni_range = 7.0
 omni_attenuation = 0.711
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="OW/Luz_Global"]

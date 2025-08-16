@@ -14,18 +14,20 @@ var JUMP_VELOCITY = 4.5
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # Spritesheet
+
 var idle = load("res://Sprites/Chars/ph/64X128_Idle_Free.png")
-var walk = load("res://Sprites/Chars/katari/prota_sprt.png")
+var walk 
 # Animación
 var tiempo = 0.0
 var lag_frame = 0.1
 # para follow
 var follow_target: Node3D
-var follow_distance :float= 1.5
+var follow_distance :float= 1.0
 var yaw = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$SpriteEmotes.stop()
+	walk = load("res://Sprites/Chars/katari/prota_sprt.png")
 	pass # Replace with function body.
 
 
@@ -67,52 +69,60 @@ func set_external_direction(dir: Vector3) -> void:
 	if state == State.BUSY:
 		external_direction = dir.normalized()
 
-
+func set_external_point(target_position: Vector3):
+	if state == State.BUSY:
+		var current_position = global_transform.origin
+		var direction = (target_position - current_position).normalized()
+		external_direction = direction
+		
+		
 func handle_idle_state() -> void:
 	# Por ahora sin lógica, pero podrías meter animaciones por defecto si querés
 	pass
 
 func handle_follow_state() -> void:
-	yaw=follow_target.yaw
 	if follow_target == null:
 		return
+	
+	yaw = follow_target.yaw
 
 	# Dirección de movimiento real del personaje al que seguimos
 	var move_dir = follow_target.velocity
 	move_dir.y = 0
 
 	var forward := Vector3.ZERO
-
 	if move_dir.length() > 0.01:
-		# El personaje se está moviendo: seguimos esa dirección
+		# Si se mueve, usamos su dirección de movimiento
 		forward = move_dir.normalized()
 	else:
-		# Está quieto: no nos movemos (pero podrías usar una dirección por defecto si quisieras)
+		# Si está quieto, usamos una dirección cualquiera para calcular posición deseada (aquí no es crucial)
+		forward = Vector3.FORWARD
+
+	# Posición deseada: detrás del target si se mueve, o su posición exacta si está quieto
+	var desired_pos: Vector3
+	if move_dir.length() > 0.01:
+		desired_pos = follow_target.global_position - forward * follow_distance
+	else:
+		desired_pos = follow_target.global_position
+
+	# Distancia actual al target
+	var distance := global_position.distance_to(follow_target.global_position)
+
+	# Si está fuera del rango radial, moverse hacia la posición deseada
+	if distance > follow_distance:
+		var dir := (desired_pos - global_position).normalized()
+		external_direction = dir
+		velocity.x = dir.x * velocidad_mov*0.98
+		velocity.z = dir.z * velocidad_mov*0.98
+	else:
+		# Ya está dentro del rango, detenerse
 		velocity = Vector3.ZERO
-		return
-
-	# Posición deseada: detrás del target según dirección de movimiento
-	var desired_pos := follow_target.global_position - forward * follow_distance
-
-	# Dirección hacia donde moverse
-	var dir := (desired_pos - global_position).normalized()
-	var distance := global_position.distance_to(desired_pos)
 
 	# Mirar hacia el target para animación
 	var dir_to_target := follow_target.global_position - global_position
 	dir_to_target.y = 0
 	external_look = dir_to_target.normalized()
 
-	if distance < 0.8:
-		velocity = Vector3.ZERO
-		return
-	if distance >5:
-		position.x=desired_pos.x
-		position.z=desired_pos.z
-		return
-	external_direction = dir
-	velocity.x = dir.x * velocidad_mov
-	velocity.z = dir.z * velocidad_mov
 
 
 
@@ -142,16 +152,18 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		get_tree().call_group("player", "clear_current_npc", self)
 		if talks:
-			var ani = $SpriteEmotes.animation
-			$SpriteEmotes.play_backwards(ani)
+			deshablas()
 	
 
 
 func hablas():
-	$SpriteEmotes.play("talk")
+	if not WorldFunc.cutscene:
+		$SpriteEmotes.play("talk")
 
 func deshablas():
-	$SpriteEmotes.play_backwards("talk")
+	if not WorldFunc.cutscene:
+		
+		$SpriteEmotes.play_backwards("talk")
 	
 func exclamar():
 	$SpriteEmotes.play("exclamation")
@@ -171,11 +183,11 @@ func mini_saltar():
 
 func update_animation(delta):
 	var sprite = $Sprite3D
-	var mat = $Sprite3D.material_override
+	var mat = $Sprite3D.material_override.duplicate()
 	var dir_mov = Vector2(velocity.x, velocity.z)
 	var dir = dir_mov.rotated(yaw).normalized()
 	if dir.length() > 0.1:
-		sprite.texture = walk
+		sprite.texture = walk	
 		mat.albedo_texture = walk
 		var angle = dir.angle()
 
@@ -197,7 +209,7 @@ func update_animation(delta):
 			sprite.frame_coords.x = (sprite.frame_coords.x + 1) % 8
 			tiempo = 0
 	else:
-		
+
 		sprite.texture = walk   ###aun no hay idle
 		mat.albedo_texture = walk
 		sprite.frame_coords.x=2
@@ -210,10 +222,11 @@ func update_animation(delta):
 				sprite.frame_coords.y = 1
 			else:
 				sprite.frame_coords.y = 0
-		else:
-			if follow_target!=null:
-				sprite.frame_coords.y =follow_target.get_node("Sprite3D").frame_coords.y
-
+		#else:
+		#	if follow_target!=null:
+		#		sprite.frame_coords.y =follow_target.get_node("Sprite3D").frame_coords.y
+	
+	sprite.material_override=mat
 
 func get_direction_from_yaw(yaw: float) -> int:
 	var angle = wrapf(yaw, -PI, PI)

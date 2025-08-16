@@ -5,6 +5,10 @@ const dialog2 = preload("res://Dialogues/worlds/World1/main/d2.dialogue")
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
+	var eterna_sprite = load("res://Sprites/Chars/eterna/eterna_sprt.png")
+	var monica_sprite = load("res://Sprites/Chars/monica/monica_sprt.png")
+	$Level/npcs/Tortu.walk= eterna_sprite
+	$Pp.walk=monica_sprite
 	if WorldFunc.primera_vez_w1_int:
 		WorldFunc.cutscene=true
 		WorldFunc.primera_vez_w1_int=false

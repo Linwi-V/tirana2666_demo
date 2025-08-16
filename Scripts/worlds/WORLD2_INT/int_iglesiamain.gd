@@ -25,8 +25,16 @@ func _ready() -> void:
 	var npcs = $Level/npcs
 	for npc in npcs.get_children():
 		npc.get_node("SpriteEmotes").modulate=Color(0,0,0,0)
-	
+	var fortunaton = $Level/npcs/Fortunato
+	var fortunaton_sprite = load("res://Sprites/Chars/fortunato/fortunato_sprt.png")
+	fortunaton.walk=fortunaton_sprite
+	var esbirro1 = $Level/npcs/Esbirro1
+	var esbirro2 = $Level/npcs/Esbirro2
+	esbirro1.walk = load("res://Sprites/Chars/Esbirro1/esbirro1_sprt.png")
+	esbirro2.walk = load("res://Sprites/Chars/Esbirro2/esbirro2_sprt.png")
 	if WorldFunc.primera_vez_w2_intmain: 
+		var monica_sprite = load("res://Sprites/Chars/monica/monica_sprt.png")
+		$Pp.walk=monica_sprite
 		$Pp/Pivot.rotation_degrees.x+=25
 		WorldFunc.cutscene=true
 		$Pp.set_busy()
@@ -49,6 +57,9 @@ func _ready() -> void:
 		#WorldFunc.cutscene=false
 		#WorldFunc.primera_vez_w2_intmain=false
 	elif WorldFunc.segunda_vez_w2_intmain:
+		MusicManager.play_music(load("res://musicas/World2/Iglesia.ogg"),2)
+		var monica_sprite = load("res://Sprites/Chars/monica/monica_sprt.png")
+		$Pp.walk=monica_sprite
 		#pos de camara
 		$Pp/Pivot.rotation_degrees.x+=0
 		$Pp/Pivot.position.y-=1
@@ -58,8 +69,6 @@ func _ready() -> void:
 		$Pp.set_busy()
 		$Pp.velocidad_mov=0.4
 		var fortunato = $Level/npcs/Fortunato
-		var esbirro1 = $Level/npcs/Esbirro1
-		var esbirro2 = $Level/npcs/Esbirro2
 		fortunato.position
 		$Pp.position=fortunato.position
 		$Pp.position.x=-($Pp.position.x)
@@ -71,6 +80,7 @@ func _ready() -> void:
 		await get_tree().create_timer(0.5).timeout
 		DialogueManager.show_dialogue_balloon(dialog2)
 	else:
+		MusicManager.play_music(load("res://musicas/World2/Iglesia.ogg"),2)
 		WorldFunc.cutscene=true
 		npcs.get_node("Esbirro1").queue_free()
 		npcs.get_node("Esbirro2").queue_free()
@@ -193,7 +203,7 @@ func d_ended(dialog):
 		await get_tree().create_timer(0.2).timeout
 		await FadeLayer.fade_out(0.2)
 		WorldFunc.primera_vez_w2_intmain=false
-		WorldFunc.start_battle(PartyData.active_party+["Fortunato"],["Esbirro","Esbirro"],"res://Assets/BTL/BGs/BTL_Dummy.tres",false, "res://Scripts/BTL/Events/tutorial2.gd")
+		WorldFunc.start_battle(PartyData.active_party+["Fortunato"],["Esbirro A","Esbirro B"],"res://Assets/BTL/BGs/BTL_Dummy.tres",false, "res://Scripts/BTL/Events/tutorial2.gd")
 		
 	elif dialog==dialog2:
 		var fortunato = $Level/npcs/Fortunato

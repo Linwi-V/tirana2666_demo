@@ -4,6 +4,8 @@ var og_pos
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var monica_sprite = load("res://Sprites/Chars/monica/monica_sprt.png")
+	$Pp.walk=monica_sprite
 	WorldFunc.cutscene=true
 	
 	$Pp.position=Vector3(-5.538075, -0.563124, 1.729)

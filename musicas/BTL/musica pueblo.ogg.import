@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bmu51nxugwjtv"
+path="res://.godot/imported/musica pueblo.ogg-cee294cbfabaddb522e2b8de15fb88d8.oggvorbisstr"
+
+[deps]
+
+source_file="res://musicas/BTL/musica pueblo.ogg"
+dest_files=["res://.godot/imported/musica pueblo.ogg-cee294cbfabaddb522e2b8de15fb88d8.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

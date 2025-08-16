@@ -362,6 +362,7 @@ func _on_ally_hp_changed(new_hp,party_member,negativo):
 		$Audio/BTL_Fx.set_stream(load("res://0_pruebas/healeo.mp3"))
 		$Audio/BTL_Fx.play()
 	else:
+		party_member.get_node("Ally").texture = load(PartyData.characters[party_member.name]["textura_daño"])
 		daño_visual(party_member)
 		$Audio/BTL_Fx.set_stream(load("res://0_pruebas/hurt party.mp3"))
 		$Audio/BTL_Fx.play()
@@ -369,7 +370,8 @@ func _on_ally_hp_changed(new_hp,party_member,negativo):
 	var tween = hp.create_tween()
 	temblor(party_member)
 	tween.tween_property(hp, "value", new_hp, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
+	await get_tree().create_timer(0.5).timeout
+	party_member.get_node("Ally").texture = load(PartyData.characters[party_member.name]["textura"])
 func _on_ally_died(party_member):
 	var retrato = party_member.get_node("Ally")
 	$Audio/BTL_Fx.set_stream(load("res://0_pruebas/death.mp3"))
@@ -438,6 +440,7 @@ func temblor(node: Control):
 func daño_visual(node:Control):
 	var original_color = node.modulate
 	var tween = create_tween()
+	
 	tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	# Flash rojo rápido
 	tween.tween_property(node, "modulate", Color(1, 0, 0), 0.05)
@@ -458,7 +461,7 @@ func highlight_current_ally(active: bool) -> void:
 	
 	for ally in $Party/AllyContainers.get_children():
 		if ally.character_id == current_ally:
-			ally.get_node("Ally").modulate = Color(1,1,0.5) if active else Color(1,1,1)
+			ally.get_node("Ally").modulate = Color(0.0,1,0.0) if active else Color(1,1,1)
 
 
 #-------------HIGHLIGHT TARGETEO ENEMIGO-------------
@@ -553,6 +556,7 @@ func perform_player_actions():
 	perform_next_action()
 	
 func perform_next_action() -> void:
+	check_combat_end()
 	# —————— 1) Saltar aliados muertos ——————
 	while current_action_index < WorldFunc.Party_BTL.size():
 		var actor_id = WorldFunc.Party_BTL[current_action_index]
@@ -1140,7 +1144,7 @@ func highlight_target_list(list: Array, active: bool, idx: int = -1) -> void:
 		e.modulate = Color(1,1,1)
 	# 2) Resaltar sólo el seleccionado
 	if active and idx >= 0 and idx < list.size():
-		list[idx].modulate = Color(1, 0.7, 0.7)
+		list[idx].modulate = Color(1, 0.4, 0.4)
 
 # Confirmar el target elegido
 func on_target_selected(node: Control) -> void:
@@ -1381,6 +1385,7 @@ func abrir_skill_menu() -> void:
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.pressed.connect(func(): _on_skill_selected(skill_name))
 		container.add_child(btn)
+	
 	var ultimo_boton = null
 	for child in container.get_children():
 		if child is Button and not child.disabled:

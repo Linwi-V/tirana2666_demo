@@ -1,0 +1,18 @@
+~ start
+do! mirar("Ladron","abajo")
+do! salto("Ladron")
+Katari del Carmen: [#char=Katari,#action=Daño] *   ¡Acá está! ¡¡¡DEVUÉLVEME EL CHAUCHERO DE MI ABUELA!!!
+do retroceder_ladron()
+Ladrón: *   ¿Qué te pasa? ¡Esta niña está endemoniada!
+do mirar("Gemelo2","arriba")
+do! salto("Gemelo2")
+Gemelo 2: [#char=Gemelo2,#action=Hablando] *   No te vas a ninguna parte, asopao.
+do mirar("Gemelo1","arriba")
+do! salto("Gemelo1")
+Gemelo 1: [#char=Gemelo1,#action=Hablando] *   Anda soltando el monedero será mejor.
+do mirar("Casimiro","arriba")
+do! salto("Casimiro")
+Casimiro: *   ¡Guau guau guau!
+
+do! set_external_direction(Vector3.RIGHT)
+=> END
