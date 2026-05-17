@@ -1,0 +1,874 @@
+# LANGUAGE translation for TIRANA DEMO for the following files:
+# res://Dialogues/worlds/World1/main/d2.dialogue
+# res://Dialogues/prueba.dialogue
+# res://Dialogues/worlds/World1/BTL/tutorial1_turno1.dialogue
+# res://Dialogues/worlds/World1/BTL/tutorial1_turno2.dialogue
+# res://Dialogues/worlds/World1/BTL/tutorial1_turno3.dialogue
+# res://Dialogues/worlds/World2/d1.dialogue
+# res://Dialogues/worlds/World2/d2.dialogue
+# res://Dialogues/worlds/World2/d3.dialogue
+# res://Dialogues/worlds/World2/d1b.dialogue
+# res://Dialogues/worlds/World2/d4.dialogue
+# res://Dialogues/worlds/World2/d5.dialogue
+# res://Dialogues/worlds/World2/d6.dialogue
+# res://Dialogues/worlds/World2/BTL/tutorial2.dialogue
+# res://Dialogues/worlds/World2/EXT/d1.dialogue
+# res://Dialogues/worlds/World2/EXT/d2.dialogue
+# res://Dialogues/worlds/World2/EXT/d3.dialogue
+# res://Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+# res://Dialogues/worlds/World2/EXT/quests/casimiro_pelea.dialogue
+# res://Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+# res://Dialogues/worlds/World2/EXT/quests/ladron_pelea.dialogue
+# res://Dialogues/worlds/World2/EXT/d4.dialogue
+# res://Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+# res://Dialogues/worlds/World2/EXT/quests/casa.dialogue
+# res://Dialogues/worlds/World2/EXT/quests/fin_demo.dialogue
+# res://Dialogues/worlds/World2/INT/casakatari.dialogue
+# res://Scenes/menu/buttons_menu.tscn
+# res://Scenes/BTL/BTL.tscn
+# res://Scenes/DNC/DNC.tscn
+# res://Scripts/BTL/UI/dmg.gd
+# res://Scripts/BTL/btl_manager.gd
+# res://Scenes/DNC/dnc_manager.gd
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TIRANA DEMO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+#: Dialogues/worlds/World1/BTL/tutorial1_turno1.dialogue
+#: Dialogues/worlds/World1/BTL/tutorial1_turno2.dialogue
+#: Dialogues/worlds/World1/BTL/tutorial1_turno3.dialogue
+msgctxt "dialogue"
+msgid "Eterna Ancestral"
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgctxt "dialogue"
+msgid "Agente Mónica"
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   Agente Mónica, tu desempeño en batalla es, como dice mi amigo Lamadrid, cada día mejor."
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   Creo que ya te estás acercando al nivel que buscas desde hace tiempo. Pero debes ser prudente, aún no es momento de actuar."
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   ¡Ya tengo la fuerza necesaria, sensei! No necesito más entrenamiento."
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   Es cierto que yo no tengo más que enseñarte. Sin embargo, a pesar de que los caminos celestiales son laxos, los atajos no existen."
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   El tiempo mismo, será tu último maestro."
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   ¿Y cómo sabré cuando sea el momento indicado?"
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   Cuando ocurra, será imposible dudar de que es el momento correcto..."
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   Por ahora, me temo que debo distraerte con una misión de bajo riesgo, pero no por ello de menor importancia."
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   ¿Recuerdas la nueva máscara que pidió el Agente Fortunato? Ya está lista y dispuesta para ser utilizada. Por ello, estarás a cargo de realizar la entrega de dicho artefacto."
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   No deberías tardar mucho, Fortunato está radicado en el pueblo de La Tirana, en el año 1965. El portal en el exterior ya está listo para ser utilizado."
+msgstr ""
+
+#: Dialogues/worlds/World1/main/d2.dialogue
+msgid "*   Llegas al pueblo, entregas la máscara y antes que te des cuenta, estarás de vuelta conmigo tomando tecito con queque de plátano."
+msgstr ""
+
+#: Dialogues/worlds/World1/BTL/tutorial1_turno1.dialogue
+msgid "*   ¡AGENTE MÓNICA! Debe prestar más atención. Te lo he dicho mil veces."
+msgstr ""
+
+#: Dialogues/worlds/World1/BTL/tutorial1_turno1.dialogue
+msgid "*   Vamos, ahora es tu turno de atacar. ¡Selecciona “Atacar” en el menú de batalla!"
+msgstr ""
+
+#: Dialogues/worlds/World1/BTL/tutorial1_turno2.dialogue
+msgid "*   ¿Piensas que será así de simple?"
+msgstr ""
+
+#: Dialogues/worlds/World1/BTL/tutorial1_turno3.dialogue
+msgid "*   ¡Veamos qué haces ahora!"
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgctxt "dialogue"
+msgid "??????"
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+#: Dialogues/worlds/World2/d3.dialogue
+#: Dialogues/worlds/World2/BTL/tutorial2.dialogue
+msgctxt "dialogue"
+msgid "Mónica"
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+#: Dialogues/worlds/World2/d3.dialogue
+#: Dialogues/worlds/World2/d4.dialogue
+#: Dialogues/worlds/World2/d5.dialogue
+#: Dialogues/worlds/World2/d6.dialogue
+#: Dialogues/worlds/World2/BTL/tutorial2.dialogue
+msgctxt "dialogue"
+msgid "Fortunato del Carmen"
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   Siempre espero que aparezcan en el momento menos indicado... y aun así, logran sorprenderme cuando menos lo imagino."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   Agente Fortunato del Carmen, no pretendía importunarlo."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   No, no, tranquila. En realidad, llegas en un momento especial. Hoy es 15 de julio, y en el pueblo estamos celebrando la fiesta en honor a la Virgen del Carmen."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   Hace bastante que no participo en una celebración..."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   Te aseguro que esta no se parece a ninguna que hayas vivido antes."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   No estaría tan segura... ¡Ah! Casi lo olvido. Aquí tienes la máscara nueva que solicitaste."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   Es aún más hermosa de lo que imaginé. Muchas gracias, Agente Mónica. Haz llegar mis agradecimientos a la central. ¿Te quedarás para la fiesta? Mañana es el día principal, pero lo de hoy también promete."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   No tienes que agradecerme, sólo hice la entrega. Me encantaría quedarme... pero debo regresar para informar que la misión ha sido completada."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   Lo entiendo. Siempre tan profesional... Aunque, a veces, también viene bien simplemente ser persona."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   Con tu retiro tan cercano, alguien tiene que mantener la vara alta."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   ..."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1.dialogue
+msgid "*   Es mejor que me vaya. El sensei me espera para tomar el té. Nos vemos pronto, Agente Fortunato del Carmen."
+msgstr ""
+
+#: Dialogues/worlds/World2/d2.dialogue
+#: Dialogues/worlds/World2/d1b.dialogue
+msgctxt "dialogue"
+msgid "Esbirro 1"
+msgstr ""
+
+#: Dialogues/worlds/World2/d2.dialogue
+#: Dialogues/worlds/World2/d1b.dialogue
+msgctxt "dialogue"
+msgid "Esbirro 2"
+msgstr ""
+
+#: Dialogues/worlds/World2/d2.dialogue
+#: Dialogues/worlds/World2/d1b.dialogue
+msgctxt "dialogue"
+msgid "Esbirro 1 y 2"
+msgstr ""
+
+#: Dialogues/worlds/World2/d2.dialogue
+msgid "*   Quizás perdimos esta batalla. Pero la guerra sigue. En algún momento se descuidarán…"
+msgstr ""
+
+#: Dialogues/worlds/World2/d2.dialogue
+msgid "*   Cuando vayan al baño. Cuando se preparen un té. Cuando duerman una siesta. Cuando se laven los dientes. Bajarán la guardia y ahí estaremos. Esa máscara pertenece al gran Q’ala Ch’usu."
+msgstr ""
+
+#: Dialogues/worlds/World2/d2.dialogue
+msgid "*   ¡POR LA TRASCENDENCIA!"
+msgstr ""
+
+#: Dialogues/worlds/World2/d3.dialogue
+msgid "*   Fortunato del Carmen, debo ir a dar aviso inmediato al cuartel general. Tenemos que intentar rastrear a Q’ala Ch’usu lo antes posible."
+msgstr ""
+
+#: Dialogues/worlds/World2/d3.dialogue
+msgid "*   Estoy de acuerdo, debemos levantar alerta roja y avisar a todos los agentes disponibles, por si se encuentran con alguna anomalía."
+msgstr ""
+
+#: Dialogues/worlds/World2/d3.dialogue
+msgid "*   Cuídate, Fortunato del Carmen. No bromeaban cuando decían que volverán por la máscara. Mantente vigilante."
+msgstr ""
+
+#: Dialogues/worlds/World2/d1b.dialogue
+msgid "*   ¡PAREN TODO QUE YA LLEGAMOS!"
+msgstr ""
+
+#: Dialogues/worlds/World2/d1b.dialogue
+msgid "*   ¡Y SUELTEN ESA MÁSCARA! Que sin ella no nos vamos…"
+msgstr ""
+
+#: Dialogues/worlds/World2/d1b.dialogue
+msgid "*   Por el gran Q’ala Ch’usu luchamos…"
+msgstr ""
+
+#: Dialogues/worlds/World2/d1b.dialogue
+msgid "*   La trascendencia es aquello que buscamos…"
+msgstr ""
+
+#: Dialogues/worlds/World2/d1b.dialogue
+msgid "*   Y ahora juntos... ¡A USTEDES LOS APLASTAMOS!"
+msgstr ""
+
+#: Dialogues/worlds/World2/d4.dialogue
+msgid "*   Protégenos chinita... por favor, protégenos."
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+#: Dialogues/worlds/World2/d6.dialogue
+#: Dialogues/worlds/World2/EXT/d1.dialogue
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+#: Dialogues/worlds/World2/EXT/quests/ladron_pelea.dialogue
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+#: Dialogues/worlds/World2/EXT/quests/casa.dialogue
+#: Dialogues/worlds/World2/EXT/quests/fin_demo.dialogue
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgctxt "dialogue"
+msgid "Katari del Carmen"
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   !!!"
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   ¡Holaaaaa!"
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   Pupita, ¿qué haces acá a esta hora? ¿No deberías estar ayudando en la casa?"
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   Nada, me mandó la Nona. Dice que otra vez usted se confundió y trajo las llaves de ella en vez de las suyas."
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   ¡¡¡ Siempre es lo mismo... esa burrada de tener llaveros iguales…"
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   También dijo que si usted seguía así, un día de estos iba a terminar viniendo con un vestido en vez de pantalones."
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   ¡PERO CÓMO SE LE OCURRE! Yo jamás har…… … … Momento… ¿Y para qué necesitan las llaves? ¿Van a salir?"
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   No, lo que pasa es que me mandó a comprar CILANTRO. Pero su chauchero está anclado al llavero. Así que no teníamos plata."
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   Joajoajoajoajoa… ya veo, ya veo… bueno, aquí tienes el monedero. Aprovecha también de comprar AJÍ EN SALSA, que se me acabó en el desayuno."
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   ¡Gracias! Y no se atrase para el almuerzo, o se va a enojar la Nona."
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   Sí, sí… pronto partiré hacia allá. Mientras tanto, ve a comprar."
+msgstr ""
+
+#: Dialogues/worlds/World2/d5.dialogue
+msgid "*   ¡Nos vemos!"
+msgstr ""
+
+#: Dialogues/worlds/World2/d6.dialogue
+msgid "*   ¡Ah, y Katari del Carmen!... por favor, anda con cuidado…"
+msgstr ""
+
+#: Dialogues/worlds/World2/d6.dialogue
+msgid "*   ??? Claro… siempre lo tengo…"
+msgstr ""
+
+#: Dialogues/worlds/World2/BTL/tutorial2.dialogue
+msgid "*   Es tal como temíamos con la Eterna Ancestral… El temible Q’ala Ch’usu ha vuelto a aparecer. Han pasado varios años desde la última vez."
+msgstr ""
+
+#: Dialogues/worlds/World2/BTL/tutorial2.dialogue
+msgid "*   Agente Mónica, debemos impedir que obtengan esa máscara a cualquier costo."
+msgstr ""
+
+#: Dialogues/worlds/World2/BTL/tutorial2.dialogue
+msgid "*   Recuerda que cuando peleamos en equipo, tú estarás al mando. Podrás elegir las acciones que realicemos y a qué enemigo atacar."
+msgstr ""
+
+#: Dialogues/worlds/World2/BTL/tutorial2.dialogue
+msgid "*   No te abrumes, estaré cubriendo tu espalda."
+msgstr ""
+
+#: Dialogues/worlds/World2/BTL/tutorial2.dialogue
+msgid "*   Es hora de aplastar algunos insectos."
+msgstr ""
+
+#: Dialogues/worlds/World2/BTL/tutorial2.dialogue
+msgid "*   ¡El medidor de ESPECIAL de Mónica está lleno! Este se rellena a medida de que usas ATACAR y se guarda el progreso entre peleas. ¡Prueba a usarlo!"
+msgstr ""
+
+#: Dialogues/worlds/World2/BTL/tutorial2.dialogue
+msgid "*   Las HABILIDADES usan energía, ubicada arriba a la izquierda, esta empieza llena al inicio del combate y se recupera en cada turno. ¡Prueba a usar el disparo de Mónica!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d1.dialogue
+msgid "*   Bien... ahora que ya tengo el monedero, debería dirigirme hacia el punto amarillo del minimapa, hasta la verdurería."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d2.dialogue
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgctxt "dialogue"
+msgid "Señor"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d2.dialogue
+msgid "¡Perdón! [next=1.0]"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgctxt "dialogue"
+msgid "Gemelo 1"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgctxt "dialogue"
+msgid "Gemelo 2"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   ¡Katari del Carmen! Qué bueno que te encontramos.[next=1.3]"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   ¿Has visto a Casimiro?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   ¿Su perro? Hoy al menos, no… ¿por qué?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   Salió temprano en la mañana, se escapó como siempre. Pero lo raro es que todavía no vuelve."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   Generalmente a esta hora ya está almorzando. Le servimos la comida y ni se asomó."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   Mmmm… lo más probable es que se haya quedado por ahí, comiendo basura o jugando con otros perros. No creo que ande muy lejos. ¿Les ayudo a buscarlo?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   ¡Eso sería el descueve!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   Déjenme pasar a comprar a la tienda y vamos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   ¡Ok! Te esperamos acá."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   …"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   ¿Pasa algo?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   ¡Parece que me robaron el monedero!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "¡Perdón! [next=1.5]"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   Debió ser ese tipo que me chocó en la feria…"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   ¡Ok! Esto es lo que haremos: iremos a buscar a Casimiro y enseguida rastrearemos al gallo que me robó, y recuperamos el monedero de mi Nona."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   Mientras antes partamos mejor."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d3.dialogue
+msgid "*   ¡En marcha!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+msgid "*   Por ahí no queda la verdurería..."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+msgid "*   ¡Casimiro! ¡Déjenlo!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+msgid "*   ¡SHU! ¡SHU! SALGAN"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+msgid "*   ¡Váyanse!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+msgid "*   Gemelo 1 tiró una piedra!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+msgid "*   ¡Qué bueno que trajiste ese pedazo de carne!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+msgid "*   Pensaba dárselo al Casimiro para que nos siguiera, pero terminó siendo más útil de lo que esperaba."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/terreno_baldio.dialogue
+msgid "*   ¿Están bien? ¿Alguna mordida? ¿No? ¡Perfecto! Ahora vamos por ese ladrón."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/casimiro_pelea.dialogue
+msgid "*   Gemelo 1 tiró un pedazo de carne![next=2]"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/casimiro_pelea.dialogue
+msgid "*   Los perros se van corriendo a buscarlo![next=2]"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+msgctxt "dialogue"
+msgid "Ladrón"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgctxt "dialogue"
+msgid "Casimiro"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+msgid "*   ¡Acá está! ¡¡¡DEVUÉLVEME EL CHAUCHERO DE MI ABUELA!!!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+msgid "*   ¿Qué te pasa? ¡Esta niña está endemoniada!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+msgid "*   No te vas a ninguna parte, asopao."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+msgid "*   Anda soltando el monedero será mejor."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue
+msgid "*   ¡Guau guau guau!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/ladron_pelea.dialogue
+msgid "*   ¡Devuélvelo ratero![next=2]"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgid "*   ¡Eso ha sido MA-CA-NU-DO!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgid "*   ¡Y a la próxima te va peor!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgid "*   ¡Guaguauguau!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgid "*   Increíble, gracias por ayudarme. Creo que no podría haber recuperado el chauchero por mi cuenta…"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgid "*   ¡Pa eso estamos!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgid "*   Ahora tenemos que irnos rápidito a la casa, eso sí, para avisarle a mi papá que encontramos al Casi."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgid "*   Casimiro, ¡vamos! Nos vemos, Katari del Carmen."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/d4.dialogue
+msgid "*   Guauguau"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgctxt "dialogue"
+msgid "Tienda"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Bienvenido a la tienda. ¿Qué deseas comprar hoy?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Ají en Salsa    $100    x {{inventario[\"aji en salsa\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Cilantro    $100    x {{inventario[\"cilantro\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Ají Verde    $100    x {{inventario[\"aji verde\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Merkén    $100    x {{inventario[\"merken\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Paprika    $100    x {{inventario[\"paprika\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Pimentón    $100    x {{inventario[\"pimenton\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Perejil    $100    x {{inventario[\"perejil\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Ciboulette    $100    x {{inventario[\"ciboulette\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Acelga    $100    x {{inventario[\"acelga\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "⠀⠀⠀⠀Espinaca    $100    x {{inventario[\"espinaca\"][\"cantidad\"]}}⠀⠀⠀⠀"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¡Hasta luego!"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Salir"
+msgstr ""
+
+#. TRANSLATORS: # CONFIRMACIONES
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Ají en Salsa[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Ají en Salsa[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Sí"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+#: Dialogues/worlds/World2/EXT/quests/fin_demo.dialogue
+msgid "No"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Cilantro[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Cilantro[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Ají Verde[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Ají Verde[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Merkén[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Merkén[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Paprika[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Paprika[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Pimentón[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Pimentón[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Perejil[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Perejil[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Ciboulette[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Ciboulette[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Acelga[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Acelga[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "¿Seguro que quieres comprar [color=yellow]Espinaca[/color] por 100 pesos?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/tienda.dialogue
+msgid "Compraste [color=yellow]Espinaca[/color]. Te quedan {{dinero}} pesos."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/casa.dialogue
+msgid "*    Mi casa, pero aún no compro las cosas..."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/fin_demo.dialogue
+msgid "*    Mi casa."
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/fin_demo.dialogue
+msgid "Entrar?"
+msgstr ""
+
+#: Dialogues/worlds/World2/EXT/quests/fin_demo.dialogue
+msgid "Si"
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgctxt "dialogue"
+msgid "Remedios Dolores del Carmen"
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgctxt "dialogue"
+msgid "Simón del Carmen"
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   ¡Katari, por la chita, harto que te demoraste! Hubiera ido yo mejor, no sé cómo haces para dilatar tanto algo tan simple como ir a la tienda, ya me estaba preocupando porque no llegabas."
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   Parece que fuiste a Pozo Almonte a comprar…"
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   ¡Cállate tú, cabro chico! Para la próxima te toca ir a ti."
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   Ya, sin pelear, o se van a ir los dos castigados sin almuerzo. ¿Katari trajiste lo que te pedí?"
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   ¡Ay, Nona! Perdóname, pasaron un millón de leseras. Traje el Cilantro que necesitabas y un Ají en Salsa que me pidió el tata. Vengo con el manso diente."
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   ¡Perfecto! Ya tengo todo listo, pico el cilantro y estamos tiquitaca. Katari, pon la mesa mientras. Simón, anda a lavarte esas manos por favor, que de acá les veo la mugre."
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   ¡Ay, Nona! Perdóname, pasaron un millón de leseras. Si compré, y lo que me pidió el tata también. Vengo con el manso diente."
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   Katari… acércate…"
+msgstr ""
+
+#: Dialogues/worlds/World2/INT/casakatari.dialogue
+msgid "*   ¿QUÉ NO SABES DISTINGUIR LO QUE ES UN CILANTRO CABRA LESA? ¡Esto no fue lo que tenías que traer! El manso diente dice la perla…"
+msgstr ""
+
+#: Scenes/menu/buttons_menu.tscn
+msgid "[wave amp=30.0 freq=2.0 connected=0]Nueva Partida"
+msgstr ""
+
+#: Scenes/menu/buttons_menu.tscn
+msgid "[wave amp=30.0 freq=2.0 connected=0]Cargar"
+msgstr ""
+
+#: Scenes/menu/buttons_menu.tscn
+msgid "[wave amp=30.0 freq=2.0 connected=0]Salir"
+msgstr ""
+
+#: Scenes/BTL/BTL.tscn
+#: Scripts/BTL/btl_manager.gd
+msgid "Atacar"
+msgstr ""
+
+#: Scenes/BTL/BTL.tscn
+msgid "Habilidades"
+msgstr ""
+
+#: Scenes/BTL/BTL.tscn
+msgid "Objetos"
+msgstr ""
+
+#: Scenes/BTL/BTL.tscn
+msgid "Escapar"
+msgstr ""
+
+#: Scenes/BTL/BTL.tscn
+msgid "Selecciona Objeto"
+msgstr ""
+
+#: Scenes/BTL/BTL.tscn
+msgid "Cancelar"
+msgstr ""
+
+#: Scenes/BTL/BTL.tscn
+msgid "Selecciona Habilidad"
+msgstr ""
+
+#: Scenes/DNC/DNC.tscn
+msgid "Puntaje:"
+msgstr ""
+
+#: Scenes/DNC/DNC.tscn
+msgid "9999999999999"
+msgstr ""
+
+#: Scenes/DNC/DNC.tscn
+msgid "COMBO!"
+msgstr ""
+
+#: Scenes/DNC/DNC.tscn
+msgid "x 11"
+msgstr ""
+
+#: Scenes/DNC/DNC.tscn
+msgid ""
+"[wave amp=60 freq=5][rainbow freq=1 sat=-8 val=0.65\n"
+" speed=0.5]PERFECTO![/rainbow]"
+msgstr ""
+
+#: Scripts/BTL/UI/dmg.gd
+msgid "¡Fallo!"
+msgstr ""
+
+#: Scripts/BTL/UI/dmg.gd
+msgid "Inmune"
+msgstr ""
+
+#: Scripts/BTL/UI/dmg.gd
+msgid "¡Absorbe!"
+msgstr ""
+
+#: Scripts/BTL/UI/dmg.gd
+msgid ""
+"\n"
+"¡Crítico Débil!"
+msgstr ""
+
+#: Scripts/BTL/UI/dmg.gd
+msgid ""
+"\n"
+"¡Crítico!"
+msgstr ""
+
+#: Scripts/BTL/UI/dmg.gd
+msgid ""
+"\n"
+"Débil"
+msgstr ""
+
+#: Scripts/BTL/UI/dmg.gd
+msgid " 0"
+msgstr ""
+
+#: Scripts/BTL/btl_manager.gd
+msgid "Especial"
+msgstr ""
+
+#: Scenes/DNC/dnc_manager.gd
+msgid "0"
+msgstr ""
+
+#: Scenes/DNC/dnc_manager.gd
+msgid ""
+msgstr ""
