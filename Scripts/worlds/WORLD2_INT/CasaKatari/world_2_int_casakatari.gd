@@ -10,6 +10,8 @@ func _ready() -> void:
 	$Pp.velocidad_mov=0.3
 	$Pp.set_external_direction(Vector3.FORWARD)
 	var awela = $Level/npcs/Remedios
+	var sprite_remedios=load("res://Sprites/Chars/remedios/remedios_sprt.png")
+	awela.walk=sprite_remedios
 	awela.set_busy()
 	awela.set_external_direction(Vector3.BACK)
 	awela.velocidad_mov=0.3

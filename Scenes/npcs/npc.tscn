@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://btgjf0r2ly3h3"]
+[gd_scene load_steps=29 format=3 uid="uid://btgjf0r2ly3h3"]
 
 [ext_resource type="Texture2D" uid="uid://cxfujrr2jjxpf" path="res://Sprites/Chars/ph/64X128_Idle_Free.png" id="1_20uak"]
 [ext_resource type="Script" uid="uid://7qbpkkak8lyh" path="res://Scripts/npcs/npc_base.gd" id="1_gmoox"]
 [ext_resource type="Texture2D" uid="uid://blb88baiyo7fl" path="res://Assets/NPCS/emotes/speech_bubble_animation-11x11.png" id="2_b1b6i"]
+[ext_resource type="Texture2D" uid="uid://dem6c23thvf28" path="res://Sprites/Chars/ladrona/ladrona_sprt.png" id="2_gysvp"]
 [ext_resource type="Texture2D" uid="uid://ddumx1tgxm0j6" path="res://Assets/NPCS/emotes/exclamation-7x8.png" id="3_gmoox"]
 [ext_resource type="Texture2D" uid="uid://vgv86865l65b" path="res://Sprites/Chars/katari/prota_sprt.png" id="5_gnk88"]
 
@@ -162,6 +163,7 @@ metadata/_snap_enabled = true
 [node name="Node3D" type="CharacterBody3D" groups=["npc"]]
 collision_layer = 3
 script = ExtResource("1_gmoox")
+walk_texture = ExtResource("2_gysvp")
 
 [node name="Sprite3D3" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.065267, 0)

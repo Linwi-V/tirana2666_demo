@@ -146,7 +146,7 @@ var enemies := {
 	"Perro": {
 		"nombre": "Perro",
 			
-		"textura": "res://icon.svg",
+		"textura": "res://Assets/ENEMIGOS/BTL/WORLD2/perro1.png",
 			
 		"stats": {
 			"max_hp": 20,
@@ -193,7 +193,7 @@ var enemies := {
 	"Ladrón": {
 		"nombre": "Ladrón",
 			
-		"textura": "res://icon.svg",
+		"textura": "res://Assets/ENEMIGOS/BTL/WORLD2/ladrona.png",
 			
 		"stats": {
 			"max_hp": 20,

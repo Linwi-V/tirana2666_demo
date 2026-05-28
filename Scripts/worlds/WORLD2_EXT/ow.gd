@@ -56,12 +56,15 @@ func _ready() -> void:
 		var ladron =$Level/npcs/Ladron
 		ladron.global_position=Vector3(11.5,-2.452,-8)
 		mirar("Ladron","arriba")
+		var sprite_ladrona=load("res://Sprites/Chars/ladrona/ladrona_sprt.png")
+		ladron.walk=sprite_ladrona
 		var sprite_gemela=load("res://Sprites/Chars/gemelos/gemela_sprt.png")
 		var sprite_gemelo=load("res://Sprites/Chars/gemelos/gemelo_sprt.png")
 		var sprite_casimiro=load("res://Sprites/Chars/casimiro/casimiro_sprt.png")
 		gemelo1.walk=sprite_gemelo
 		gemelo2.walk=sprite_gemela
 		casimiro.walk=sprite_casimiro
+		
 		$Level/npcs/Perro1.queue_free()
 		$Level/npcs/Perro2.queue_free()
 		$Level/npcs/Perro3.queue_free()
@@ -219,6 +222,11 @@ func d_ended(dialog):
 		mirar("Perro3","derecha")
 		$Level/npcs/Perro4.show()
 		mirar("Perro4","arriba")
+		var sprite_perro=load("res://Sprites/Chars/randoms/perro/perro_sprt.png")
+		$Level/npcs/Perro1.walk=sprite_perro
+		$Level/npcs/Perro2.walk=sprite_perro
+		$Level/npcs/Perro3.walk=sprite_perro
+		$Level/npcs/Perro4.walk=sprite_perro
 		$Level/npcs/Casimiro.show()
 		var casimiro=$Level/npcs/Casimiro
 		var sprite_casimiro=load("res://Sprites/Chars/casimiro/casimiro_sprt.png")
@@ -309,6 +317,9 @@ func _on_pp_dialog_changer(npc: Variant) -> void:
 		
 	elif npc.name == "Ladron":
 		
+		var sprite_ladrona=load("res://Sprites/Chars/ladrona/ladrona_sprt.png")
+		$Level/npcs/Ladron.walk=sprite_ladrona
+		mirar("Ladron","izquierda")
 		titulo_d="pelea_ladron"
 		create_tween().tween_property($Level/npcs/Ladron,"position:x",12.5,0.5 )
 		$Pp.current_dialog=load("res://Dialogues/worlds/World2/EXT/quests/ladron_rincon.dialogue")
@@ -368,6 +379,8 @@ func _on_area_este_body_shape_entered(body_rid: RID, body: Node3D, body_shape_in
 				WorldFunc.cutscene=true
 				$Pp.set_busy()
 				$Pp.external_direction=Vector3.BACK
+				var sprite_ladrona=load("res://Sprites/Chars/ladrona/ladrona_sprt.png")
+				$Level/npcs/Ladron.walk=sprite_ladrona
 				await get_tree().create_timer(0.5).timeout
 				$Level/npcs/Ladron.set_busy()
 				$Level/npcs/Ladron.velocidad_mov=5

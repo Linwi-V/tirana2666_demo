@@ -15,8 +15,10 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # Spritesheet
 
+@export var walk_texture: Texture2D
+@export var idle_texture: Texture2D
 var idle = load("res://Sprites/Chars/ph/64X128_Idle_Free.png")
-var walk 
+var walk
 # Animación
 var tiempo = 0.0
 var lag_frame = 0.1

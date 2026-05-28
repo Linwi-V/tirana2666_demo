@@ -276,6 +276,7 @@ size = Vector3(7.36566, 2.23047, 6.77698)
 [node name="World2" type="Node3D"]
 
 [node name="OW" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01107, 0.495207, -0.860617)
 script = ExtResource("1_517xe")
 
 [node name="Level" parent="OW" instance=ExtResource("2_hbjcq")]
